@@ -1,73 +1,94 @@
 <script generic="T extends string" lang="ts" setup>
-import { isNonNullish, isNullish } from 'remeda'
+import { isNonNullish, isNullish } from 'remeda';
 
 const data = useData<{
-	readonly singleplayer: {
-		readonly challenge: number
-	}
-}>()
+    readonly singleplayer: {
+        readonly challenge: number;
+    };
+}>();
 
 const valid = computed(() => {
-	if (isNullish(data.singleplayer)) {
-		return false
-	}
+    if (isNullish(data.singleplayer)) {
+        return false;
+    }
 
-	return isNonNullish(data.singleplayer.challenge)
-})
+    return isNonNullish(data.singleplayer.challenge);
+});
 </script>
 
 <template>
-	<template v-if="valid">
-		<div class="w-68.75 h-31.25 rounded-7.5 relative" style="box-shadow: 0 .5625rem 1.5625rem 0 #00000026;">
-			<div class="absolute top-0 left-0">
-				<svg fill="none" height="125" viewBox="0 0 275 125" width="275" xmlns="http://www.w3.org/2000/svg">
-					<g clip-path="url(#clip0_2242_267)">
-						<rect fill="url(#paint0_linear_2242_267)" height="125" rx="30" width="275"/>
-						<g style="mix-blend-mode:overlay">
-							<mask id="mask0_2242_267" height="173" maskUnits="userSpaceOnUse" style="mask-type:alpha"
-								  width="173"
-								  x="142" y="-28">
-								<rect fill="url(#paint1_radial_2242_267)" height="140.538"
-									  transform="rotate(-15 142 8.37402)" width="140.538"
-									  x="142" y="8.37402"/>
-							</mask>
-							<g mask="url(#mask0_2242_267)">
-								<path
-									d="M202.109 119.577L176.344 23.4211L227.25 9.78082L232.544 20.4871L264.219 11.9998L279.374 68.5622L239.781 79.1713L234.487 68.465L202.812 76.9523L213.421 116.546L202.109 119.577ZM246.082 65.3581L265.031 60.2809L255.937 26.3434L226.242 34.3003L220.948 23.594L190.687 31.7024L199.781 65.6398L240.789 54.6518L246.082 65.3581Z"
-									fill="#1C1B1F"/>
-							</g>
-						</g>
-					</g>
-					<defs>
-						<linearGradient id="paint0_linear_2242_267" gradientUnits="userSpaceOnUse" x1="50.5" x2="244"
-										y1="-12"
-										y2="144.5">
-							<stop stop-color="#EAC7FF"/>
-							<stop offset="1" stop-color="#D19CFA"/>
-						</linearGradient>
-						<radialGradient id="paint1_radial_2242_267" cx="0" cy="0"
-										gradientTransform="translate(212.269 78.6433) rotate(90) scale(74.6611)"
-										gradientUnits="userSpaceOnUse"
-										r="1">
-							<stop offset="0.208333" stop-color="white" stop-opacity="0.78"/>
-							<stop offset="1" stop-color="white" stop-opacity="0"/>
-						</radialGradient>
-						<clipPath id="clip0_2242_267">
-							<rect fill="white" height="125" rx="30" width="275"/>
-						</clipPath>
-					</defs>
-				</svg>
-			</div>
+    <template v-if="valid">
+        <div class="w-68.75 h-31.25 rounded-7.5 relative" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
+            <div class="absolute top-0 left-0">
+                <svg fill="none" height="125" viewBox="0 0 275 125" width="275" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_2242_267)">
+                        <rect fill="url(#paint0_linear_2242_267)" height="125" rx="30" width="275" />
+                        <g style="mix-blend-mode: overlay">
+                            <mask
+                                id="mask0_2242_267"
+                                height="173"
+                                maskUnits="userSpaceOnUse"
+                                style="mask-type: alpha"
+                                width="173"
+                                x="142"
+                                y="-28"
+                            >
+                                <rect
+                                    fill="url(#paint1_radial_2242_267)"
+                                    height="140.538"
+                                    transform="rotate(-15 142 8.37402)"
+                                    width="140.538"
+                                    x="142"
+                                    y="8.37402"
+                                />
+                            </mask>
+                            <g mask="url(#mask0_2242_267)">
+                                <path
+                                    d="M202.109 119.577L176.344 23.4211L227.25 9.78082L232.544 20.4871L264.219 11.9998L279.374 68.5622L239.781 79.1713L234.487 68.465L202.812 76.9523L213.421 116.546L202.109 119.577ZM246.082 65.3581L265.031 60.2809L255.937 26.3434L226.242 34.3003L220.948 23.594L190.687 31.7024L199.781 65.6398L240.789 54.6518L246.082 65.3581Z"
+                                    fill="#1C1B1F"
+                                />
+                            </g>
+                        </g>
+                    </g>
+                    <defs>
+                        <linearGradient
+                            id="paint0_linear_2242_267"
+                            gradientUnits="userSpaceOnUse"
+                            x1="50.5"
+                            x2="244"
+                            y1="-12"
+                            y2="144.5"
+                        >
+                            <stop stop-color="#EAC7FF" />
+                            <stop offset="1" stop-color="#D19CFA" />
+                        </linearGradient>
+                        <radialGradient
+                            id="paint1_radial_2242_267"
+                            cx="0"
+                            cy="0"
+                            gradientTransform="translate(212.269 78.6433) rotate(90) scale(74.6611)"
+                            gradientUnits="userSpaceOnUse"
+                            r="1"
+                        >
+                            <stop offset="0.208333" stop-color="white" stop-opacity="0.78" />
+                            <stop offset="1" stop-color="white" stop-opacity="0" />
+                        </radialGradient>
+                        <clipPath id="clip0_2242_267">
+                            <rect fill="white" height="125" rx="30" width="275" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
 
-			<div class="absolute top-4.75 left-6">
-				<span class="font-template text-6.25 fw-800 color-[#8e23b4]">Challenge</span>
-			</div>
+            <div class="absolute top-4.75 left-6">
+                <span class="font-template text-6.25 fw-800 color-[#8e23b4]">Challenge</span>
+            </div>
 
-			<div class="absolute bottom-4.25 left-6">
-				<span class="font-template text-11.25 fw-500 color-[#8e23b4]">
-					{{ data.singleplayer.challenge }}
-				</span>
-			</div>
-		</div>
-	</template>
+            <div class="absolute bottom-4.25 left-6">
+                <span class="font-template text-11.25 fw-500 color-[#8e23b4]">
+                    {{ data.singleplayer.challenge }}
+                </span>
+            </div>
+        </div>
+    </template>
 </template>

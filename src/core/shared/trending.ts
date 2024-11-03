@@ -1,7 +1,7 @@
 enum Trending {
-	UP = 'up',
-	KEEP = 'keep',
-	DOWN = 'down'
+    UP = 'up',
+    KEEP = 'keep',
+    DOWN = 'down',
 }
 
-export default Trending
+export default Trending;

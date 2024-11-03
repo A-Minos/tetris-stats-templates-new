@@ -1,6 +1,6 @@
 enum Languages {
-	enUS = 'en-US',
-	zhCN = 'zh-CN'
+    enUS = 'en-US',
+    zhCN = 'zh-CN',
 }
 
-export default Languages
+export default Languages;
