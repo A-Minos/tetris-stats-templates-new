@@ -1,20 +1,41 @@
 {
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "nuxt dev",
-		"build": "nuxt build",
-		"generate": "nuxt generate",
-		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
-	},
-	"devDependencies": {
-		"@unocss/nuxt": "^0.61.9",
-		"echarts": "^5.5.1",
-		"nuxt": "^3.12.4",
-		"remeda": "^2.10.1",
-		"sass": "^1.77.8",
-		"vue": "^3.4.37",
-		"vue-echarts": "^7.0.2"
-	}
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@unocss/nuxt": "^0.61.9",
+    "echarts": "^5.5.1",
+    "nuxt": "^3.12.4",
+    "prettier": "^3.3.3",
+    "remeda": "^2.10.1",
+    "sass": "^1.77.8",
+    "vue": "^3.4.37",
+    "vue-echarts": "^7.0.2"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120,
+    "tabWidth": 2,
+    "endOfLine": "lf",
+    "overrides": [
+      {
+        "files": [
+          "*.vue",
+          "*.ts",
+          "*.js",
+          "*.css",
+          "*.scss"
+        ],
+        "options": {
+          "tabWidth": 4
+        }
+      }
+    ]
+  }
 }
