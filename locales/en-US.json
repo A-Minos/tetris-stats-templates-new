@@ -1,1 +1,50 @@
-{}
+{
+  "v1": {
+    "binding": {
+      "main": {
+        "success": {
+          "text": "{userName}, your account on {gamePlatform} was verified and successfully linked to {botName}.",
+          "styles": { "fw": "400" }
+        },
+        "unverified": {
+          "text": "{userName}, your account on {gamePlatform} was linked to {botName}.\nHowever, your account is not yet verified.",
+          "styles": { "fw": "400" }
+        },
+        "unknown": {
+          "text": "{userName}, your account on {gamePlatform} was linked to {botName},\nBut we can't verify your identity yet.",
+          "styles": { "fw": "400" }
+        },
+        "unbind": {
+          "text": "{userName}, your account on {gamePlatform} was successfully unlinked from {botName}.",
+          "styles": { "fw": "400" }
+        },
+        "error": {
+          "text": "{userName}, there was an issue when linking your account on {gamePlatform} to {botName}.",
+          "styles": { "fw": "400" }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "You can now type in {command} to retrieve your stats on that platform.",
+          "styles": { "fw": "500" }
+        },
+        "unverified": {
+          "text": "You can now type in {command} to start the verification process.",
+          "styles": { "fw": "500" }
+        },
+        "unknown": {
+          "text": "You can now type in {command} to retrieve your stats on that platform.",
+          "styles": { "fw": "500" }
+        },
+        "unbind": {
+          "text": "You can now type in {command} to relink your account on that platform to {botName}.",
+          "styles": { "fw": "500" }
+        },
+        "error": {
+          "text": "{error}",
+          "styles": { "fw": "500" }
+        }
+      }
+    }
+  }
+}

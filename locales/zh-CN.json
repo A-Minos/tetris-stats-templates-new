@@ -1,1 +1,50 @@
-{}
+{
+  "v1": {
+    "binding": {
+      "main": {
+        "success": {
+          "text": "已将您在 {gamePlatform} 上的账号 {userName} 成功验证并绑定至 {botName}.",
+          "styles": { "fw": "350" }
+        },
+        "unverified": {
+          "text": "已将您在 {gamePlatform} 上的账号 {userName} 绑定至 {botName}, 但尚未通过验证.",
+          "styles": { "fw": "350" }
+        },
+        "unknown": {
+          "text": "已将您在 {gamePlatform} 上的账号 {userName} 绑定至 {botName}, 但是我们暂时无法验证您的身份.",
+          "styles": { "fw": "350" }
+        },
+        "unbind": {
+          "text": "已将您在 {gamePlatform} 上的账号 {userName} 成功从 {botName} 解绑.",
+          "styles": { "fw": "350" }
+        },
+        "error": {
+          "text": "在将您在 {gamePlatform} 上的账号 {userName} 绑定至 {botName} 时出现了错误。",
+          "styles": { "fw": "350" }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "你可以输入 {command} 命令来查找你在该平台上的统计数据.",
+          "styles": { "fw": "400" }
+        },
+        "unverified": {
+          "text": "你可以输入 {command} 命令来开始验证你的账号.",
+          "styles": { "fw": "400" }
+        },
+        "unknown": {
+          "text": "你可以输入 {command} 命令来查找你在该平台上的统计数据.",
+          "styles": { "fw": "400" }
+        },
+        "unbind": {
+          "text": "你可以输入 {command} 命令来重新将你在该平台上的账号绑定至 {botName}.",
+          "styles": { "fw": "400" }
+        },
+        "error": {
+          "text": "{error}",
+          "styles": { "fw": "500" }
+        }
+      }
+    }
+  }
+}
