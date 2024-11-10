@@ -45,6 +45,43 @@
           "styles": { "fw": "500" }
         }
       }
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "Account & Rankings"
+        },
+        "multi": {
+          "title": "Multiplayer Stats"
+        },
+        "single": {
+          "title": "Singleplayer Stats"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": { "title": "Account Info" },
+        "historical": {
+          "title": "Historical Stats"
+        },
+        "today": {
+          "title": "Today’s Stats"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "Account & Rankings"
+        },
+        "multi": {
+          "title": "Multiplayer Stats"
+        },
+        "single": {
+          "title": "Singleplayer Stats"
+        }
+      }
     }
   }
 }

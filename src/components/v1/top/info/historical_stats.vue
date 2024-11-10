@@ -1,10 +1,5 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
-import Languages from '~/core/shared/languages';
-
-const data = useData<{
-    readonly _lang: Languages;
-}>();
 
 const container = ref<HTMLDivElement>();
 
@@ -17,13 +12,11 @@ onMounted(() => {
 
 <template>
     <template v-if="valid">
-        <template v-if="data._lang === Languages.enUS">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">Historical Stats</span>
-        </template>
-
-        <template v-if="data._lang === Languages.zhCN">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">历史数据</span>
-        </template>
+        <i18n-t
+            :keypath="`v1.top.info.historical.title`"
+            tag="span"
+            class="font-template text-8.75 fw-900 color-[#000000]"
+        ></i18n-t>
 
         <div class="mt-3.75">
             <div ref="container" class="flex gap-6.25">

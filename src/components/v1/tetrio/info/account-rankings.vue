@@ -1,10 +1,7 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
-import Languages from '~/core/shared/languages';
 
 const data = useData<{
-    readonly _lang: Languages;
-
     readonly user: {
         readonly avatar: string;
         readonly name: string;
@@ -37,13 +34,11 @@ onMounted(async () => {
 
 <template>
     <template v-if="valid">
-        <template v-if="data._lang === Languages.enUS">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">Account & Rankings</span>
-        </template>
-
-        <template v-if="data._lang === Languages.zhCN">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">账号与排位</span>
-        </template>
+        <i18n-t
+            :keypath="`v1.tetrio.info.account.title`"
+            tag="span"
+            class="font-template text-8.75 fw-900 color-[#000000]"
+        ></i18n-t>
 
         <div class="mt-2.75">
             <div class="flex gap-6.25">

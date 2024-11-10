@@ -1,10 +1,5 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
-import Languages from '~/core/shared/languages';
-
-const data = useData<{
-    readonly _lang: Languages;
-}>();
 
 const container = ref<HTMLDivElement>();
 
@@ -17,13 +12,11 @@ onMounted(() => {
 
 <template>
     <template v-if="valid">
-        <template v-if="data._lang === Languages.enUS">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">Singleplayer Stats</span>
-        </template>
-
-        <template v-if="data._lang === Languages.zhCN">
-            <span class="font-template text-8.75 fw-900 color-[#000000]">单人游戏数据</span>
-        </template>
+        <i18n-t
+            :keypath="`v1.tos.info.single.title`"
+            tag="span"
+            class="font-template text-8.75 fw-900 color-[#000000]"
+        ></i18n-t>
 
         <div class="mt-3.75">
             <div ref="container" class="grid grid-cols-2 gap-6.25">

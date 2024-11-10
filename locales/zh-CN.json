@@ -45,6 +45,43 @@
           "styles": { "fw": "500" }
         }
       }
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "账号与排位"
+        },
+        "multi": {
+          "title": "多人游戏数据"
+        },
+        "single": {
+          "title": "单人游戏数据"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": { "title": "账号信息" },
+        "historical": {
+          "title": "历史数据"
+        },
+        "today": {
+          "title": "今日数据"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "账号与排位"
+        },
+        "multi": {
+          "title": "多人游戏数据"
+        },
+        "single": {
+          "title": "单人游戏数据"
+        }
+      }
     }
   }
 }
