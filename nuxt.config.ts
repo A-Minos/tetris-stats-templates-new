@@ -1,8 +1,18 @@
 export default defineNuxtConfig({
     ssr: false,
     srcDir: 'src',
-    modules: ['@unocss/nuxt', '@nuxtjs/i18n'],
+    modules: ['@unocss/nuxt', '@nuxtjs/i18n', 'nuxt-zod-i18n'],
 
+    app: {
+        head: {
+            script: [
+                {
+                    innerHTML: `window.__DATA__ = '{{ DATA }}';`,
+                    type: 'text/typescript',
+                },
+            ],
+        },
+    },
     router: {
         options: {
             hashMode: true,
