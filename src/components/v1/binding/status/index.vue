@@ -1,17 +1,14 @@
-<script lang="ts">
-export enum Status {
-    SUCCESS = 'success',
-    UNVERIFIED = 'unverified',
-    UNKNOWN = 'unknown',
-    UNBIND = 'unbind',
-    ERROR = 'error',
-}
-</script>
-
 <script lang="ts" setup>
-const data = useData<{
-    readonly type: Status;
-}>();
+import z from 'zod';
+import { Status } from '~/types/status';
+
+const data = useData(
+    z
+        .object({
+            type: z.nativeEnum(Status),
+        })
+        .readonly(),
+);
 </script>
 
 <template>

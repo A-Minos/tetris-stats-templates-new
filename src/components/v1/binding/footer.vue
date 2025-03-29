@@ -1,29 +1,30 @@
 <script lang="ts" setup>
-import { Status } from '~/components/v1/binding/status/index.vue';
+import z from 'zod';
+import { Status } from '~/types/status';
 
 const { t } = useI18n();
 
-const data = useData<
-    | {
-          readonly type: Status.SUCCESS | Status.UNVERIFIED | Status.UNKNOWN;
-
-          readonly command: string;
-      }
-    | {
-          readonly type: Status.UNBIND;
-
-          readonly command: string;
-
-          readonly bot: {
-              readonly name: string;
-          };
-      }
-    | {
-          readonly type: Status.ERROR;
-
-          readonly error: string;
-      }
->();
+const data = useData(
+    z
+        .union([
+            z.object({
+                type: z.union([z.literal(Status.SUCCESS), z.literal(Status.UNVERIFIED), z.literal(Status.UNKNOWN)]),
+                command: z.string(),
+            }),
+            z.object({
+                type: z.literal(Status.UNBIND),
+                command: z.string(),
+                bot: z.object({
+                    name: z.string(),
+                }),
+            }),
+            z.object({
+                type: z.literal(Status.ERROR),
+                error: z.string(),
+            }),
+        ])
+        .readonly(),
+);
 </script>
 
 <template>

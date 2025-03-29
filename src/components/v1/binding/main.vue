@@ -1,21 +1,26 @@
 <script lang="ts" setup>
-import { Status } from '~/components/v1/binding/status/index.vue';
+import z from 'zod';
+import { Status } from '~/types/status';
 
 const { t } = useI18n();
 
-const data = useData<{
-    readonly type: Status;
+const data = useData(
+    z
+        .object({
+            type: z.nativeEnum(Status),
 
-    readonly platform: string;
+            platform: z.string(),
 
-    readonly user: {
-        readonly name: string;
-    };
+            user: z.object({
+                name: z.string(),
+            }),
 
-    readonly bot: {
-        readonly name: string;
-    };
-}>();
+            bot: z.object({
+                name: z.string(),
+            }),
+        })
+        .readonly(),
+);
 </script>
 
 <template>
