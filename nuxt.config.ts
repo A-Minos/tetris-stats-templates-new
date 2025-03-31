@@ -8,7 +8,7 @@ export default defineNuxtConfig({
             script: [
                 {
                     innerHTML: `window.__DATA__ = '{{ DATA }}';`,
-                    type: 'text/typescript',
+                    type: 'text/javascript',
                 },
             ],
         },
