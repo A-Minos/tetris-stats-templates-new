@@ -6,17 +6,21 @@ import { use } from 'echarts/core';
 import { SVGRenderer } from 'echarts/renderers';
 import { isNonNullish } from 'remeda';
 import chart from 'vue-echarts';
-
-const data = useData<{
-    readonly multiplayer: {
-        readonly app: number;
-        readonly ci: number;
-        readonly dspp: number;
-        readonly dsps: number;
-        readonly ge: number;
-        readonly pps: number;
-    };
-}>();
+import { z } from 'zod';
+const data = useData(
+    z
+        .object({
+            multiplayer: z.object({
+                app: z.number(),
+                ci: z.number(),
+                dspp: z.number(),
+                dsps: z.number(),
+                ge: z.number(),
+                pps: z.number(),
+            }),
+        })
+        .readonly(),
+);
 
 use([SVGRenderer, RadarChart]);
 

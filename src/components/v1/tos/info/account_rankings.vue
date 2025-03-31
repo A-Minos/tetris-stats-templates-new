@@ -1,12 +1,18 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
+import { z } from 'zod';
+import Avatar from '~/types/avatar';
 
-const data = useData<{
-    readonly user: {
-        readonly avatar: string;
-        readonly name: string;
-    };
-}>();
+const data = useData(
+    z
+        .object({
+            user: z.object({
+                avatar: Avatar,
+                name: z.string(),
+            }),
+        })
+        .readonly(),
+);
 
 const valid = computed(() => {
     if (isNullish(data.user)) {
@@ -39,7 +45,11 @@ onMounted(async () => {
                 <div class="size-68.75 rounded-7.5 bg-[#fafafa]" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
                     <div class="size-full px-15.5 py-7.5 box-border">
                         <div class="flex flex-col items-center gap-7">
-                            <img :src="data.user.avatar" alt="user.avatar" class="size-31.25 rounded-full" />
+                            <shared-avatar
+                                :avatar="data.user.avatar"
+                                alt="user.avatar"
+                                class="size-31.25 rounded-full"
+                            />
                             <span class="font-template text-7.5 fw-800 text-[#000000]">{{ data.user.name }}</span>
                         </div>
                     </div>

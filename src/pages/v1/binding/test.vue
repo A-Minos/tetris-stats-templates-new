@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 import type { VNode } from 'vue';
-import { Status } from '~/components/v1/binding/status/index.vue';
 import V1Binding from '~/pages/v1/binding/index.vue';
+import { Status } from '~/types/status';
 
 const { setLocale } = useI18n();
 
 const pages = ref<VNode[]>([]);
 
 onMounted(async () => {
-    for (const status of [Status.SUCCESS, Status.UNVERIFIED, Status.UNKNOWN, Status.UNBIND, Status.ERROR]) {
-        document.querySelector('template#data')!.innerHTML = JSON.stringify({
+    for (const status of Object.values(Status)) {
+        window.__DATA__ = JSON.stringify({
             platform: 'TETR.IO',
             type: status,
             user: {

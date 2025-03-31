@@ -1,11 +1,15 @@
-<script generic="T extends string" lang="ts" setup>
+<script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
-
-const data = useData<{
-    readonly singleplayer: {
-        readonly blitz: number;
-    };
-}>();
+import { z } from 'zod';
+const data = useData(
+    z
+        .object({
+            singleplayer: z.object({
+                blitz: z.string(),
+            }),
+        })
+        .readonly(),
+);
 
 const valid = computed(() => {
     if (isNullish(data.singleplayer)) {

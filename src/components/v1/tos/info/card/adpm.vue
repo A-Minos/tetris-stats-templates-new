@@ -1,15 +1,19 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
+import { z } from 'zod';
 import Trending from '~/core/shared/trending';
-
-const data = useData<{
-    readonly multiplayer: {
-        readonly adpm: number;
-        readonly vs: number;
-        readonly adpl: number;
-        readonly adpm_trending: Trending;
-    };
-}>();
+const data = useData(
+    z
+        .object({
+            multiplayer: z.object({
+                adpm: z.number(),
+                vs: z.number(),
+                adpl: z.number(),
+                adpm_trending: z.nativeEnum(Trending),
+            }),
+        })
+        .readonly(),
+);
 
 const valid = computed(() => {
     if (isNullish(data.multiplayer)) {

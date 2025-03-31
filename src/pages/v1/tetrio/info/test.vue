@@ -8,7 +8,7 @@ const { setLocale } = useI18n();
 const pages = ref<VNode[]>([]);
 
 onMounted(async () => {
-    document.querySelector('template#data')!.innerHTML = JSON.stringify({
+    window.__DATA__ = JSON.stringify({
         user: {
             avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
             name: 'SCDHH',

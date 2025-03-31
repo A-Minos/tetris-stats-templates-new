@@ -1,14 +1,18 @@
-<script generic="T extends string" lang="ts" setup>
+<script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
+import { z } from 'zod';
 import Trending from '~/core/shared/trending';
-
-const data = useData<{
-    readonly multiplayer: {
-        readonly apm: number;
-        readonly apl: number;
-        readonly apm_trending: Trending;
-    };
-}>();
+const data = useData(
+    z
+        .object({
+            multiplayer: z.object({
+                apm: z.number(),
+                apl: z.number(),
+                apm_trending: z.nativeEnum(Trending),
+            }),
+        })
+        .readonly(),
+);
 
 const valid = computed(() => {
     if (isNullish(data.multiplayer)) {

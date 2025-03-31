@@ -1,7 +1,7 @@
 <template>
     <div class="w-fit bg-[#f1f1f1] px-6.25">
         <div class="mt-5.5">
-            <v1-tos-info-account_rankings />
+            <v1-tos-info-account-rankings />
         </div>
 
         <div class="mt-10.75">

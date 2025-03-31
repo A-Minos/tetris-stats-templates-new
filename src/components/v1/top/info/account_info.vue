@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
+import { z } from 'zod';
 
-const data = useData<{
-    readonly user: {
-        readonly avatar: string;
-        readonly name: string;
-    };
-}>();
+const data = useData(
+    z
+        .object({
+            user: z.object({
+                avatar: z.string(),
+                name: z.string(),
+            }),
+        })
+        .readonly(),
+);
 
 const valid = computed(() => {
     if (isNullish(data.user)) {

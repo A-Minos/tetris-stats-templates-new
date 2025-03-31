@@ -5,29 +5,34 @@ import { use } from 'echarts/core';
 import { SVGRenderer } from 'echarts/renderers';
 import { isNonNullish } from 'remeda';
 import chart from 'vue-echarts';
+import { z } from 'zod';
 import point from '~/assets/images/chart/point.svg';
-
 use([SVGRenderer, GridComponent, LineChart, MarkLineComponent]);
 
-const data = useData<{
-    readonly multiplayer: {
-        readonly icon: string;
-        readonly tr: number;
-        readonly rank: number;
+const data = useData(
+    z
+        .object({
+            multiplayer: z.object({
+                icon: z.string(),
+                tr: z.string(),
+                rank: z.number(),
 
-        readonly history: {
-            readonly data: {
-                readonly record_at: Date;
-                readonly tr: number;
-            }[];
-
-            readonly split_interval: number;
-            readonly min_tr: number;
-            readonly max_tr: number;
-            readonly offset: number;
-        };
-    };
-}>();
+                history: z.object({
+                    data: z.array(
+                        z.object({
+                            record_at: z.coerce.date(),
+                            tr: z.number(),
+                        }),
+                    ),
+                    split_interval: z.number(),
+                    min_tr: z.number(),
+                    max_tr: z.number(),
+                    offset: z.number(),
+                }),
+            }),
+        })
+        .readonly(),
+);
 
 const option = computed(() => {
     return {

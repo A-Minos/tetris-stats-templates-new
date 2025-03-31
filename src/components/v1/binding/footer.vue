@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import z from 'zod';
+import { z } from 'zod';
 import { Status } from '~/types/status';
 
 const { t } = useI18n();
