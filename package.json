@@ -10,17 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxtjs/i18n": "^9.0.0-rc.2",
+    "@nuxtjs/i18n": "^9.4.0",
     "@types/identicon.js": "^2.3.5",
     "@unocss/nuxt": "^0.61.9",
-    "echarts": "^5.5.1",
-    "nuxt": "^3.12.4",
+    "echarts": "^5.6.0",
+    "nuxt": "^3.16.2",
     "nuxt-zod-i18n": "1.11.5",
-    "prettier": "^3.3.3",
-    "remeda": "^2.10.1",
-    "sass": "^1.77.8",
-    "vue": "^3.4.37",
-    "vue-echarts": "^7.0.2"
+    "nuxtjs-naive-ui": "^1.0.2",
+    "prettier": "^3.5.3",
+    "remeda": "^2.21.2",
+    "sass": "^1.86.3",
+    "unplugin-auto-import": "^19.1.2",
+    "unplugin-vue-components": "^28.4.1",
+    "vue": "^3.5.13",
+    "vue-echarts": "^7.0.3"
   },
   "prettier": {
     "singleQuote": true,
@@ -43,7 +46,11 @@
     ]
   },
   "dependencies": {
+    "@antv/g2": "^5.2.12",
+    "@vicons/antd": "^0.13.0",
+    "@vueuse/core": "^13.0.0",
     "identicon.js": "^2.3.3",
-    "zod": "^3.24.1"
+    "naive-ui": "^2.41.0",
+    "zod": "^3.24.2"
   }
 }
