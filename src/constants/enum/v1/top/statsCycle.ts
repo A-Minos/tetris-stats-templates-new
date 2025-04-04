@@ -1,4 +1,4 @@
-export enum DataType {
+export enum StatsCycle {
     TODAY = 'today',
     HISTORICAL = 'historical',
 }

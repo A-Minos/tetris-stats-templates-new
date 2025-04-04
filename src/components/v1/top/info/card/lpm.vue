@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
 import { z } from 'zod';
-import Trending from '~/core/shared/trending';
-import { DataType } from '../stats';
+import Trending from '~/constants/enum/v1/trending';
+import { StatsCycle } from '~/constants/enum/v1/top/statsCycle';
 
 const props = defineProps<{
-    readonly data_type: DataType;
+    readonly data_type: StatsCycle;
 }>();
 
 const schema = z.object({
@@ -25,9 +25,9 @@ const data = useData(
 
 const source = (() => {
     switch (props.data_type) {
-        case DataType.TODAY:
+        case StatsCycle.TODAY:
             return data.today;
-        case DataType.HISTORICAL:
+        case StatsCycle.HISTORICAL:
             return data.historical;
     }
 })();
@@ -159,10 +159,10 @@ const source = (() => {
 
                 <template v-if="isNonNullish(source.lpm_trending)">
                     <template v-if="source.lpm_trending === Trending.UP">
-                        <v1-shared-trending-up />
+                        <v1-trending-up />
                     </template>
                     <template v-else-if="source.lpm_trending === Trending.DOWN">
-                        <v1-shared-trending-down />
+                        <v1-trending-down />
                     </template>
                 </template>
             </div>

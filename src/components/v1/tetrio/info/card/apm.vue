@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
 import { z } from 'zod';
-import Trending from '~/core/shared/trending';
+import Trending from '~/constants/enum/v1/trending';
 const data = useData(
     z
         .object({
@@ -176,11 +176,11 @@ const valid = computed(() => {
 
                     <template v-if="isNonNullish(data.multiplayer.apm_trending)">
                         <template v-if="data.multiplayer.apm_trending === Trending.UP">
-                            <v1-shared-trending-up />
+                            <v1-trending-up />
                         </template>
 
                         <template v-if="data.multiplayer.apm_trending === Trending.DOWN">
-                            <v1-shared-trending-down />
+                            <v1-trending-down />
                         </template>
                     </template>
                 </div>
