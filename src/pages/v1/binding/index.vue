@@ -13,5 +13,5 @@
 </template>
 
 <style lang="scss">
-@import '~/styles/v1';
+@use '~/styles/v1';
 </style>
