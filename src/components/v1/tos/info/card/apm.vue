@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
 import { z } from 'zod';
-import Trending from '~/core/shared/trending';
+import { Trending } from '~/components/v1/trending/index.vue';
+
 const data = useData(
     z
         .object({
@@ -174,15 +175,10 @@ const valid = computed(() => {
                         {{ data.multiplayer.apm }}
                     </span>
 
-                    <template v-if="isNonNullish(data.multiplayer.apm_trending)">
-                        <template v-if="data.multiplayer.apm_trending === Trending.UP">
-                            <v1-shared-trending-up />
-                        </template>
-
-                        <template v-if="data.multiplayer.apm_trending === Trending.DOWN">
-                            <v1-shared-trending-down />
-                        </template>
-                    </template>
+                    <v1-trending
+                        v-if="isNonNullish(data.multiplayer.apm_trending)"
+                        :trending="data.multiplayer.apm_trending"
+                    />
                 </div>
             </div>
 

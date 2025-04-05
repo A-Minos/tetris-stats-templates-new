@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import useData from '~/composables/useData';
-import Languages from '~/core/shared/languages';
+import Languages from '~/constants/enum/languages';
+import useData from '~/utils/useData';
+
 export default defineNuxtPlugin((app) => {
     app.hooks.addHooks({
         'app:created': () => {

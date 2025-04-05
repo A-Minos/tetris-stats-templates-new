@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import Identicon from 'identicon.js';
-import { isString } from 'remeda';
 import type Avatar from '~/types/avatar';
-import type IdenticonType from '~/types/identicon';
 
-const props = defineProps<{
+defineProps<{
     avatar: Avatar;
 }>();
+</script>
 
-function generateIdenticon(avatar: IdenticonType) {
+<script lang="ts">
+import Identicon from 'identicon.js';
+import { isString } from 'remeda';
+import type IdenticonType from '~/types/identicon';
+
+function generateIdenticon(avatar: IdenticonType): string {
     return (
         'data:image/svg+xmlbase64,' +
         new Identicon(avatar.hash, {
@@ -22,13 +25,12 @@ function generateIdenticon(avatar: IdenticonType) {
     );
 }
 
-function getAvatar(avatar: Avatar) {
+export function getAvatar(avatar: Avatar): string {
     if (isString(avatar)) {
         return avatar;
     }
-    if (avatar.hash) {
-        return generateIdenticon(avatar);
-    }
+
+    return generateIdenticon(avatar);
 }
 </script>
 

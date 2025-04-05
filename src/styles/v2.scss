@@ -1,0 +1,16 @@
+:root,
+body {
+    @apply m-0 p-0 text-[16px];
+}
+
+@font-face {
+    font-family: 'HarmonyOS Sans SC';
+    src: url('~/assets/fonts/HarmonyOS_Sans_SC_Medium.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HUN';
+    src: url('~/assets/fonts/HUN.ttf');
+    font-display: swap;
+}

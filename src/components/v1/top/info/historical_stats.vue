@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
-import { DataType } from './stats';
+import { StatsCycle } from '~/constants/enum/v1/top/statsCycle';
 
 const container = ref<HTMLDivElement>();
 
@@ -21,8 +21,8 @@ onMounted(() => {
 
         <div class="mt-3.75">
             <div ref="container" class="flex gap-6.25">
-                <v1-top-info-card-lpm :data_type="DataType.HISTORICAL" />
-                <v1-top-info-card-apm :data_type="DataType.HISTORICAL" />
+                <v1-top-info-card-lpm :data_type="StatsCycle.HISTORICAL" />
+                <v1-top-info-card-apm :data_type="StatsCycle.HISTORICAL" />
             </div>
         </div>
     </template>
