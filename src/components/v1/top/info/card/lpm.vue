@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
 import { z } from 'zod';
-import Trending from '~/constants/enum/v1/trending';
+import { Trending } from '~/components/v1/trending/index.vue';
+
 import { StatsCycle } from '~/constants/enum/v1/top/statsCycle';
 
 const props = defineProps<{
@@ -11,7 +12,7 @@ const props = defineProps<{
 const schema = z.object({
     lpm: z.number(),
     pps: z.number(),
-    lpm_trending: z.nativeEnum(Trending),
+    lpm_trending: z.nativeEnum(Trending).nullable(),
 });
 
 const data = useData(
@@ -157,14 +158,7 @@ const source = (() => {
             <div class="flex items-center">
                 <span class="font-template text-11.25 fw-500 color-[#4d7d0f]">{{ source.lpm }}</span>
 
-                <template v-if="isNonNullish(source.lpm_trending)">
-                    <template v-if="source.lpm_trending === Trending.UP">
-                        <v1-trending-up />
-                    </template>
-                    <template v-else-if="source.lpm_trending === Trending.DOWN">
-                        <v1-trending-down />
-                    </template>
-                </template>
+                <v1-trending v-if="isNonNullish(source.lpm_trending)" :trending="source.lpm_trending" />
             </div>
         </div>
 

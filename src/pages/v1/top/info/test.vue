@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { VNode } from 'vue';
-import Trending from '~/constants/enum/v1/trending';
+import { Trending } from '~/components/v1/trending/index.vue';
+
 import V1TopInfo from '~/pages/v1/top/info/index.vue';
 
 const { setLocale } = useI18n();
