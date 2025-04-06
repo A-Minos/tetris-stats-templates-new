@@ -15,8 +15,6 @@ defineProps<{
             <n-text class="text-5 fw-bold">{{ require_tr }} TR</n-text>
         </n-flex>
 
-        <n-text :type="trending >= 0 ? 'success' : 'error'" class="ml-2 fw-bold">
-            {{ trending > 0 ? '↑' : trending < 0 ? '↓' : '→' }}{{ Math.abs(trending) }}
-        </n-text>
+        <v2-tetrio-rank-trending :trending="trending" />
     </n-flex>
 </template>
