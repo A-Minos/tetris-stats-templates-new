@@ -23,7 +23,7 @@ defineProps<{
             </n-flex>
 
             <n-flex justify="space-between">
-                <n-text>T / 迷你 T</n-text>
+                <n-text>{{ $t('v2.tetrio.record.clear.tspin_mini') }}</n-text>
 
                 <n-flex :size="0">
                     <n-text>{{ statistic.tspins.total }}</n-text>
@@ -45,7 +45,7 @@ defineProps<{
             </n-flex>
 
             <n-flex justify="space-between">
-                <n-text>迷你 T1 / 迷你 T2</n-text>
+                <n-text>{{ $t('v2.tetrio.record.clear.mini_tspin_single_double') }}</n-text>
 
                 <n-flex :size="0">
                     <n-text>{{ statistic.tspins.mini.single }}</n-text>
@@ -55,7 +55,7 @@ defineProps<{
             </n-flex>
 
             <n-flex justify="space-between">
-                <n-text>全清</n-text>
+                <n-text>{{ $t('v2.tetrio.record.clear.all_clear') }}</n-text>
                 <n-text>{{ statistic.all_clear }}</n-text>
             </n-flex>
         </n-flex>

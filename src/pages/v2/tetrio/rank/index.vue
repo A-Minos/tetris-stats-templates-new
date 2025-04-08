@@ -48,7 +48,9 @@ const data = useData(
 
         <n-card size="small">
             <div class="text-center">
-                <n-text class="text-xl" type="info">更新时间: {{ data.updated_at.toLocaleString(locale) }}</n-text>
+                <n-text class="text-xl" type="info">{{
+                    $t('v2.tetrio.rank.update_time', { time: data.updated_at.toLocaleString(locale) })
+                }}</n-text>
             </div>
         </n-card>
 

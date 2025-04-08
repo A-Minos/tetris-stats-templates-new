@@ -36,9 +36,12 @@ const data = useData(
                 </n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ data.blitz.play_at.toLocaleString(locale) }} ({{
-                        formatDateFns(partial(formatDistanceToNow, data.blitz.play_at))
-                    }}前)
+                    {{
+                        $t('v2.tetrio.user.info.quick_play_2.achieve_time', {
+                            time: data.blitz.play_at.toLocaleString(locale),
+                            when: formatDateFns(partial(formatDistanceToNow, data.blitz.play_at)).value,
+                        })
+                    }}
                 </n-text>
             </n-flex>
 

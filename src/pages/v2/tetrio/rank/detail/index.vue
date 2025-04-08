@@ -55,21 +55,23 @@ const data = useData(
                 </n-flex>
 
                 <n-flex justify="center">
-                    <n-card class="w-fit text-center" size="small" title="最低数据">
+                    <n-card class="w-fit text-center" size="small" :title="$t('v2.tetrio.rank.detail.minimum_data')">
                         <v2-tetrio-rank-detail-statistic :data="data.minimum_data" />
                     </n-card>
 
-                    <n-card class="w-fit text-center" size="small" title="平均数据">
+                    <n-card class="w-fit text-center" size="small" :title="$t('v2.tetrio.rank.detail.average_data')">
                         <v2-tetrio-rank-detail-statistic :data="data.average_data" />
                     </n-card>
 
-                    <n-card class="w-fit text-center" size="small" title="最高数据">
+                    <n-card class="w-fit text-center" size="small" :title="$t('v2.tetrio.rank.detail.maximum_data')">
                         <v2-tetrio-rank-detail-statistic :data="data.maximum_data" />
                     </n-card>
                 </n-flex>
 
                 <div class="text-center">
-                    <n-text :depth="3"> 更新时间: {{ data.updated_at.toLocaleString(locale) }}</n-text>
+                    <n-text :depth="3">{{
+                        $t('v2.tetrio.rank.update_time', { time: data.updated_at.toLocaleString(locale) })
+                    }}</n-text>
                 </div>
             </n-flex>
         </v2-tetrio-rank-card>

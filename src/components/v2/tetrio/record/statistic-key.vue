@@ -10,17 +10,17 @@ defineProps<{
     <n-card size="small">
         <n-flex :size="0" vertical>
             <n-flex justify="space-between">
-                <n-text>按键</n-text>
+                <n-text>{{ $t('v2.tetrio.record.key.keys') }}</n-text>
                 <n-text>{{ statistic.keys }}</n-text>
             </n-flex>
 
             <n-flex justify="space-between">
-                <n-text>按键/块</n-text>
+                <n-text>{{ $t('v2.tetrio.record.key.kpp') }}</n-text>
                 <n-text>{{ statistic.kpp }}</n-text>
             </n-flex>
 
             <n-flex justify="space-between">
-                <n-text>按键/秒</n-text>
+                <n-text>{{ $t('v2.tetrio.record.key.kps') }}</n-text>
                 <n-text>{{ statistic.kps }}</n-text>
             </n-flex>
         </n-flex>

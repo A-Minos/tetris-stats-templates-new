@@ -33,7 +33,12 @@ const props = defineProps<{
             <n-text :depth="3" class="text-xs">{{ user.id }}</n-text>
 
             <n-text :depth="3" class="text-2">
-                {{ Math.trunc(calculateXpLevel(user.xp)) }} 级 ({{ new Intl.NumberFormat(locale).format(user.xp) }} XP)
+                {{
+                    $t('v2.tetrio.user.list.level', {
+                        level: Math.trunc(calculateXpLevel(user.xp)),
+                        xp: new Intl.NumberFormat(locale).format(user.xp),
+                    })
+                }}
             </n-text>
         </n-flex>
 

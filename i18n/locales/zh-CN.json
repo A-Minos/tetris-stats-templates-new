@@ -83,5 +83,78 @@
         }
       }
     }
+  },
+  "v2": {
+    "tetrio": {
+      "rank": {
+        "player": "{value} 玩家",
+        "update_time": "更新时间: {time}",
+        "detail": {
+          "minimum_data": "最低数据",
+          "average_data": "平均数据",
+          "maximum_data": "最高数据"
+        }
+      },
+      "replay": "回放 ID",
+      "record": {
+        "key": {
+          "keys": "按键",
+          "kpp": "按键/块",
+          "kps": "按键/秒"
+        },
+        "max": {
+          "combo": "最大连击",
+          "b2b": "最大 b2b"
+        },
+        "block": {
+          "pieces": "块数",
+          "pps": "块/秒",
+          "lines": "消行",
+          "lpm": "消行/分钟",
+          "holds": "暂存",
+          "level": "等级",
+          "blitz": {
+            "score": "分数",
+            "spp": "分数/块"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / 迷你 T",
+          "mini_tspin_single_double": "迷你 T1 / 迷你 T2",
+          "all_clear": "全清"
+        },
+        "finesse": {
+          "title": "极简",
+          "faults": "多余操作"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "多人游戏",
+          "single_player": "单人游戏",
+          "tetra_league": {
+            "win_rate": "胜率: {wins} / {total} ({rate}%)",
+            "highest": "历史最高:"
+          },
+          "quick_play_2": {
+            "achieve_time": "达成时间: {time} ({when}前)",
+            "highest": "历史最高: {height}m (#{global_rank}) 在 {time} ({when}前)"
+          },
+          "detail": {
+            "level": "{level} 级 ({xp} XP)",
+            "win_rate": "胜率: {wins} / {total} ({rate}%)",
+            "played_games": "游玩次数: {count}",
+            "wins": "胜场数: {count}",
+            "join_time": "注册时间: {time} ({when}前)"
+          },
+          "single": {
+            "achieve_time": "达成时间: {time} ({when}前)"
+          }
+        },
+        "list": {
+          "level": "{level} 级 ({xp} XP)"
+        }
+      }
+    }
   }
 }

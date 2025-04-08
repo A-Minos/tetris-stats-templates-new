@@ -52,7 +52,12 @@ const xp_progress = computed(() => {
                     <n-flex vertical>
                         <div class="text-center">
                             <n-text class="fw-bold">
-                                {{ Math.trunc(xp_level) }} 级 ({{ new Intl.NumberFormat(locale).format(xp_level) }} XP)
+                                {{
+                                    $t('v2.tetrio.user.info.detail.level', {
+                                        level: Math.trunc(xp_level),
+                                        xp: new Intl.NumberFormat(locale).format(xp_level),
+                                    })
+                                }}
                             </n-text>
                         </div>
 
@@ -70,24 +75,33 @@ const xp_progress = computed(() => {
             <div v-if="isNonNullish(data.statistic)" class="text-center">
                 <n-text :depth="3" class="text-sm">
                     <template v-if="isNonNullish(data.statistic.total) && isNonNullish(data.statistic.wins)">
-                        胜率: {{ data.statistic.wins }} / {{ data.statistic.total }} ({{
-                            ((data.statistic.wins / data.statistic.total) * 100).toFixed(2)
-                        }}%)
+                        {{
+                            $t('v2.tetrio.user.info.detail.win_rate', {
+                                wins: data.statistic.wins,
+                                total: data.statistic.total,
+                                rate: ((data.statistic.wins / data.statistic.total) * 100).toFixed(2),
+                            })
+                        }}
                     </template>
 
-                    <template v-else-if="isNonNullish(data.statistic.total)"
-                        >游玩次数: {{ data.statistic.total }}</template
-                    >
+                    <template v-else-if="isNonNullish(data.statistic.total)">{{
+                        $t('v2.tetrio.user.info.detail.played_games', { count: data.statistic.total })
+                    }}</template>
 
-                    <template v-else-if="isNonNullish(data.statistic.wins)">胜场数: {{ data.statistic.wins }}</template>
+                    <template v-else-if="isNonNullish(data.statistic.wins)">{{
+                        $t('v2.tetrio.user.info.detail.wins', { count: data.statistic.wins })
+                    }}</template>
                 </n-text>
             </div>
 
             <div class="text-center" v-if="isNonNullish(data.user.join_at)">
                 <n-text :depth="3" class="text-sm">
-                    注册时间: {{ data.user.join_at.toLocaleString(locale) }} ({{
-                        formatDateFns(partial(formatDistanceToNow, data.user.join_at))
-                    }}前)
+                    {{
+                        $t('v2.tetrio.user.info.detail.join_time', {
+                            time: data.user.join_at.toLocaleString(locale),
+                            when: formatDateFns(partial(formatDistanceToNow, data.user.join_at)).value,
+                        })
+                    }}
                 </n-text>
             </div>
         </div>

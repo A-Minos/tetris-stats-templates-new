@@ -57,9 +57,12 @@ const record = computed(() => {
                 </n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ record.play_at.toLocaleString(locale) }} ({{
-                        formatDateFns(partial(formatDistanceToNow, record.play_at))
-                    }}前)
+                    {{
+                        $t('v2.tetrio.user.info.quick_play_2.achieve_time', {
+                            time: record.play_at.toLocaleString(locale),
+                            when: formatDateFns(partial(formatDistanceToNow, record.play_at)).value,
+                        })
+                    }}
                 </n-text>
             </n-flex>
 
@@ -81,12 +84,14 @@ const record = computed(() => {
         <template v-if="isNonNullish(week) && isNonNullish(best)">
             <n-flex align="center" class="!gap-1">
                 <n-text type="warning">
-                    历史最高:
-                    {{ String(best.altitude).substring(0, String(best.altitude).lastIndexOf('.') + 2) }}m (#{{
-                        best.global_rank
-                    }}) 在
-                    {{ best.play_at.toLocaleString(locale) }}
-                    ({{ formatDateFns(partial(formatDistanceToNow, best.play_at)) }}前)
+                    {{
+                        $t('v2.tetrio.user.info.quick_play_2.highest', {
+                            height: String(best.altitude).substring(0, String(best.altitude).lastIndexOf('.') + 2),
+                            global_rank: best.global_rank,
+                            time: best.play_at.toLocaleString(locale),
+                            when: formatDateFns(partial(formatDistanceToNow, best.play_at)).value,
+                        })
+                    }}
                 </n-text>
             </n-flex>
         </template>

@@ -34,9 +34,12 @@ const data = useData(
                 <n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ data.sprint.play_at.toLocaleString(locale) }} ({{
-                        formatDateFns(partial(formatDistanceToNow, data.sprint.play_at))
-                    }}前)
+                    {{
+                        $t('v2.tetrio.user.info.quick_play_2.achieve_time', {
+                            time: data.sprint.play_at.toLocaleString(locale),
+                            when: formatDateFns(partial(formatDistanceToNow, data.sprint.play_at)).value,
+                        })
+                    }}
                 </n-text>
             </n-flex>
 

@@ -7,7 +7,10 @@ defineProps<{
 <template>
     <n-card class="text-5" size="small">
         <n-flex justify="space-evenly">
-            <div class="text-center">回放 ID: r:{{ replay_id }}</div>
+            <div class="text-center">
+                {{ $t('v2.tetrio.replay') }}:
+                <n-a :href="`https://tetr.io/#R:${replay_id}`" target="_blank"> r:{{ replay_id }} </n-a>
+            </div>
         </n-flex>
     </n-card>
 </template>

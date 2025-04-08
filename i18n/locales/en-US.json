@@ -83,5 +83,78 @@
         }
       }
     }
+  },
+  "v2": {
+    "tetrio": {
+      "rank": {
+        "player": "{value} Players",
+        "update_time": "Update Time: {time}",
+        "detail": {
+          "minimum_data": "Minimum Data",
+          "average_data": "Average Data",
+          "maximum_data": "Maximum Data"
+        }
+      },
+      "replay": "Replay ID",
+      "record": {
+        "key": {
+          "keys": "Keys",
+          "kpp": "Keys/Block",
+          "kps": "Keys/Second"
+        },
+        "max": {
+          "combo": "Max Combo",
+          "b2b": "Max B2B"
+        },
+        "block": {
+          "pieces": "Blocks",
+          "pps": "Blocks/Second",
+          "lines": "Lines",
+          "lpm": "Lines/Minute",
+          "holds": "Holds",
+          "level": "Level",
+          "blitz": {
+            "score": "Score",
+            "spp": "Score/Block"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / Mini T",
+          "mini_tspin_single_double": "Mini T1 / Mini T2",
+          "all_clear": "All Clear"
+        },
+        "finesse": {
+          "title": "Finesse",
+          "faults": "Faults"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "Multiplayer",
+          "single_player": "Singleplayer",
+          "tetra_league": {
+            "win_rate": "Win Rate: {wins} / {total} ({rate}%)",
+            "highest": "Highest Ever:"
+          },
+          "quick_play_2": {
+            "achieve_time": "Achieved Time: {time} ({when} ago)",
+            "highest": "Highest Ever: {height}m (#{global_rank}) at {time} ({when} ago)"
+          },
+          "detail": {
+            "level": "Level {level} ({xp} XP)",
+            "win_rate": "Win Rate: {wins} / {total} ({rate}%)",
+            "played_games": "Games Played: {count}",
+            "wins": "Wins: {count}",
+            "join_time": "Join Time: {time} ({when} ago)"
+          },
+          "single": {
+            "achieve_time": "Achieved Time: {time} ({when} ago)"
+          }
+        },
+        "list": {
+          "level": "Level {level} ({xp} XP)"
+        }
+      }
+    }
   }
 }

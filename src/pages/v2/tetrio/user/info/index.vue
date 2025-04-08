@@ -8,7 +8,7 @@ import { showSingleplayer } from '~/utils/show';
         <v2-tetrio-user-info-role />
         <v2-tetrio-user-info-bad-standing />
         <v2-tetrio-user-info-bio />
-        <n-divider class="!my-0">多人游戏</n-divider>
+        <n-divider class="!my-0">{{ $t('v2.tetrio.user.info.multi_player') }}</n-divider>
         <v2-tetrio-user-info-badges />
         <n-flex vertical>
             <v2-tetrio-user-info-tetra-league />
@@ -20,7 +20,7 @@ import { showSingleplayer } from '~/utils/show';
             </n-flex>
         </n-flex>
 
-        <n-divider v-if="showSingleplayer" class="!my-0">单人游戏</n-divider>
+        <n-divider v-if="showSingleplayer" class="!my-0">{{ $t('v2.tetrio.user.info.single_player') }}</n-divider>
 
         <n-flex :wrap="false">
             <v2-tetrio-user-info-sprint />

@@ -156,7 +156,8 @@ const valid = computed(() => {
         <div
             class="size-68.75 rounded-7.5"
             style="
-                background: linear-gradient(222deg, #525252 11.97%, #1d1916 89.73%),
+                background:
+                    linear-gradient(222deg, #525252 11.97%, #1d1916 89.73%),
                     linear-gradient(222deg, #4f9dff 11.97%, #2563ea 89.73%);
                 box-shadow: 0 0.9375rem 1.875rem 0 #0000004d;
                 filter: drop-shadow(0 0 1.9375rem #fafafa66);

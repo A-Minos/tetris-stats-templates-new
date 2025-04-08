@@ -57,16 +57,20 @@ const props = defineProps<{
             <n-flex :size="0" align="center" justify="center">
                 <template v-if="isNonNullish(statistic)">
                     <n-text :depth="3" class="text-sm">
-                        胜率: {{ statistic.wins }} / {{ statistic.total }} ({{
-                            ((statistic.wins / statistic.total) * 100).toFixed(2)
-                        }}%)
+                        {{
+                            $t('v2.tetrio.user.info.tetra_league.win_rate', {
+                                wins: statistic.wins,
+                                total: statistic.total,
+                                rate: ((statistic.wins / statistic.total) * 100).toFixed(2),
+                            })
+                        }}
                     </n-text>
 
                     <n-divider vertical />
                 </template>
 
                 <template v-if="isNonNullish(highest_rank)">
-                    <n-text :depth="3">历史最高:</n-text>
+                    <n-text :depth="3">{{ $t('v2.tetrio.user.info.tetra_league.highest') }}</n-text>
                     <v2-rank :rank="highest_rank" class="[&>img]:size-4" />
                 </template>
             </n-flex>
