@@ -14,6 +14,7 @@ export default defineNuxtConfig({
             { code: 'zh-CN', name: 'Chinese', file: 'zh-CN.json' },
         ],
         experimental: {
+            typedOptionsAndMessages: 'default',
             generatedLocaleFilePathFormat: 'relative',
         },
     },
