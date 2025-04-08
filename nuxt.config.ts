@@ -13,6 +13,9 @@ export default defineNuxtConfig({
             { code: 'en-US', name: 'English', file: 'en-US.json' },
             { code: 'zh-CN', name: 'Chinese', file: 'zh-CN.json' },
         ],
+        experimental: {
+            generatedLocaleFilePathFormat: 'relative',
+        },
     },
     vite: {
         plugins: [
