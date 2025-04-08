@@ -6,6 +6,14 @@ export default defineNuxtConfig({
     ssr: false,
     srcDir: 'src',
     modules: ['@unocss/nuxt', '@nuxtjs/i18n', 'nuxt-zod-i18n', 'nuxtjs-naive-ui'],
+    i18n: {
+        defaultLocale: 'zh-CN',
+        strategy: 'no_prefix',
+        locales: [
+            { code: 'en-US', name: 'English', file: 'en-US.json' },
+            { code: 'zh-CN', name: 'Chinese', file: 'zh-CN.json' },
+        ],
+    },
     vite: {
         plugins: [
             AutoImport({
@@ -38,10 +46,6 @@ export default defineNuxtConfig({
         options: {
             hashMode: true,
         },
-    },
-
-    i18n: {
-        vueI18n: './i18n.config.ts',
     },
 
     compatibilityDate: '2024-11-04',
