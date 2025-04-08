@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import { formatDistanceToNow } from 'date-fns';
+import { partial } from 'lodash';
 import { isNonNullish } from 'remeda';
 import { z } from 'zod';
+import { formatDateFns } from '~/plugins/i18n';
 import { confirmShow } from '~/utils/show';
+
+const { locale } = useI18n();
 
 const data = useData(
     z
@@ -28,12 +32,12 @@ const data = useData(
         <n-flex align="center" justify="space-between">
             <n-flex :size="0" vertical>
                 <n-text class="text-3xl fw-bold">
-                    {{ new Intl.NumberFormat('zh-CN').format(data.blitz.score) }}
+                    {{ new Intl.NumberFormat(locale).format(data.blitz.score) }}
                 </n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ data.blitz.play_at.toLocaleString('zh-CN') }} ({{
-                        formatDistanceToNow(data.blitz.play_at)
+                    达成时间: {{ data.blitz.play_at.toLocaleString(locale) }} ({{
+                        formatDateFns(partial(formatDistanceToNow, data.blitz.play_at))
                     }}前)
                 </n-text>
             </n-flex>

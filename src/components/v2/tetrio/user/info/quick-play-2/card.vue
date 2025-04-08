@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import { asyncComputed } from '@vueuse/core';
 import { formatDistanceToNow } from 'date-fns';
+import { partial } from 'lodash';
 import { isNonNullish, isNullish } from 'remeda';
+import { formatDateFns } from '~/plugins/i18n';
+import type zenith from '~/types/zenith';
+
+const { locale } = useI18n();
 
 const props = defineProps<{
     readonly country: string | null;
@@ -52,7 +57,9 @@ const record = computed(() => {
                 </n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ record.play_at.toLocaleString('zh-CN') }} ({{ formatDistanceToNow(record.play_at) }}前)
+                    达成时间: {{ record.play_at.toLocaleString(locale) }} ({{
+                        formatDateFns(partial(formatDistanceToNow, record.play_at))
+                    }}前)
                 </n-text>
             </n-flex>
 
@@ -78,8 +85,8 @@ const record = computed(() => {
                     {{ String(best.altitude).substring(0, String(best.altitude).lastIndexOf('.') + 2) }}m (#{{
                         best.global_rank
                     }}) 在
-                    {{ best.play_at.toLocaleString('zh-CN') }}
-                    ({{ formatDistanceToNow(best.play_at) }}前)
+                    {{ best.play_at.toLocaleString(locale) }}
+                    ({{ formatDateFns(partial(formatDistanceToNow, best.play_at)) }}前)
                 </n-text>
             </n-flex>
         </template>

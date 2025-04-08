@@ -4,6 +4,8 @@ import { z } from 'zod';
 import GradeType from '~/constants/enum/v2/tetrio/grade-type';
 import Statistic from '~/types/v2/tetrio/record/statistic';
 
+const { locale } = useI18n();
+
 const data = useData(
     z
         .object({
@@ -63,7 +65,7 @@ const is_best = computed(() => {
             </n-flex>
 
             <div class="text-right">
-                <n-text :depth="3">{{ data.play_at.toLocaleString('zh-CN') }}</n-text>
+                <n-text :depth="3">{{ data.play_at.toLocaleString(locale) }}</n-text>
             </div>
         </n-flex>
     </n-alert>

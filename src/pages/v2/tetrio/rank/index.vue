@@ -2,6 +2,8 @@
 import { z } from 'zod';
 import { ValidRank } from '~/types/rank';
 
+const { locale } = useI18n();
+
 const data = useData(
     z
         .object({
@@ -46,7 +48,7 @@ const data = useData(
 
         <n-card size="small">
             <div class="text-center">
-                <n-text class="text-xl" type="info">更新时间: {{ data.updated_at.toLocaleString('zh-CN') }}</n-text>
+                <n-text class="text-xl" type="info">更新时间: {{ data.updated_at.toLocaleString(locale) }}</n-text>
             </div>
         </n-card>
 

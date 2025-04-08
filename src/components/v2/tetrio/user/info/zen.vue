@@ -3,6 +3,8 @@ import { isNonNullish, isNullish } from 'remeda';
 import { z } from 'zod';
 import { confirmShow } from '~/utils/show';
 
+const { locale } = useI18n();
+
 const data = useData(
     z
         .object({
@@ -73,7 +75,7 @@ const symbols = computed(() => {
     <n-card v-if="isNonNullish(data.zen) && confirmShow()" size="small" title="Zen">
         <n-flex align="center" justify="space-between">
             <n-flex :size="0" align="start" vertical>
-                <n-text class="text-3xl fw-bold">{{ new Intl.NumberFormat('zh-CN').format(data.zen.score) }}</n-text>
+                <n-text class="text-3xl fw-bold">{{ new Intl.NumberFormat(locale).format(data.zen.score) }}</n-text>
                 <n-text :depth="3" class="text-xl fw-bold">Level {{ data.zen.level }}</n-text>
             </n-flex>
 

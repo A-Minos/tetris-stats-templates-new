@@ -9,6 +9,8 @@ export { BlitzStatistic };
 </script>
 
 <script setup lang="ts">
+const { locale } = useI18n();
+
 const data = useData(
     z
         .object({
@@ -22,7 +24,7 @@ const data = useData(
     <v2-layout content_class="max-w-320">
         <v2-tetrio-record-result
             title="Blitz"
-            :result-value="new Intl.NumberFormat('zh-CN').format(data.statistic.score)"
+            :result-value="new Intl.NumberFormat(locale).format(data.statistic.score)"
             :statistic="data.statistic"
         />
 

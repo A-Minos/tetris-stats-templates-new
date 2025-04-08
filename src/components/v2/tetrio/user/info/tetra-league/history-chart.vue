@@ -3,6 +3,8 @@ import { Chart } from '@antv/g2';
 import { tryOnMounted } from '@vueuse/core';
 import type { historyDataType } from '~/types/history-data';
 
+const { locale } = useI18n();
+
 const props = defineProps<{
     readonly current_tr: number;
     readonly data: historyDataType;
@@ -26,7 +28,7 @@ tryOnMounted(() => {
 
         axis: {
             x: {
-                labelFormatter: (date: Date) => date.toLocaleDateString('zh-CN'),
+                labelFormatter: (date: Date) => date.toLocaleDateString(locale.value),
             },
             y: {
                 title: 'Tetra Rating',
@@ -55,6 +57,8 @@ tryOnMounted(() => {
     setTimeout(() => {
         chart.render();
     }, 0);
+
+    watch(locale, () => chart.render());
 });
 </script>
 

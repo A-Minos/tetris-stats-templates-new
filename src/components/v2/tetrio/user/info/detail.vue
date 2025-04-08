@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 import { ClockCircleOutlined } from '@vicons/antd';
 import { formatDistanceToNow } from 'date-fns';
+import { partial } from 'lodash';
 import { isNonNullish } from 'remeda';
 import { z } from 'zod';
+import { formatDateFns } from '~/plugins/i18n';
 import { calculateXpLevel } from '~/utils/xp';
+
+const { locale } = useI18n();
 
 const data = useData(
     z
@@ -48,7 +52,7 @@ const xp_progress = computed(() => {
                     <n-flex vertical>
                         <div class="text-center">
                             <n-text class="fw-bold">
-                                {{ Math.trunc(xp_level) }} 级 ({{ new Intl.NumberFormat('zh-CN').format(xp_level) }} XP)
+                                {{ Math.trunc(xp_level) }} 级 ({{ new Intl.NumberFormat(locale).format(xp_level) }} XP)
                             </n-text>
                         </div>
 
@@ -81,8 +85,8 @@ const xp_progress = computed(() => {
 
             <div class="text-center" v-if="isNonNullish(data.user.join_at)">
                 <n-text :depth="3" class="text-sm">
-                    注册时间: {{ data.user.join_at.toLocaleString('zh-CN') }} ({{
-                        formatDistanceToNow(data.user.join_at)
+                    注册时间: {{ data.user.join_at.toLocaleString(locale) }} ({{
+                        formatDateFns(partial(formatDistanceToNow, data.user.join_at))
                     }}前)
                 </n-text>
             </div>

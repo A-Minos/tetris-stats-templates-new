@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import { formatDistanceToNow } from 'date-fns';
+import { partial } from 'lodash';
 import { isNonNullish } from 'remeda';
 import { z } from 'zod';
+import { formatDateFns } from '~/plugins/i18n';
 import { confirmShow } from '~/utils/show';
+
+const { locale } = useI18n();
 
 const data = useData(
     z
@@ -30,8 +34,8 @@ const data = useData(
                 <n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>
 
                 <n-text :depth="3" class="text-sm">
-                    达成时间: {{ data.sprint.play_at.toLocaleString('zh-CN') }} ({{
-                        formatDistanceToNow(data.sprint.play_at)
+                    达成时间: {{ data.sprint.play_at.toLocaleString(locale) }} ({{
+                        formatDateFns(partial(formatDistanceToNow, data.sprint.play_at))
                     }}前)
                 </n-text>
             </n-flex>

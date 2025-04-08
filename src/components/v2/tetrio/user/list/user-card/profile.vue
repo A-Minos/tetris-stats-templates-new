@@ -4,6 +4,8 @@ import { getAvatar } from '~/components/shared/avatar.vue';
 import Avatar from '~/types/avatar';
 import { calculateXpLevel } from '~/utils/xp';
 
+const { locale } = useI18n();
+
 const props = defineProps<{
     readonly index: number | null;
 
@@ -31,7 +33,7 @@ const props = defineProps<{
             <n-text :depth="3" class="text-xs">{{ user.id }}</n-text>
 
             <n-text :depth="3" class="text-2">
-                {{ Math.trunc(calculateXpLevel(user.xp)) }} 级 ({{ new Intl.NumberFormat('zh-CN').format(user.xp) }} XP)
+                {{ Math.trunc(calculateXpLevel(user.xp)) }} 级 ({{ new Intl.NumberFormat(locale).format(user.xp) }} XP)
             </n-text>
         </n-flex>
 
