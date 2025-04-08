@@ -39,8 +39,8 @@ export default defineNuxtPlugin((app) => {
                 if (!data._lang) {
                     return;
                 }
-                const { setLocale } = useI18n();
-                setLocale(data._lang);
+                const nuxtApp = useNuxtApp();
+                nuxtApp.$i18n.locale.value = data._lang;
             } catch (e) {
                 console.error(e);
                 return;
