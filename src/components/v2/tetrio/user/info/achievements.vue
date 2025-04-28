@@ -1,7 +1,21 @@
 <script lang="ts" setup>
 import { z } from 'zod';
-import all from '~/assets/images/achievements/all.webp';
-import diamond from '~/assets/images/achievements/diamond.webp';
+import frameNone from '~/assets/images/achievements/frames/none.png';
+import frameIssued from '~/assets/images/achievements/frames/issued.png';
+import frameBronze from '~/assets/images/achievements/frames/bronze.png';
+import frameSilver from '~/assets/images/achievements/frames/silver.png';
+import frameGold from '~/assets/images/achievements/frames/gold.png';
+import framePlatinum from '~/assets/images/achievements/frames/platinum.png';
+import frameDiamond from '~/assets/images/achievements/frames/diamond.png';
+import frameRingPiece from '~/assets/images/achievements/frames/ring-piece.png';
+import icons0 from '~/assets/images/achievements/icons/0.png';
+import icons874 from '~/assets/images/achievements/icons/874.png';
+import wreathT3 from '~/assets/images/achievements/wreaths/t3.png';
+import wreathT5 from '~/assets/images/achievements/wreaths/t5.png';
+import wreathT10 from '~/assets/images/achievements/wreaths/t10.png';
+import wreathT25 from '~/assets/images/achievements/wreaths/t25.png';
+import wreathT50 from '~/assets/images/achievements/wreaths/t50.png';
+import wreathT100 from '~/assets/images/achievements/wreaths/t100.png';
 
 const data = useData(
     z
@@ -15,10 +29,12 @@ const data = useData(
 );
 
 const calculateAchievementStyle = (index: number) => {
+	index--;
+	let iconSet = ({'0': icons0, '874': icons874})[index >> 6];
     return {
-        backgroundImage: `url(${all})`,
+        backgroundImage: `url(${iconSet})`,
         backgroundSize: '800% 800%',
-        backgroundPosition: `${Math.floor((index - 1) % 8) * -100}%${Math.floor((index - 1) / 8) * -100}%`,
+        backgroundPosition: `${index % 8 * -100}% ${(index % 64 >> 3) * -100}%`,
     };
 };
 </script>
@@ -33,11 +49,11 @@ const calculateAchievementStyle = (index: number) => {
             <template v-for="achievement in data.user.achievements">
                 <div class="relative size-20">
                     <div class="absolute top-0 left-0">
-                        <n-image :img-props="{ class: 'size-20' }" :src="diamond" />
+                        <n-image :img-props="{ class: 'size-20' }" :src="frameDiamond" />
                     </div>
 
                     <div class="absolute top-1/2 left-1/2 -translate-1/2 filter-invert">
-                        <div :style="calculateAchievementStyle(achievement)" class="size-10" />
+                        <div :style="calculateAchievementStyle(achievement)" class="size-11" />
                     </div>
                 </div>
             </template>
