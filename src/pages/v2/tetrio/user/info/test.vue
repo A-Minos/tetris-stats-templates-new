@@ -29,7 +29,7 @@ onMounted(async () => {
                 },
             ],
             ar: 1_000,
-            achievements: [1, 2, 3, 4, 5, 6, 7, 8],
+            achievements: [1, 2, 3, 4, 5, 6, 7, 8, 55937, 55940],
             xp: 1_000,
             playtime: '1d 2h 3m 4s',
             join_at: '2020-12-27T21:34:38.088Z',
