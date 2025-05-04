@@ -10,27 +10,56 @@ import frameDiamond from '~/assets/images/achievements/frames/diamond.png';
 import frameRingPiece from '~/assets/images/achievements/frames/ring-piece.png';
 import icons0 from '~/assets/images/achievements/icons/0.png';
 import icons874 from '~/assets/images/achievements/icons/874.png';
-import wreathT3 from '~/assets/images/achievements/wreaths/t3.png';
-import wreathT5 from '~/assets/images/achievements/wreaths/t5.png';
-import wreathT10 from '~/assets/images/achievements/wreaths/t10.png';
-import wreathT25 from '~/assets/images/achievements/wreaths/t25.png';
-import wreathT50 from '~/assets/images/achievements/wreaths/t50.png';
-import wreathT100 from '~/assets/images/achievements/wreaths/t100.png';
+
+enum RankType {
+    PERCENTILE = 1,
+    ISSUE = 2,
+    ZENITH = 3,
+    PERCENTILELAX = 4,
+    PERCENTILEVLAX = 5,
+    PERCENTILEMLAX = 6,
+}
+
+enum ArType {
+    UNRANKED = 0,
+    RANKED = 1,
+    COMPETITIVE = 2,
+}
+
+enum Rank {
+    NONE = 0,
+    BRONZE = 1,
+    SILVER = 2,
+    GOLD = 3,
+    PLATINUM = 4,
+    DIAMOND = 5,
+    ISSUED = 100,
+}
 
 const data = useData(
     z
         .object({
             user: z.object({
                 ar: z.number(),
-                achievements: z.array(z.number()),
+                achievements: z.record(
+                    z.number(),
+                    z.object({
+                        rank_type: z.nativeEnum(RankType),
+                        ar_type: z.nativeEnum(ArType),
+                        stub: z.boolean().nullable(),
+                        rank: z.nativeEnum(Rank).nullable(),
+                        achieved_score: z.number().nullable(),
+                        pos: z.number().int().nullable(),
+                    }),
+                ),
             }),
         })
         .readonly(),
 );
 
 const calculateAchievementStyle = (index: number) => {
-	index--;
-	let iconSet = ({'0': icons0, '874': icons874})[index >> 6];
+    index--;
+    let iconSet = ({ '0': icons0, '874': icons874 })[index >> 6];
     return {
         backgroundImage: `url(${iconSet})`,
         backgroundSize: '800% 800%',
