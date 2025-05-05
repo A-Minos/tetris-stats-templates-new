@@ -41,15 +41,17 @@ const data = useData(
         .object({
             user: z.object({
                 ar: z.number(),
-                achievements: z.record(
-                    z.number(),
+                achievements: z.array(
                     z.object({
+                        key: z.number().int(),
                         rank_type: z.nativeEnum(RankType),
                         ar_type: z.nativeEnum(ArType),
                         stub: z.boolean().nullable(),
                         rank: z.nativeEnum(Rank).nullable(),
                         achieved_score: z.number().nullable(),
                         pos: z.number().int().nullable(),
+                        progress: z.number().nullable(),
+                        total: z.number().int().nullable(),
                     }),
                 ),
             }),
