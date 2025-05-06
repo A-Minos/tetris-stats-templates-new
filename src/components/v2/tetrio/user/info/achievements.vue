@@ -136,8 +136,8 @@ function calcIcon(key: number) {
 function calcWreath({ pos, ar_type, stub }: { pos: number; ar_type: ArType; stub: boolean | null }) {
     return !stub && pos > -1 && ar_type === ArType.COMPETITIVE
         ? [wreathT3, wreathT5, wreathT10, wreathT25, wreathT50, wreathT100, null][
-        [3, 5, 10, 25, 50, 100].filter((e) => pos >= e).length
-        ]
+              [3, 5, 10, 25, 50, 100].filter((e) => pos >= e).length
+          ]
         : null;
 }
 
@@ -161,7 +161,10 @@ function calcProgress({
     let prog = 0;
     if (!stub && pos > -1) {
         if (
-            rank_type === RankType.PERCENTILE || rank_type === RankType.PERCENTILELAX || rank_type === RankType.PERCENTILEVLAX || rank_type === RankType.PERCENTILEMLAX
+            rank_type === RankType.PERCENTILE ||
+            rank_type === RankType.PERCENTILELAX ||
+            rank_type === RankType.PERCENTILEVLAX ||
+            rank_type === RankType.PERCENTILEMLAX
         ) {
             let perc = pos / Math.max(1, total - 1),
                 cut = CUTOFFS[rank_type][rank],
