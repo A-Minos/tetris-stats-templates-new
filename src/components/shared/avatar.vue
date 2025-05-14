@@ -13,7 +13,7 @@ import type IdenticonType from '~/types/identicon';
 
 function generateIdenticon(avatar: IdenticonType): string {
     return (
-        'data:image/svg+xmlbase64,' +
+        'data:image/svg+xml;base64,' +
         new Identicon(avatar.hash, {
             background: [8, 10, 6, 255],
             margin: 0.15,
