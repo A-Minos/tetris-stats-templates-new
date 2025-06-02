@@ -16,9 +16,15 @@ useLang();
                     {{ $t('error.title') }}
                 </span>
 
-                <span class="text-xl text-red">{{ error.message }}</span>
+                <template v-if="error">
+                    <span class="text-xl text-red">{{ error.message }}</span>
 
-                <span class="text-xs whitespace-pre line-clamp-15">{{ error.stack }}</span>
+                    <span class="text-xs whitespace-pre line-clamp-15">{{ error.stack }}</span>
+                </template>
+
+                <template v-else>
+                    <span class="text-xl text-red">?</span>
+                </template>
             </div>
         </div>
     </div>
