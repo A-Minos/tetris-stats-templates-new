@@ -1,4 +1,7 @@
 {
+  "error": {
+    "title": "An error occurred"
+  },
   "v1": {
     "binding": {
       "main": {
