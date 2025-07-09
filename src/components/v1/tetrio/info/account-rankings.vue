@@ -42,33 +42,39 @@ onMounted(async () => {
         <i18n-t
             :keypath="`v1.tetrio.info.account.title`"
             tag="span"
-            class="font-template text-8.75 fw-900 color-[#000000]"
+            class="font-template text-8.75 fw-900 text-[#000]"
         ></i18n-t>
 
-        <div class="mt-2.75">
+        <div class="mt-2.5">
             <div class="flex gap-6.25">
-                <div class="size-68.75 rounded-7.5 bg-[#fafafa]" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
+                <div
+                    class="flex size-68.75 rounded-7.5 bg-[#fafafa] shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
+                >
                     <div class="size-full p-6.25 box-border">
-                        <div class="flex flex-col items-center gap-2.5">
+                        <div class="flex flex-col items-center gap-2.5 h-full justify-center">
                             <shared-avatar
                                 :avatar="data.user.avatar"
                                 alt="user.avatar"
-                                class="size-31.25 rounded-full"
+                                class="size-31.25 rounded-full shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
                             />
                             <span class="font-template text-6.25 fw-800 text-[#000000]">{{ data.user.name }}</span>
 
                             <div v-if="isNonNullish(data.user.bio)" class="text-center">
-                                <span class="font-template text-4.5 fw-400 text-[#000000]">{{ data.user.bio }}</span>
+                                <span class="font-template text-4.5 fw-400 text-[#000000] break-all line-clamp-3">
+                                    {{ data.user.bio }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="size-68.75 rounded-7.5 bg-[#fafafa]" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
+                <div
+                    class="size-68.75 rounded-7.5 bg-[#fafafa] shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
+                >
                     <div class="size-full p-6.25 box-border">
                         <div class="flex flex-col gap-2.5">
                             <div class="flex flex-col">
-                                <img alt="tetr.io" class="size-15" src="~/assets/images/logo/tetrio.png" />
+                                <img alt="tetr.io" class="size-15 rounded-2.5" src="~/assets/images/logo/tetrio.png" />
                                 <span class="font-template text-7.5 fw-800 text-[#000000]">TETR.IO</span>
                             </div>
 
@@ -77,11 +83,11 @@ onMounted(async () => {
                             <div class="flex flex-col">
                                 <span class="font-template text-6.25 fw-800 text-[#000000]">Ranking</span>
 
-                                <span class="font-template text-12.5 fw-400 text-[#000000]">
+                                <span class="font-template text-12.5 fw-400 lh-[120%] text-[#000000]">
                                     {{ data.multiplayer.glicko }}
                                 </span>
 
-                                <span class="font-template text-7.5 fw-300 -mt-4.35 text-[#000000]">
+                                <span class="font-template text-7.5 fw-300 lh-[120%] -mt-3.75 text-[#000000]">
                                     ±{{ data.multiplayer.rd }}
                                 </span>
                             </div>

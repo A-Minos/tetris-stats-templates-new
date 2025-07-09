@@ -241,11 +241,7 @@ onMounted(async () => {
     <template v-if="valid">
         <div class="relative">
             <div
-                class="w-143.75 h-68.75 rounded-7.5"
-                style="
-                    background: linear-gradient(222deg, #525252 11.97%, #1d1916 89.73%);
-                    box-shadow: 0 0.9375rem 1.875rem 0 #0000004d;
-                "
+                class="w-143.75 h-68.75 rounded-7.5 bg-gradient-linear bg-gradient-[222deg,#525252_11.97%,#1D1916_89.73%] shadow-[0rem_0.9375rem_1.875rem_0rem_rgba(0,0,0,0.30)]"
             >
                 <chart :option="option" />
             </div>
