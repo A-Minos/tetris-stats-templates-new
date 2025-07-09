@@ -42,7 +42,9 @@ onMounted(async () => {
 
         <div class="mt-2.75">
             <div class="flex gap-6.25">
-                <div class="size-68.75 rounded-7.5 bg-[#fafafa]" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
+                <div
+                    class="size-68.75 rounded-7.5 bg-[#fafafa] shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
+                >
                     <div class="size-full px-15.5 py-7.5 box-border">
                         <div class="flex flex-col items-center gap-7">
                             <shared-avatar
@@ -55,7 +57,9 @@ onMounted(async () => {
                     </div>
                 </div>
 
-                <div class="size-68.75 rounded-7.5 bg-[#fafafa]" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
+                <div
+                    class="size-68.75 rounded-7.5 bg-[#fafafa] shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
+                >
                     <div class="size-full px-6.25 py-10 box-border">
                         <div class="flex flex-col gap-8.75 items-center">
                             <div class="size-31.25">

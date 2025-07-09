@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { isNonNullish, isNullish } from 'remeda';
 import { z } from 'zod';
+import adpm from '~/assets/images/card/adpm.svg';
 import { Trending } from '~/components/v1/trending/index.vue';
 
 const data = useData(
@@ -29,96 +30,8 @@ const valid = computed(() => {
 
 <template>
     <template v-if="valid">
-        <div class="w-68.75 h-31.25 rounded-7.5 relative" style="box-shadow: 0 0.5625rem 1.5625rem 0 #00000026">
-            <div class="absolute top-0 left-0">
-                <svg fill="none" height="125" viewBox="0 0 275 125" width="275" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_2242_615)">
-                        <rect fill="url(#paint0_linear_2242_615)" height="125" rx="30" width="275" />
-                        <g opacity="0.5" style="mix-blend-mode: overlay">
-                            <mask
-                                id="mask0_2242_615"
-                                height="208"
-                                maskUnits="userSpaceOnUse"
-                                style="mask-type: alpha"
-                                width="209"
-                                x="92"
-                                y="-32"
-                            >
-                                <rect
-                                    fill="url(#paint1_radial_2242_615)"
-                                    height="169.169"
-                                    transform="rotate(-15 92.9521 12.3839)"
-                                    width="169.169"
-                                    x="92.9521"
-                                    y="12.3839"
-                                />
-                            </mask>
-                            <g mask="url(#mask0_2242_615)">
-                                <rect
-                                    fill="black"
-                                    height="42.2923"
-                                    transform="rotate(-15 201.286 49.032)"
-                                    width="42.2923"
-                                    x="201.286"
-                                    y="49.032"
-                                />
-                                <rect
-                                    fill="url(#paint2_linear_2242_615)"
-                                    height="42.2923"
-                                    transform="rotate(-15 115.499 72.0188)"
-                                    width="88.8138"
-                                    x="115.499"
-                                    y="72.0188"
-                                />
-                                <path
-                                    clip-rule="evenodd"
-                                    d="M204.462 106.925C216.305 116.473 229.328 121.132 243.531 120.903C255.945 114 264.896 103.454 270.383 89.2622C275.866 75.0756 276.667 60.738 272.785 46.2494L263.437 11.3625L212.882 6.51932L171.522 35.9911L175.681 51.5145L187.171 48.436L185.118 40.7764L216.138 18.6725L254.055 22.3049L261.295 49.328C264.386 60.8617 263.94 72.2191 259.958 83.4002C255.976 94.5814 249.427 103.079 240.313 108.892C229.512 108.415 219.593 104.33 210.553 96.6381C209.983 96.1531 209.425 95.6605 208.879 95.1602L195.757 98.6763C198.37 101.605 201.271 104.355 204.462 106.925Z"
-                                    fill="black"
-                                    fill-rule="evenodd"
-                                />
-                            </g>
-                        </g>
-                    </g>
-                    <defs>
-                        <linearGradient
-                            id="paint0_linear_2242_615"
-                            gradientUnits="userSpaceOnUse"
-                            x1="50.5"
-                            x2="244"
-                            y1="-12"
-                            y2="144.5"
-                        >
-                            <stop stop-color="#C7DAFF" />
-                            <stop offset="1" stop-color="#9CBCFA" />
-                        </linearGradient>
-                        <radialGradient
-                            id="paint1_radial_2242_615"
-                            cx="0"
-                            cy="0"
-                            gradientTransform="translate(177.537 96.9684) rotate(90) scale(89.8711)"
-                            gradientUnits="userSpaceOnUse"
-                            r="1"
-                        >
-                            <stop offset="0.208333" stop-color="white" />
-                            <stop offset="1" stop-color="white" stop-opacity="0" />
-                        </radialGradient>
-                        <linearGradient
-                            id="paint2_linear_2242_615"
-                            gradientUnits="userSpaceOnUse"
-                            x1="115.499"
-                            x2="204.313"
-                            y1="72.0188"
-                            y2="72.0188"
-                        >
-                            <stop stop-opacity="0" />
-                            <stop offset="1" stop-opacity="0.4" />
-                        </linearGradient>
-                        <clipPath id="clip0_2242_615">
-                            <rect fill="white" height="125" rx="30" width="275" />
-                        </clipPath>
-                    </defs>
-                </svg>
-            </div>
+        <div class="w-68.75 h-31.25 rounded-7.5 relative shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]">
+            <img :src="adpm" class="absolute top-0 left-0" />
 
             <div class="absolute top-4.75 left-6">
                 <span class="font-template text-6.25 fw-800 color-[#235db4]">ADPM</span>

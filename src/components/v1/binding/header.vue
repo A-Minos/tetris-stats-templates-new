@@ -32,8 +32,7 @@ const valid = computed(() => {
                 <shared-avatar
                     :avatar="data.user.avatar"
                     alt="user.avatar"
-                    class="size-24 rounded-5"
-                    style="box-shadow: 0 0.6875rem 1.4375rem 0 #00000038"
+                    class="size-24 rounded-5 shadow-[0rem_0.6875rem_1.4375rem_0rem_rgba(0,0,0,0.22)]"
                 />
             </template>
 
@@ -43,8 +42,7 @@ const valid = computed(() => {
                 <shared-avatar
                     :avatar="data.bot.avatar"
                     alt="bot.avatar"
-                    class="size-24 rounded-5"
-                    style="box-shadow: 0 0.6875rem 1.4375rem #00000038"
+                    class="size-24 rounded-5 shadow-[0rem_0.6875rem_1.4375rem_0rem_rgba(0,0,0,0.22)]"
                 />
             </template>
         </div>

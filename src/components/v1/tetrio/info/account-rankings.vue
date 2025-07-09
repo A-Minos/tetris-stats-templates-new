@@ -51,7 +51,7 @@ onMounted(async () => {
                     class="flex size-68.75 rounded-7.5 bg-[#fafafa] shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
                 >
                     <div class="size-full p-6.25 box-border">
-                        <div class="flex flex-col items-center gap-2.5">
+                        <div class="flex flex-col items-center gap-2.5 h-full justify-center">
                             <shared-avatar
                                 :avatar="data.user.avatar"
                                 alt="user.avatar"
@@ -60,9 +60,9 @@ onMounted(async () => {
                             <span class="font-template text-6.25 fw-800 text-[#000000]">{{ data.user.name }}</span>
 
                             <div v-if="isNonNullish(data.user.bio)" class="text-center">
-                                <span class="font-template text-4.5 fw-400 text-[#000000] break-all line-clamp-3">{{
-                                    data.user.bio
-                                }}</span>
+                                <span class="font-template text-4.5 fw-400 text-[#000000] break-all line-clamp-3">
+                                    {{ data.user.bio }}
+                                </span>
                             </div>
                         </div>
                     </div>
