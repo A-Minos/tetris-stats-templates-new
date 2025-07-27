@@ -28,19 +28,19 @@
       },
       "footer": {
         "success": {
-          "text": "You can now type in {command} to retrieve your stats on that platform.",
+          "text": "You can now type in {prompt} to retrieve your stats on that platform.",
           "styles": { "fw": "500" }
         },
         "unverified": {
-          "text": "You can now type in {command} to start the verification process.",
+          "text": "You can now type in {prompt} to start the verification process.",
           "styles": { "fw": "500" }
         },
         "unknown": {
-          "text": "You can now type in {command} to retrieve your stats on that platform.",
+          "text": "You can now type in {prompt} to retrieve your stats on that platform.",
           "styles": { "fw": "500" }
         },
         "unbind": {
-          "text": "You can now type in {command} to relink your account on that platform to {botName}.",
+          "text": "You can now type in {prompt} to relink your account on that platform to {botName}.",
           "styles": { "fw": "500" }
         },
         "error": {
