@@ -43,10 +43,6 @@ export default defineNuxtConfig({
                     innerHTML: `window.__DATA__ = {{ data | tojson }};`,
                     type: 'text/javascript',
                 },
-                {
-                    innerHTML: `window.__PATH__ = '{{ path }}';`,
-                    type: 'text/javascript',
-                },
             ],
         },
         cdnURL: './',
