@@ -9,6 +9,7 @@ import framePlatinum from '~/assets/images/achievements/frames/platinum.png';
 import frameRingPiece from '~/assets/images/achievements/frames/ring-piece.png';
 import frameSilver from '~/assets/images/achievements/frames/silver.png';
 import icons0 from '~/assets/images/achievements/icons/0.png';
+import icons1 from '~/assets/images/achievements/icons/1.png';
 import icons874 from '~/assets/images/achievements/icons/874.png';
 import wreathT10 from '~/assets/images/achievements/wreaths/t10.png';
 import wreathT100 from '~/assets/images/achievements/wreaths/t100.png';
@@ -16,6 +17,12 @@ import wreathT25 from '~/assets/images/achievements/wreaths/t25.png';
 import wreathT3 from '~/assets/images/achievements/wreaths/t3.png';
 import wreathT5 from '~/assets/images/achievements/wreaths/t5.png';
 import wreathT50 from '~/assets/images/achievements/wreaths/t50.png';
+
+const LOCAL_ICON_SHEETS: Record<number, string> = {
+    0: icons0,
+    1: icons1,
+    874: icons874,
+};
 
 enum RankType {
     PERCENTILE = 1,
@@ -136,8 +143,11 @@ function calcFrame({ rank, stub }: { rank: Rank; stub: boolean | null }) {
 
 function calcIcon(key: number) {
     const id = key - 1;
+    const sheet = id >> 6;
+    const img = LOCAL_ICON_SHEETS[sheet];
+    if (!img) throw new Error(`Missing local achievement icon sheet: ${sheet}.png (key=${key})`);
     return {
-        img: { '0': icons0, '874': icons874 }[id >> 6],
+        img,
         pos: [id & 7, (id >> 3) & 7],
     };
 }
