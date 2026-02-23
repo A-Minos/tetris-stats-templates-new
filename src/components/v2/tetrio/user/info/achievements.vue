@@ -24,6 +24,7 @@ enum RankType {
     PERCENTILELAX = 4,
     PERCENTILEVLAX = 5,
     PERCENTILEMLAX = 6,
+    PERCENTILEINVARIANT = 7,
 }
 
 enum ArType {
@@ -111,6 +112,14 @@ const CUTOFFS: {
         [Rank.PLATINUM]: [0.1, 0.2, 10, 19],
         [Rank.DIAMOND]: [0.0, 0.1, 0, 9],
     },
+    [RankType.PERCENTILEINVARIANT]: {
+        [Rank.NONE]: [0.7, 1.0, 0, 1],
+        [Rank.BRONZE]: [0.5, 0.7, 50, 69],
+        [Rank.SILVER]: [0.3, 0.5, 30, 49],
+        [Rank.GOLD]: [0.1, 0.3, 10, 29],
+        [Rank.PLATINUM]: [0.05, 0.1, 5, 9],
+        [Rank.DIAMOND]: [0.0, 0.05, 0, 4],
+    },
 };
 
 function calcFrame({ rank, stub }: { rank: Rank; stub: boolean | null }) {
@@ -164,7 +173,8 @@ function calcProgress({
             rank_type === RankType.PERCENTILE ||
             rank_type === RankType.PERCENTILELAX ||
             rank_type === RankType.PERCENTILEVLAX ||
-            rank_type === RankType.PERCENTILEMLAX
+            rank_type === RankType.PERCENTILEMLAX ||
+            rank_type === RankType.PERCENTILEINVARIANT
         ) {
             let perc = pos / Math.max(1, total - 1),
                 cut = CUTOFFS[rank_type][rank],
