@@ -113,11 +113,12 @@ const CUTOFFS: {
         [Rank.DIAMOND]: [0.0, 0.1, 0, 9],
     },
     [RankType.PERCENTILEINVARIANT]: {
-        [Rank.BRONZE]: [50, 69],
-        [Rank.SILVER]: [30, 49],
-        [Rank.GOLD]: [10, 29],
-        [Rank.PLATINUM]: [5, 9],
-        [Rank.DIAMOND]: [0, 4],
+        [Rank.NONE]: [1.0, 1.0, 100, Infinity],
+        [Rank.BRONZE]: [0.7, 1.0, 70, 99],
+        [Rank.SILVER]: [0.5, 0.7, 50, 69],
+        [Rank.GOLD]: [0.3, 0.5, 30, 49],
+        [Rank.PLATINUM]: [0.1, 0.3, 10, 29],
+        [Rank.DIAMOND]: [0.0, 0.1, 0, 9],
     },
 };
 
@@ -172,16 +173,14 @@ function calcProgress({
             rank_type === RankType.PERCENTILE ||
             rank_type === RankType.PERCENTILELAX ||
             rank_type === RankType.PERCENTILEVLAX ||
-            rank_type === RankType.PERCENTILEMLAX
+            rank_type === RankType.PERCENTILEMLAX ||
+            rank_type === RankType.PERCENTILEINVARIANT
         ) {
             let perc = pos / Math.max(1, total - 1),
                 cut = CUTOFFS[rank_type][rank],
                 ppos = cut ? 1 - (perc - cut[0]) / (cut[1] - cut[0]) : 0,
                 cpos = cut ? 1 - (pos - cut[2]) / (cut[3] - cut[2]) : 0;
             prog = Math.max(ppos, cpos);
-        } else if (rank_type === RankType.PERCENTILEINVARIANT) {
-            let cut = CUTOFFS[rank_type][rank];
-            prog = cut ? 1 - (pos - cut[0]) / (cut[1] - cut[0]) : 0;
         } else if (RankType.ZENITH == rank_type) {
             let cut = CUTOFFS[rank_type][rank];
             prog = cut ? (achieved_score - cut[0]) / (cut[1] - cut[0]) : 0;
