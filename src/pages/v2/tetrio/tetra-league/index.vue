@@ -13,31 +13,40 @@ const data = useData(
     z
         .object({
             replay_id: z.string(),
-            games: z.array(
-                z.object({
-                    user: z.object({
-                        id: z.string(),
-                        name: z.string(),
+            games: z
+                .array(
+                    z.object({
+                        user: z.object({
+                            id: z.string(),
+                            name: z.string(),
+                        }),
+                        points: z.number(),
+                        average_data: StatisticalData,
+                        data: z.array(StatisticalData),
+                        handling: z.object({
+                            arr: z.number(),
+                            das: z.number(),
+                            sdf: z.number(),
+                        }),
                     }),
-                    points: z.number(),
-                    average_data: StatisticalData,
-                    data: z.array(StatisticalData),
-                    handling: z.object({
-                        arr: z.number(),
-                        das: z.number(),
-                        sdf: z.number(),
-                    }),
-                }),
-            ),
+                )
+                .nonempty(),
             play_at: z.coerce.date(),
         })
         .readonly(),
 );
 
 const winner_user_id = computed(() => {
-    return data.games.toSorted((a, b) => {
-        return b.points - a.points;
-    })[0].user.id;
+    return (
+        data.games
+            .toSorted((a, b) => {
+                return b.points - a.points;
+            })
+            .at(0)?.user.id ??
+        (() => {
+            throw new Error('No games found');
+        })()
+    );
 });
 
 useLang();

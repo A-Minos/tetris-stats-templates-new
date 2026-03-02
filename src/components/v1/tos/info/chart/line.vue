@@ -207,7 +207,13 @@ const option = computed(() => {
                         [
                             {
                                 xAxis: 'max',
-                                yAxis: data.multiplayer.history.data[data.multiplayer.history.data.length - 1].score,
+                                yAxis:
+                                    data.multiplayer.history.data.at(-1)?.score ??
+                                    (() => {
+                                        throw new Error(
+                                            'Multiplayer history is empty, cannot render rating chart line marker.',
+                                        );
+                                    })(),
                             },
                             {
                                 xAxis: 'max',
