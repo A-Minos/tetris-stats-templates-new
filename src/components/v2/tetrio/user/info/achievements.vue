@@ -129,6 +129,14 @@ const CUTOFFS: {
     },
 };
 
+function isPercentileCutoff(cutoff: number[] | undefined): cutoff is [number, number, number, number] {
+    return Array.isArray(cutoff) && cutoff.length >= 4;
+}
+
+function isZenithCutoff(cutoff: number[] | undefined): cutoff is [number, number] {
+    return Array.isArray(cutoff) && cutoff.length >= 2;
+}
+
 function calcFrame({ rank, stub }: { rank: Rank; stub: boolean | null }) {
     return {
         [Rank.NONE]: frameNone,
@@ -186,14 +194,24 @@ function calcProgress({
             rank_type === RankType.PERCENTILEMLAX ||
             rank_type === RankType.PERCENTILEINVARIANT
         ) {
-            let perc = pos / Math.max(1, total - 1),
-                cut = CUTOFFS[rank_type][rank],
-                ppos = cut ? 1 - (perc - cut[0]) / (cut[1] - cut[0]) : 0,
-                cpos = cut ? 1 - (pos - cut[2]) / (cut[3] - cut[2]) : 0;
-            prog = Math.max(ppos, cpos);
-        } else if (RankType.ZENITH == rank_type) {
-            let cut = CUTOFFS[rank_type][rank];
-            prog = cut ? (achieved_score - cut[0]) / (cut[1] - cut[0]) : 0;
+            const cut = CUTOFFS[rank_type][rank];
+
+            if (isPercentileCutoff(cut)) {
+                const perc = pos / Math.max(1, total - 1);
+                const ppos = 1 - (perc - cut[0]) / (cut[1] - cut[0]);
+                const cpos = 1 - (pos - cut[2]) / (cut[3] - cut[2]);
+                prog = Math.max(ppos, cpos);
+            } else {
+                throw new Error(`Missing percentile cutoff for rank_type=${rank_type}, rank=${rank}`);
+            }
+        } else if (RankType.ZENITH === rank_type) {
+            const cut = CUTOFFS[rank_type][rank];
+
+            if (!isZenithCutoff(cut)) {
+                throw new Error(`Missing zenith cutoff for rank=${rank}`);
+            }
+
+            prog = (achieved_score - cut[0]) / (cut[1] - cut[0]);
         }
     }
     if (!stub && progress !== null && progress !== -1) prog = progress;
