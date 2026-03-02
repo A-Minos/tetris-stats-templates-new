@@ -20,8 +20,7 @@ onMounted(async () => {
                 avatar: 'https://txt.osk.sh/branding/tetrio-color.png',
                 name: 'NoneBot',
             },
-            error: '__error__',
-            command: '__command__',
+            prompt: '__prompt__',
         });
 
         await nextTick();
