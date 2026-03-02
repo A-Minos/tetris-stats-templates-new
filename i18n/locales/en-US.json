@@ -44,7 +44,7 @@
           "styles": { "fw": "500" }
         },
         "error": {
-          "text": "{error}",
+          "text": "{prompt}",
           "styles": { "fw": "500" }
         }
       }
