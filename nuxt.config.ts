@@ -26,6 +26,14 @@ export default defineNuxtConfig({
     },
 
     app: {
+        head: {
+            script: [
+                {
+                    innerHTML: 'window.__DATA__ = {{ data | tojson }};',
+                    type: 'text/javascript',
+                },
+            ],
+        },
         cdnURL: './',
     },
 
