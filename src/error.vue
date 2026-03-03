@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app';
+import type { SectionedSourceMapInput } from '@jridgewell/trace-mapping';
 import { darkTheme } from 'naive-ui';
 import hljs from 'highlight.js/lib/common';
 
@@ -15,6 +16,19 @@ type CodeRow = Readonly<{
     lineNumber: number;
     html: string;
 }>;
+
+type SnippetState = {
+    loading: boolean;
+    code: string;
+    language: string;
+    startLine: number;
+    endLine: number;
+    fetchedFrom: string;
+    errorLine: number | null;
+    errorColumn: number | null;
+    locationText: string;
+    error: string;
+};
 
 const props = defineProps<{
     error?: NuxtError;
@@ -47,17 +61,6 @@ const primaryLocationText = computed(() => {
     return `${frame.displayPath}:${frame.line}:${frame.column}`;
 });
 
-const snippetErrorLine = computed((): number | null => {
-    const frame = primaryFrame.value;
-    if (!frame || !snippet.code) {
-        return null;
-    }
-    if (frame.line < snippet.startLine || frame.line > snippet.endLine) {
-        return null;
-    }
-    return frame.line;
-});
-
 const errorRowStyle = {
     backgroundColor: 'rgba(240, 68, 68, 0.12)',
     borderRadius: '6px',
@@ -70,14 +73,21 @@ const errorLineNumberStyle = {
     fontWeight: '700',
 };
 
-const snippet = reactive({
+const snippet = reactive<SnippetState>({
     loading: false,
     code: '',
     language: 'plaintext',
     startLine: 0,
     endLine: 0,
     fetchedFrom: '',
+    errorLine: null,
+    errorColumn: null,
+    locationText: '',
     error: '',
+});
+
+const bestLocationText = computed(() => {
+    return snippet.locationText || primaryLocationText.value;
 });
 
 const snippetRows = computed((): CodeRow[] => {
@@ -97,6 +107,9 @@ watch(
         snippet.startLine = 0;
         snippet.endLine = 0;
         snippet.fetchedFrom = '';
+        snippet.errorLine = null;
+        snippet.errorColumn = null;
+        snippet.locationText = '';
         snippet.error = '';
         snippet.language = 'plaintext';
 
@@ -327,6 +340,223 @@ function getSameOriginHttpUrl(rawUrl: string): URL | null {
     }
 }
 
+type SnippetResult = Readonly<{
+    code: string;
+    language: string;
+    startLine: number;
+    endLine: number;
+    fetchedFrom: string;
+    errorLine: number;
+    errorColumn: number;
+    locationText: string;
+}>;
+
+type SourceMapFetchResult = Readonly<{
+    map: SectionedSourceMapInput;
+    mapUrl: string | null;
+}>;
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null;
+}
+
+function isStringArray(value: unknown): value is string[] {
+    return Array.isArray(value) && value.every((v) => typeof v === 'string');
+}
+
+function isStringOrNullArray(value: unknown): value is Array<string | null> {
+    return Array.isArray(value) && value.every((v) => typeof v === 'string' || v === null);
+}
+
+function isSourceMapInput(value: unknown): value is SectionedSourceMapInput {
+    if (!isRecord(value)) {
+        return false;
+    }
+    if (value.version !== 3) {
+        return false;
+    }
+
+    if (Array.isArray(value.sections)) {
+        return true;
+    }
+
+    return typeof value.mappings === 'string' && isStringOrNullArray(value.sources) && isStringArray(value.names);
+}
+
+function buildSnippetFromSourceText(
+    sourceText: string,
+    displayPath: string,
+    language: string,
+    errorLine: number,
+    errorColumn: number,
+): SnippetResult | null {
+    const lines = splitLines(sourceText);
+    if (!Number.isFinite(errorLine) || errorLine <= 0 || errorLine > lines.length) {
+        return null;
+    }
+
+    const context = 8;
+    const start = Math.max(0, errorLine - 1 - context);
+    const end = Math.min(lines.length, errorLine - 1 + context + 1);
+    const code = lines.slice(start, end).join('\n');
+
+    return {
+        code,
+        language,
+        startLine: start + 1,
+        endLine: end,
+        fetchedFrom: displayPath,
+        errorLine,
+        errorColumn,
+        locationText: `${displayPath}:${errorLine}:${errorColumn}`,
+    };
+}
+
+function buildSnippetFromBundleText(bundleText: string, bundleUrl: URL, frame: StackFrame): SnippetResult | null {
+    const displayPath = toDisplayPath(bundleUrl.toString());
+    const language = guessLanguageFromPath(bundleUrl.pathname);
+    const errorLine = frame.line;
+    const errorColumn = frame.column;
+
+    return buildSnippetFromSourceText(bundleText, displayPath, language, errorLine, errorColumn);
+}
+
+function extractSourceMappingURL(codeText: string): string | null {
+    const marker = 'sourceMappingURL=';
+    const index = codeText.lastIndexOf(marker);
+    if (index < 0) {
+        return null;
+    }
+    const after = codeText.slice(index + marker.length);
+    const firstLine = after.split(/\r?\n/)[0];
+    const url = firstLine?.trim();
+    if (!url) {
+        return null;
+    }
+    return url;
+}
+
+function decodeBase64Utf8(base64: string): string {
+    const binary = atob(base64);
+    const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+}
+
+function parseInlineSourceMap(dataUrl: string): SectionedSourceMapInput | null {
+    const match = dataUrl.match(/^data:application\/json(?:;charset=[^;]+)?;base64,(.+)$/);
+    if (!match) {
+        return null;
+    }
+    const base64 = match[1];
+    if (!base64) {
+        return null;
+    }
+    try {
+        const jsonText = decodeBase64Utf8(base64);
+        const parsed = JSON.parse(jsonText) as unknown;
+        return isSourceMapInput(parsed) ? parsed : null;
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
+async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<SourceMapFetchResult | null> {
+    const mappingUrl = extractSourceMappingURL(codeText);
+    if (mappingUrl) {
+        if (mappingUrl.startsWith('data:')) {
+            const map = parseInlineSourceMap(mappingUrl);
+            if (map) {
+                return { map, mapUrl: null };
+            }
+        } else {
+            try {
+                const mapUrl = new URL(mappingUrl, codeUrl.toString());
+                const res = await fetch(mapUrl.toString(), { credentials: 'same-origin' });
+                if (res.ok) {
+                    const map = (await res.json()) as unknown;
+                    if (isSourceMapInput(map)) {
+                        return { map, mapUrl: mapUrl.toString() };
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+    }
+
+    try {
+        const mapUrl = new URL(codeUrl.toString());
+        mapUrl.pathname = `${mapUrl.pathname}.map`;
+        const res = await fetch(mapUrl.toString(), { credentials: 'same-origin' });
+        if (!res.ok) {
+            return null;
+        }
+        const map = (await res.json()) as unknown;
+        if (!isSourceMapInput(map)) {
+            return null;
+        }
+        return { map, mapUrl: mapUrl.toString() };
+    } catch (e) {
+        console.error(e);
+        return null;
+    }
+}
+
+async function tryBuildSnippetFromSourceMap(
+    codeUrl: URL,
+    codeText: string,
+    frame: StackFrame,
+): Promise<SnippetResult | null> {
+    const mapResult = await tryFetchSourceMap(codeUrl, codeText);
+    if (!mapResult) {
+        return null;
+    }
+
+    const genLine = frame.line;
+    const genColumn = Math.max(0, Math.floor(frame.column) - 1);
+    if (!Number.isFinite(genLine) || !Number.isFinite(genColumn) || genLine <= 0 || genColumn < 0) {
+        return null;
+    }
+
+    const traceMapping = await import('@jridgewell/trace-mapping');
+    const tracer = new traceMapping.AnyMap(mapResult.map, mapResult.mapUrl);
+
+    const attempts = [
+        traceMapping.originalPositionFor(tracer, {
+            line: genLine,
+            column: genColumn,
+            bias: traceMapping.GREATEST_LOWER_BOUND,
+        }),
+        traceMapping.originalPositionFor(tracer, {
+            line: genLine,
+            column: genColumn,
+            bias: traceMapping.LEAST_UPPER_BOUND,
+        }),
+        traceMapping.originalPositionFor(tracer, {
+            line: genLine,
+            column: genColumn,
+        }),
+    ];
+
+    const mapped = attempts.find((m) => m.source !== null && m.line !== null && m.column !== null);
+    if (!mapped || mapped.source === null || mapped.line === null || mapped.column === null) {
+        return null;
+    }
+
+    const sourceText = traceMapping.sourceContentFor(tracer, mapped.source);
+    if (!sourceText) {
+        return null;
+    }
+
+    const displayPath = toDisplayPath(mapped.source);
+    const language = guessLanguageFromPath(mapped.source);
+    const errorLine = mapped.line;
+    const errorColumn = mapped.column + 1;
+
+    return buildSnippetFromSourceText(sourceText, displayPath, language, errorLine, errorColumn);
+}
+
 async function loadSnippet(frame: StackFrame): Promise<void> {
     const requestId = ++snippetRequestId;
     snippet.loading = true;
@@ -345,26 +575,28 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
         }
 
         const text = await res.text();
-        const lines = text.split(/\r?\n/);
-        if (!Number.isFinite(frame.line) || frame.line <= 0 || frame.line > lines.length) {
+
+        const mappedSnippet = await tryBuildSnippetFromSourceMap(url, text, frame);
+        const bundleSnippet = mappedSnippet ? null : buildSnippetFromBundleText(text, url, frame);
+        const result = mappedSnippet ?? bundleSnippet;
+
+        if (!result) {
             snippet.error = 'Line out of range';
             return;
         }
-
-        const context = 8;
-        const start = Math.max(0, frame.line - 1 - context);
-        const end = Math.min(lines.length, frame.line - 1 + context + 1);
-        const code = lines.slice(start, end).join('\n');
 
         if (requestId !== snippetRequestId) {
             return;
         }
 
-        snippet.code = code;
-        snippet.startLine = start + 1;
-        snippet.endLine = end;
-        snippet.fetchedFrom = toDisplayPath(url.toString());
-        snippet.language = guessLanguageFromPath(url.pathname);
+        snippet.code = result.code;
+        snippet.startLine = result.startLine;
+        snippet.endLine = result.endLine;
+        snippet.fetchedFrom = result.fetchedFrom;
+        snippet.language = result.language;
+        snippet.errorLine = result.errorLine;
+        snippet.errorColumn = result.errorColumn;
+        snippet.locationText = result.locationText;
     } catch (e) {
         console.error(e);
         snippet.error = String(e);
@@ -420,10 +652,10 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                             <n-code :code="errorPageSource" language="plaintext" />
                         </n-flex>
 
-                        <template v-if="primaryLocationText">
+                        <template v-if="bestLocationText">
                             <n-flex vertical size="small">
                                 <div class="text-sm fw-bold">{{ $t('error.location') }}</div>
-                                <n-code :code="primaryLocationText" language="plaintext" />
+                                <n-code :code="bestLocationText" language="plaintext" />
                             </n-flex>
                         </template>
 
@@ -470,19 +702,21 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                                                 v-for="row in snippetRows"
                                                 :key="row.lineNumber"
                                                 class="flex gap-3"
-                                                :style="row.lineNumber === snippetErrorLine ? errorRowStyle : undefined"
+                                                :style="
+                                                    row.lineNumber === snippet.errorLine ? errorRowStyle : undefined
+                                                "
                                             >
                                                 <div
                                                     class="shrink-0 select-none text-xs leading-5 flex items-center justify-end gap-2"
                                                     style="width: 3.5em; color: var(--n-line-number-text-color)"
                                                     :style="
-                                                        row.lineNumber === snippetErrorLine
+                                                        row.lineNumber === snippet.errorLine
                                                             ? errorLineNumberStyle
                                                             : undefined
                                                     "
                                                 >
                                                     <span
-                                                        v-if="row.lineNumber === snippetErrorLine"
+                                                        v-if="row.lineNumber === snippet.errorLine"
                                                         style="color: #f04444"
                                                     >
                                                         ●
@@ -497,7 +731,7 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                                         </div>
                                     </n-code>
                                     <div class="text-xs opacity-70">
-                                        {{ $t('error.location') }}: {{ primaryLocationText }}
+                                        {{ $t('error.location') }}: {{ bestLocationText }}
                                     </div>
                                 </template>
 

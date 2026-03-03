@@ -5,6 +5,7 @@
     "": {
       "dependencies": {
         "@antv/g2": "^5.4.8",
+        "@jridgewell/trace-mapping": "^0.3.31",
         "@vicons/antd": "^0.13.0",
         "@vueuse/core": "^14.2.1",
         "identicon.js": "^2.3.3",

@@ -43,11 +43,22 @@ export default defineNuxtConfig({
         },
     },
 
+    sourcemap: {
+        client: true,
+        server: true,
+    },
+
     compatibilityDate: '2024-11-04',
 
     devtools: {
         timeline: {
             enabled: true,
+        },
+    },
+
+    vite: {
+        build: {
+            sourcemap: true,
         },
     },
 });
