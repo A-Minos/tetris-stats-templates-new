@@ -1,6 +1,14 @@
 {
   "error": {
-    "title": "An error occurred"
+    "title": "An error occurred",
+    "route": "Route",
+    "page_source": "Error page source",
+    "location": "Source location",
+    "stack": "Stack trace",
+    "no_stack": "No stack trace",
+    "snippet": "Code snippet",
+    "snippet_loading": "Loading snippet…",
+    "snippet_failed": "Failed to load snippet"
   },
   "v1": {
     "binding": {

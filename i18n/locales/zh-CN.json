@@ -1,6 +1,14 @@
 {
   "error": {
-    "title": "错误发生"
+    "title": "错误发生",
+    "route": "当前路由",
+    "page_source": "错误界面源码位置",
+    "location": "源码定位",
+    "stack": "堆栈信息",
+    "no_stack": "无堆栈信息",
+    "snippet": "代码片段",
+    "snippet_loading": "正在加载代码片段…",
+    "snippet_failed": "无法加载代码片段"
   },
   "v1": {
     "binding": {
