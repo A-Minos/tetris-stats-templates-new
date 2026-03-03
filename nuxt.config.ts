@@ -5,7 +5,12 @@ export default defineNuxtConfig({
 
     ssr: false,
     srcDir: 'src',
-    modules: ['@unocss/nuxt', '@nuxtjs/i18n', 'nuxt-zod-i18n', 'nuxtjs-naive-ui'],
+    modules: [
+        '@unocss/nuxt',
+        '@nuxtjs/i18n',
+        'nuxt-zod-i18n',
+        ['@bg-dev/nuxt-naiveui', { colorModePreference: 'dark-only' }],
+    ],
 
     i18n: {
         defaultLocale: 'zh-CN',

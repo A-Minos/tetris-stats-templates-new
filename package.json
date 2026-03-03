@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@bg-dev/nuxt-naiveui": "^2.0.0",
     "@nuxtjs/i18n": "^10.2.3",
     "@types/identicon.js": "^2.3.5",
     "@types/lodash": "^4.17.24",
@@ -17,12 +18,9 @@
     "echarts": "^5.6.0",
     "nuxt": "^4.3.1",
     "nuxt-zod-i18n": "^1.12.1",
-    "nuxtjs-naive-ui": "^1.0.2",
     "prettier": "^3.8.1",
     "remeda": "^2.33.6",
     "sass": "^1.97.3",
-    "unplugin-auto-import": "^21.0.0",
-    "unplugin-vue-components": "^31.0.0",
     "vue": "^3.5.29",
     "vue-echarts": "^7.0.3",
     "vue-tsc": "^3.2.5"
