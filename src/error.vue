@@ -38,8 +38,6 @@ useLang();
 
 const route = useRoute();
 
-const errorPageSource = 'src/error.vue';
-
 const stackText = computed(() => props.error?.stack ?? '');
 
 const stackRows = computed((): CodeRow[] => {
@@ -647,41 +645,11 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
 
                         <n-divider />
 
-                        <n-flex vertical size="small">
-                            <div class="text-sm fw-bold">{{ $t('error.page_source') }}</div>
-                            <n-code :code="errorPageSource" language="plaintext" />
-                        </n-flex>
-
                         <template v-if="bestLocationText">
                             <n-flex vertical size="small">
                                 <div class="text-sm fw-bold">{{ $t('error.location') }}</div>
                                 <n-code :code="bestLocationText" language="plaintext" />
                             </n-flex>
-                        </template>
-
-                        <template v-if="stackText">
-                            <n-flex vertical size="small" class="min-w-0">
-                                <div class="text-sm fw-bold">{{ $t('error.stack') }}</div>
-                                <n-code class="block w-full">
-                                    <div class="flex flex-col gap-1">
-                                        <div v-for="row in stackRows" :key="row.lineNumber" class="flex gap-3">
-                                            <div
-                                                class="shrink-0 select-none text-right text-xs leading-5"
-                                                style="width: 3.5em; color: var(--n-line-number-text-color)"
-                                            >
-                                                {{ row.lineNumber }}
-                                            </div>
-                                            <div
-                                                class="min-w-0 flex-1 text-xs leading-5 whitespace-pre-wrap break-all"
-                                                v-html="row.html"
-                                            />
-                                        </div>
-                                    </div>
-                                </n-code>
-                            </n-flex>
-                        </template>
-                        <template v-else>
-                            <div class="text-xs opacity-70">{{ $t('error.no_stack') }}</div>
                         </template>
 
                         <template v-if="primaryFrame">
@@ -730,9 +698,6 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                                             </div>
                                         </div>
                                     </n-code>
-                                    <div class="text-xs opacity-70">
-                                        {{ $t('error.location') }}: {{ bestLocationText }}
-                                    </div>
                                 </template>
 
                                 <template v-else>
@@ -742,6 +707,31 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                                     </div>
                                 </template>
                             </n-flex>
+                        </template>
+
+                        <template v-if="stackText">
+                            <n-flex vertical size="small" class="min-w-0">
+                                <div class="text-sm fw-bold">{{ $t('error.stack') }}</div>
+                                <n-code class="block w-full">
+                                    <div class="flex flex-col gap-1">
+                                        <div v-for="row in stackRows" :key="row.lineNumber" class="flex gap-3">
+                                            <div
+                                                class="shrink-0 select-none text-right text-xs leading-5"
+                                                style="width: 3.5em; color: var(--n-line-number-text-color)"
+                                            >
+                                                {{ row.lineNumber }}
+                                            </div>
+                                            <div
+                                                class="min-w-0 flex-1 text-xs leading-5 whitespace-pre-wrap break-all"
+                                                v-html="row.html"
+                                            />
+                                        </div>
+                                    </div>
+                                </n-code>
+                            </n-flex>
+                        </template>
+                        <template v-else>
+                            <div class="text-xs opacity-70">{{ $t('error.no_stack') }}</div>
                         </template>
                     </n-flex>
                 </n-card>
