@@ -8,12 +8,16 @@ const props = defineProps<{
 }>();
 
 const icon = asyncComputed(async () => {
-    return await import(`~/assets/images/ranks/${props.name.toLowerCase()}.svg?url`).then((module) => {
+    return await import(`~/assets/images/rank/${props.name}.svg?url`).then((module) => {
         return module.default;
     });
 });
 
 const color = asyncComputed(async () => {
+    if (!icon.value) {
+        return undefined;
+    }
+
     const pixels = await rgbaster(icon.value);
     const primaryColor = pixels[0]?.color;
 
