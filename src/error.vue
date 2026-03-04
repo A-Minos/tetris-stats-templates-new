@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app';
 import type { SectionedSourceMapInput } from '@jridgewell/trace-mapping';
+import type { ZodDebugData } from '~/utils/useData';
 import { darkTheme } from 'naive-ui';
 import hljs from 'highlight.js/lib/common';
 
@@ -30,6 +31,37 @@ type SnippetState = {
     error: string;
 };
 
+type PathSegment = string | number;
+type Path = PathSegment[];
+
+type ZodIssueRow = Readonly<{
+    key: string;
+    pathText: string;
+    message: string;
+    isFocus: boolean;
+}>;
+
+type JsonRenderRow = Readonly<{
+    lineNumber: number;
+    html: string;
+    path: Path | null;
+}>;
+
+type JsonExcerptRow = Readonly<{
+    lineNumber: number;
+    html: string;
+    isFocus: boolean;
+}>;
+
+type JsonExcerpt = Readonly<{
+    rows: JsonExcerptRow[];
+    startLine: number;
+    endLine: number;
+    totalLines: number;
+    truncated: boolean;
+    highlightPath: Path | null;
+}>;
+
 const props = defineProps<{
     error?: NuxtError;
 }>();
@@ -37,6 +69,66 @@ const props = defineProps<{
 useLang();
 
 const route = useRoute();
+
+const zodDebug = computed((): ZodDebugData | null => {
+    const direct = props.error?.data;
+    if (isZodDebugData(direct)) {
+        return direct;
+    }
+
+    const cause = props.error?.cause;
+    if (isRecord(cause) && 'data' in cause) {
+        const causeData = (cause as { data?: unknown }).data;
+        if (isZodDebugData(causeData)) {
+            return causeData;
+        }
+    }
+
+    return null;
+});
+
+const zodIssueRows = computed((): ZodIssueRow[] => {
+    const debug = zodDebug.value;
+    if (!debug) {
+        return [];
+    }
+
+    const focusKey = serializePath(debug.focusPath);
+
+    return debug.issues.slice(0, 6).map((issue, index) => {
+        const key = `${serializePath(issue.path)}-${index}`;
+        return {
+            key,
+            pathText: formatPath(issue.path),
+            message: issue.message,
+            isFocus: serializePath(issue.path) === focusKey,
+        };
+    });
+});
+
+const zodFocusText = computed(() => {
+    const debug = zodDebug.value;
+    if (!debug) {
+        return '';
+    }
+    return formatPath(debug.focusPath);
+});
+
+const zodInputExcerpt = computed((): JsonExcerpt => {
+    const debug = zodDebug.value;
+    if (!debug) {
+        return {
+            rows: [],
+            startLine: 0,
+            endLine: 0,
+            totalLines: 0,
+            truncated: false,
+            highlightPath: null,
+        };
+    }
+
+    return buildJsonExcerpt(debug.input, debug.focusPath);
+});
 
 const stackText = computed(() => props.error?.stack ?? '');
 
@@ -137,6 +229,250 @@ function escapeHtml(input: string): string {
         .replaceAll('>', '&gt;')
         .replaceAll('"', '&quot;')
         .replaceAll("'", '&#039;');
+}
+
+function formatPath(path: Path): string {
+    if (path.length === 0) {
+        return '$';
+    }
+
+    let text = '$';
+    for (const seg of path) {
+        if (typeof seg === 'number') {
+            text += `[${seg}]`;
+            continue;
+        }
+
+        if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(seg)) {
+            text += `.${seg}`;
+            continue;
+        }
+
+        text += `[${JSON.stringify(seg)}]`;
+    }
+    return text;
+}
+
+function serializePath(path: Path): string {
+    return path.map((seg) => (typeof seg === 'number' ? `[${seg}]` : `.${seg}`)).join('');
+}
+
+function isPathEqual(a: Path, b: Path): boolean {
+    if (a.length !== b.length) {
+        return false;
+    }
+    return a.every((seg, i) => seg === b[i]);
+}
+
+function isPathArray(value: unknown): value is Path {
+    return Array.isArray(value) && value.every((v) => typeof v === 'string' || typeof v === 'number');
+}
+
+function isZodDebugData(value: unknown): value is ZodDebugData {
+    if (!isRecord(value)) {
+        return false;
+    }
+    if (value.type !== 'zod') {
+        return false;
+    }
+
+    const issues = value.issues;
+    const focusPath = value.focusPath;
+    if (!Array.isArray(issues) || !isPathArray(focusPath)) {
+        return false;
+    }
+
+    return issues.every((iss) => {
+        return (
+            isRecord(iss) &&
+            typeof iss.message === 'string' &&
+            isPathArray(iss.path) &&
+            (iss.code === undefined || typeof iss.code === 'string')
+        );
+    });
+}
+
+function isJsonPrimitive(value: unknown): value is string | number | boolean | null {
+    return value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
+}
+
+function jsonStringifyPrimitive(value: string | number | boolean | null): string {
+    if (value === null) {
+        return 'null';
+    }
+    if (typeof value === 'string') {
+        return JSON.stringify(value);
+    }
+    if (typeof value === 'number') {
+        return Number.isFinite(value) ? String(value) : 'null';
+    }
+    return value ? 'true' : 'false';
+}
+
+function highlightJsonLine(line: string): string {
+    const canHighlight = Boolean(hljs.getLanguage('json'));
+    if (!canHighlight || !line) {
+        return escapeHtml(line);
+    }
+
+    try {
+        return hljs.highlight(line, { language: 'json' }).value;
+    } catch (e) {
+        console.error(e);
+        return escapeHtml(line);
+    }
+}
+
+function buildJsonRows(value: unknown, maxLines: number): { rows: JsonRenderRow[]; truncated: boolean } {
+    const rows: JsonRenderRow[] = [];
+    let lineNumber = 1;
+    let truncated = false;
+
+    const indentUnit = '  ';
+    const indent = (level: number) => indentUnit.repeat(level);
+
+    const pushLine = (text: string, path: Path | null) => {
+        if (rows.length >= maxLines) {
+            truncated = true;
+            return;
+        }
+        rows.push({
+            lineNumber,
+            html: highlightJsonLine(text),
+            path,
+        });
+        lineNumber += 1;
+    };
+
+    const isPlainObject = (input: unknown): input is Record<string, unknown> => {
+        if (!isRecord(input)) {
+            return false;
+        }
+        return Object.prototype.toString.call(input) === '[object Object]';
+    };
+
+    const renderValue = (input: unknown, path: Path, level: number, withComma: boolean) => {
+        if (rows.length >= maxLines) {
+            truncated = true;
+            return;
+        }
+
+        if (isJsonPrimitive(input)) {
+            pushLine(`${indent(level)}${jsonStringifyPrimitive(input)}${withComma ? ',' : ''}`, path);
+            return;
+        }
+
+        if (Array.isArray(input)) {
+            if (input.length === 0) {
+                pushLine(`${indent(level)}[]${withComma ? ',' : ''}`, path);
+                return;
+            }
+            pushLine(`${indent(level)}[`, path);
+            input.forEach((el, index) => {
+                renderValue(el, [...path, index], level + 1, index !== input.length - 1);
+            });
+            pushLine(`${indent(level)}]${withComma ? ',' : ''}`, null);
+            return;
+        }
+
+        if (isPlainObject(input)) {
+            const keys = Object.keys(input);
+            if (keys.length === 0) {
+                pushLine(`${indent(level)}{}${withComma ? ',' : ''}`, path);
+                return;
+            }
+            pushLine(`${indent(level)}{`, path);
+            keys.forEach((key, index) => {
+                renderProperty(key, input[key], [...path, key], level + 1, index !== keys.length - 1);
+            });
+            pushLine(`${indent(level)}}${withComma ? ',' : ''}`, null);
+            return;
+        }
+
+        pushLine(`${indent(level)}${JSON.stringify(String(input))}${withComma ? ',' : ''}`, path);
+    };
+
+    const renderProperty = (key: string, input: unknown, path: Path, level: number, withComma: boolean) => {
+        const keyJson = JSON.stringify(key);
+        const prefix = `${indent(level)}${keyJson}: `;
+
+        if (isJsonPrimitive(input)) {
+            pushLine(`${prefix}${jsonStringifyPrimitive(input)}${withComma ? ',' : ''}`, path);
+            return;
+        }
+
+        if (Array.isArray(input)) {
+            if (input.length === 0) {
+                pushLine(`${prefix}[]${withComma ? ',' : ''}`, path);
+                return;
+            }
+            pushLine(`${prefix}[`, path);
+            input.forEach((el, index) => {
+                renderValue(el, [...path, index], level + 1, index !== input.length - 1);
+            });
+            pushLine(`${indent(level)}]${withComma ? ',' : ''}`, null);
+            return;
+        }
+
+        if (isPlainObject(input)) {
+            const keys = Object.keys(input);
+            if (keys.length === 0) {
+                pushLine(`${prefix}{}${withComma ? ',' : ''}`, path);
+                return;
+            }
+            pushLine(`${prefix}{`, path);
+            keys.forEach((childKey, index) => {
+                renderProperty(childKey, input[childKey], [...path, childKey], level + 1, index !== keys.length - 1);
+            });
+            pushLine(`${indent(level)}}${withComma ? ',' : ''}`, null);
+            return;
+        }
+
+        pushLine(`${prefix}${JSON.stringify(String(input))}${withComma ? ',' : ''}`, path);
+    };
+
+    renderValue(value, [], 0, false);
+    return { rows, truncated };
+}
+
+function buildJsonExcerpt(input: unknown, focusPath: Path): JsonExcerpt {
+    const { rows, truncated } = buildJsonRows(input, 5000);
+
+    const highlightPath = findNearestExistingPath(rows, focusPath);
+    const focusIndex = highlightPath
+        ? rows.findIndex((r) => r.path && isPathEqual(r.path, highlightPath))
+        : rows.findIndex((r) => r.path && isPathEqual(r.path, []));
+
+    const index = focusIndex >= 0 ? focusIndex : 0;
+    const context = 10;
+    const start = Math.max(0, index - context);
+    const end = Math.min(rows.length, index + context + 1);
+    const excerptRows = rows.slice(start, end).map((r) => {
+        return {
+            lineNumber: r.lineNumber,
+            html: r.html,
+            isFocus: Boolean(highlightPath && r.path && isPathEqual(r.path, highlightPath)),
+        };
+    });
+
+    return {
+        rows: excerptRows,
+        startLine: excerptRows[0]?.lineNumber ?? 0,
+        endLine: excerptRows.at(-1)?.lineNumber ?? 0,
+        totalLines: rows.length,
+        truncated,
+        highlightPath,
+    };
+}
+
+function findNearestExistingPath(rows: JsonRenderRow[], target: Path): Path | null {
+    for (let len = target.length; len >= 0; len -= 1) {
+        const prefix = target.slice(0, len);
+        if (rows.some((r) => r.path && isPathEqual(r.path, prefix))) {
+            return prefix;
+        }
+    }
+    return null;
 }
 
 function splitLines(input: string): string[] {
@@ -641,6 +977,79 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
                         </template>
                         <template v-else>
                             <n-alert :show-icon="false" type="error">?</n-alert>
+                        </template>
+
+                        <template v-if="zodDebug">
+                            <n-flex vertical size="small" class="min-w-0">
+                                <div class="text-sm fw-bold">{{ $t('error.validation_title') }}</div>
+
+                                <div class="text-xs opacity-70 break-all">
+                                    {{ $t('error.validation_focus') }}: {{ zodFocusText }}
+                                </div>
+
+                                <template v-if="zodIssueRows.length">
+                                    <n-code class="block w-full">
+                                        <div class="flex flex-col gap-1">
+                                            <div v-for="issue in zodIssueRows" :key="issue.key" class="flex gap-3">
+                                                <div
+                                                    class="shrink-0 select-none text-right text-xs leading-5"
+                                                    style="width: 1.5em; color: var(--n-line-number-text-color)"
+                                                    :style="issue.isFocus ? errorLineNumberStyle : undefined"
+                                                >
+                                                    {{ issue.isFocus ? '●' : '' }}
+                                                </div>
+                                                <div
+                                                    class="min-w-0 flex-1 text-xs leading-5 whitespace-pre-wrap break-all"
+                                                >
+                                                    <span class="opacity-70">{{ issue.pathText }}</span>
+                                                    <span>{{ ': ' + issue.message }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </n-code>
+                                </template>
+
+                                <n-flex vertical size="small" class="min-w-0">
+                                    <div class="text-sm fw-bold">{{ $t('error.validation_input') }}</div>
+                                    <template v-if="zodInputExcerpt.rows.length">
+                                        <div class="text-xs opacity-70 break-all">
+                                            {{ zodInputExcerpt.startLine }}-{{ zodInputExcerpt.endLine }}
+                                            <template v-if="zodInputExcerpt.totalLines">
+                                                / {{ zodInputExcerpt.totalLines }}
+                                            </template>
+                                            <template v-if="zodInputExcerpt.truncated">
+                                                {{ ' ' + $t('error.validation_truncated') }}
+                                            </template>
+                                        </div>
+                                        <n-code class="block w-full">
+                                            <div class="flex flex-col gap-1">
+                                                <div
+                                                    v-for="row in zodInputExcerpt.rows"
+                                                    :key="row.lineNumber"
+                                                    class="flex gap-3"
+                                                    :style="row.isFocus ? errorRowStyle : undefined"
+                                                >
+                                                    <div
+                                                        class="shrink-0 select-none text-xs leading-5 flex items-center justify-end gap-2"
+                                                        style="width: 3.5em; color: var(--n-line-number-text-color)"
+                                                        :style="row.isFocus ? errorLineNumberStyle : undefined"
+                                                    >
+                                                        <span v-if="row.isFocus" style="color: #f04444">●</span>
+                                                        <span>{{ row.lineNumber }}</span>
+                                                    </div>
+                                                    <div
+                                                        class="min-w-0 flex-1 text-xs leading-5 whitespace-pre-wrap break-all"
+                                                        v-html="row.html"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </n-code>
+                                    </template>
+                                    <template v-else>
+                                        <div class="text-xs opacity-70">{{ $t('error.validation_no_input') }}</div>
+                                    </template>
+                                </n-flex>
+                            </n-flex>
                         </template>
 
                         <n-divider />
