@@ -188,20 +188,39 @@ const snippetRows = computed((): CodeRow[] => {
 });
 
 let snippetRequestId = 0;
+let snippetAbortController: AbortController | null = null;
+
+function resetSnippetState(): void {
+    snippet.code = '';
+    snippet.startLine = 0;
+    snippet.endLine = 0;
+    snippet.fetchedFrom = '';
+    snippet.errorLine = null;
+    snippet.errorColumn = null;
+    snippet.locationText = '';
+    snippet.error = '';
+    snippet.language = 'plaintext';
+}
+
+function cancelSnippetLoad(): void {
+    if (!snippetAbortController) {
+        return;
+    }
+    snippetAbortController.abort();
+    snippetAbortController = null;
+}
+
+onBeforeUnmount(() => {
+    cancelSnippetLoad();
+});
+
 watch(
     () => primaryFrame.value?.raw,
     async () => {
         const frame = primaryFrame.value;
 
-        snippet.code = '';
-        snippet.startLine = 0;
-        snippet.endLine = 0;
-        snippet.fetchedFrom = '';
-        snippet.errorLine = null;
-        snippet.errorColumn = null;
-        snippet.locationText = '';
-        snippet.error = '';
-        snippet.language = 'plaintext';
+        cancelSnippetLoad();
+        resetSnippetState();
 
         if (!frame) {
             return;
@@ -519,76 +538,52 @@ function buildHighlightedRows(code: string, startLineNumber: number, language: s
     });
 }
 
+function buildStackFrame(raw: string, match: RegExpMatchArray | null): StackFrame | null {
+    if (!match) {
+        return null;
+    }
+
+    const url = match[1];
+    const lineText = match[2];
+    const columnText = match[3];
+    if (!url || !lineText || !columnText) {
+        return null;
+    }
+
+    const lineNumber = Number(lineText);
+    const columnNumber = Number(columnText);
+    if (!Number.isFinite(lineNumber) || !Number.isFinite(columnNumber)) {
+        return null;
+    }
+
+    return {
+        raw,
+        url,
+        line: lineNumber,
+        column: columnNumber,
+        displayPath: toDisplayPath(url),
+    };
+}
+
 function parseStackLine(line: string): StackFrame | null {
     const raw = line.trim();
     if (!raw) {
         return null;
     }
 
-    const matchParen = raw.match(/\((.+):(\d+):(\d+)\)/);
-    if (matchParen) {
-        const url = matchParen[1];
-        const lineText = matchParen[2];
-        const columnText = matchParen[3];
-        if (!url || !lineText || !columnText) {
-            return null;
-        }
-        const lineNumber = Number(lineText);
-        const columnNumber = Number(columnText);
-        if (!Number.isFinite(lineNumber) || !Number.isFinite(columnNumber)) {
-            return null;
-        }
-        return {
-            raw,
-            url,
-            line: lineNumber,
-            column: columnNumber,
-            displayPath: toDisplayPath(url),
-        };
+    const frameFromParen = buildStackFrame(raw, raw.match(/\((.+):(\d+):(\d+)\)/));
+    if (frameFromParen) {
+        return frameFromParen;
     }
 
-    const matchAt = raw.match(/\bat\s+(.+):(\d+):(\d+)\b/);
-    if (matchAt) {
-        const url = matchAt[1];
-        const lineText = matchAt[2];
-        const columnText = matchAt[3];
-        if (!url || !lineText || !columnText) {
-            return null;
-        }
-        const lineNumber = Number(lineText);
-        const columnNumber = Number(columnText);
-        if (!Number.isFinite(lineNumber) || !Number.isFinite(columnNumber)) {
-            return null;
-        }
-        return {
-            raw,
-            url,
-            line: lineNumber,
-            column: columnNumber,
-            displayPath: toDisplayPath(url),
-        };
+    const frameFromAt = buildStackFrame(raw, raw.match(/\bat\s+(.+):(\d+):(\d+)\b/));
+    if (frameFromAt) {
+        return frameFromAt;
     }
 
-    const matchFirefox = raw.match(/@(.+):(\d+):(\d+)\b/);
-    if (matchFirefox) {
-        const url = matchFirefox[1];
-        const lineText = matchFirefox[2];
-        const columnText = matchFirefox[3];
-        if (!url || !lineText || !columnText) {
-            return null;
-        }
-        const lineNumber = Number(lineText);
-        const columnNumber = Number(columnText);
-        if (!Number.isFinite(lineNumber) || !Number.isFinite(columnNumber)) {
-            return null;
-        }
-        return {
-            raw,
-            url,
-            line: lineNumber,
-            column: columnNumber,
-            displayPath: toDisplayPath(url),
-        };
+    const frameFromFirefox = buildStackFrame(raw, raw.match(/@(.+):(\d+):(\d+)\b/));
+    if (frameFromFirefox) {
+        return frameFromFirefox;
     }
 
     return null;
@@ -694,6 +689,16 @@ function isRecord(value: unknown): value is Record<string, unknown> {
     return typeof value === 'object' && value !== null;
 }
 
+function isAbortError(value: unknown): boolean {
+    if (value instanceof DOMException) {
+        return value.name === 'AbortError';
+    }
+    if (!isRecord(value)) {
+        return false;
+    }
+    return value.name === 'AbortError';
+}
+
 function isStringArray(value: unknown): value is string[] {
     return Array.isArray(value) && value.every((v) => typeof v === 'string');
 }
@@ -795,7 +800,11 @@ function parseInlineSourceMap(dataUrl: string): SectionedSourceMapInput | null {
     }
 }
 
-async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<SourceMapFetchResult | null> {
+async function tryFetchSourceMap(
+    codeUrl: URL,
+    codeText: string,
+    signal?: AbortSignal,
+): Promise<SourceMapFetchResult | null> {
     const mappingUrl = extractSourceMappingURL(codeText);
     if (mappingUrl) {
         if (mappingUrl.startsWith('data:')) {
@@ -806,7 +815,7 @@ async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<Source
         } else {
             try {
                 const mapUrl = new URL(mappingUrl, codeUrl.toString());
-                const res = await fetch(mapUrl.toString(), { credentials: 'same-origin' });
+                const res = await fetch(mapUrl.toString(), { credentials: 'same-origin', signal });
                 if (res.ok) {
                     const map = (await res.json()) as unknown;
                     if (isSourceMapInput(map)) {
@@ -814,6 +823,9 @@ async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<Source
                     }
                 }
             } catch (e) {
+                if (isAbortError(e)) {
+                    throw e;
+                }
                 console.error(e);
             }
         }
@@ -822,7 +834,7 @@ async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<Source
     try {
         const mapUrl = new URL(codeUrl.toString());
         mapUrl.pathname = `${mapUrl.pathname}.map`;
-        const res = await fetch(mapUrl.toString(), { credentials: 'same-origin' });
+        const res = await fetch(mapUrl.toString(), { credentials: 'same-origin', signal });
         if (!res.ok) {
             return null;
         }
@@ -832,6 +844,9 @@ async function tryFetchSourceMap(codeUrl: URL, codeText: string): Promise<Source
         }
         return { map, mapUrl: mapUrl.toString() };
     } catch (e) {
+        if (isAbortError(e)) {
+            throw e;
+        }
         console.error(e);
         return null;
     }
@@ -841,8 +856,9 @@ async function tryBuildSnippetFromSourceMap(
     codeUrl: URL,
     codeText: string,
     frame: StackFrame,
+    signal?: AbortSignal,
 ): Promise<SnippetResult | null> {
-    const mapResult = await tryFetchSourceMap(codeUrl, codeText);
+    const mapResult = await tryFetchSourceMap(codeUrl, codeText, signal);
     if (!mapResult) {
         return null;
     }
@@ -893,6 +909,10 @@ async function tryBuildSnippetFromSourceMap(
 
 async function loadSnippet(frame: StackFrame): Promise<void> {
     const requestId = ++snippetRequestId;
+    cancelSnippetLoad();
+
+    const controller = new AbortController();
+    snippetAbortController = controller;
     snippet.loading = true;
 
     try {
@@ -902,7 +922,7 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
             return;
         }
 
-        const res = await fetch(url.toString(), { credentials: 'same-origin' });
+        const res = await fetch(url.toString(), { credentials: 'same-origin', signal: controller.signal });
         if (!res.ok) {
             snippet.error = `HTTP ${res.status}`;
             return;
@@ -910,7 +930,7 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
 
         const text = await res.text();
 
-        const mappedSnippet = await tryBuildSnippetFromSourceMap(url, text, frame);
+        const mappedSnippet = await tryBuildSnippetFromSourceMap(url, text, frame, controller.signal);
         const bundleSnippet = mappedSnippet ? null : buildSnippetFromBundleText(text, url, frame);
         const result = mappedSnippet ?? bundleSnippet;
 
@@ -932,11 +952,17 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
         snippet.errorColumn = result.errorColumn;
         snippet.locationText = result.locationText;
     } catch (e) {
+        if (isAbortError(e)) {
+            return;
+        }
         console.error(e);
         snippet.error = String(e);
     } finally {
         if (requestId === snippetRequestId) {
             snippet.loading = false;
+        }
+        if (snippetAbortController === controller) {
+            snippetAbortController = null;
         }
     }
 }
