@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app';
 import type { SectionedSourceMapInput } from '@jridgewell/trace-mapping';
-import type { ZodDebugData } from '~/utils/useData';
-import { darkTheme } from 'naive-ui';
 import hljs from 'highlight.js/lib/common';
+import { darkTheme } from 'naive-ui';
+import type { ZodDebugData } from '~/utils/useData';
 
 type StackFrame = Readonly<{
     raw: string;
