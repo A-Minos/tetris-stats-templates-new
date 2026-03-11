@@ -5,7 +5,7 @@ import { Status } from '~/types/status';
 const data = useData(
     z
         .object({
-            type: z.nativeEnum(Status),
+            type: z.enum(Status),
         })
         .readonly(),
 );

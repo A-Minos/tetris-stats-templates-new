@@ -12,7 +12,7 @@ const props = defineProps<{
 const schema = z.object({
     lpm: z.number(),
     pps: z.number(),
-    lpm_trending: z.nativeEnum(Trending).nullable(),
+    lpm_trending: z.enum(Trending).nullable(),
 });
 
 const data = useData(

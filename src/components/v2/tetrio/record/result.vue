@@ -9,7 +9,7 @@ const { locale } = useI18n();
 const data = useData(
     z
         .object({
-            type: z.nativeEnum(GradeType).nullable(),
+            type: z.enum(GradeType).nullable(),
 
             rank: z.number().nullable(),
             personal_rank: z.number().nullable(),

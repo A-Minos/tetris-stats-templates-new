@@ -7,7 +7,7 @@ export default () => {
         const data = useData(
             z
                 .object({
-                    lang: z.nativeEnum(Languages).optional(),
+                    lang: z.enum(Languages).optional(),
                 })
                 .readonly(),
         );

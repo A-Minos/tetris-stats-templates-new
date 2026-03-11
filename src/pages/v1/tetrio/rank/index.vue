@@ -7,7 +7,7 @@ import { Rank, ValidRank } from '~/types/rank';
 const data = useData(
     z
         .object({
-            items: z.record(
+            items: z.partialRecord(
                 ValidRank,
                 z.object({
                     trending: z.number(),
