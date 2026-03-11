@@ -13,7 +13,7 @@ function applyZodLocale(locale: string): void {
 
 export default defineNuxtPlugin(() => {
     const nuxtApp = useNuxtApp();
-    const { locale } = useI18n();
+    const { locale } = nuxtApp.$i18n;
 
     applyZodLocale(locale.value);
 
