@@ -15,13 +15,13 @@
     "@types/identicon.js": "^2.3.5",
     "@types/lodash": "^4.17.24",
     "@unocss/nuxt": "66.6.2",
-    "echarts": "^5.6.0",
-    "nuxt": "^4.3.1",
+    "echarts": "^6.0.0",
+    "nuxt": "^4.4.2",
     "prettier": "^3.8.1",
     "remeda": "^2.33.6",
-    "sass": "^1.97.3",
-    "vue": "^3.5.29",
-    "vue-echarts": "^7.0.3",
+    "sass": "^1.98.0",
+    "vue": "^3.5.30",
+    "vue-echarts": "^8.0.1",
     "vue-tsc": "^3.2.5"
   },
   "prettier": {
@@ -51,7 +51,7 @@
     "@vueuse/core": "^14.2.1",
     "identicon.js": "^2.3.3",
     "lodash": "^4.17.23",
-    "naive-ui": "^2.43.2",
+    "naive-ui": "^2.44.1",
     "rgbaster-plus": "^1.1.1",
     "zod": "^4.3.6"
   }
