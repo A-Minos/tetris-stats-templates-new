@@ -58,10 +58,10 @@ const data = useData(
                 achievements: z.array(
                     z.object({
                         key: z.number().int(),
-                        rank_type: z.nativeEnum(RankType),
-                        ar_type: z.nativeEnum(ArType),
+                        rank_type: z.enum(RankType),
+                        ar_type: z.enum(ArType),
                         stub: z.boolean().nullable(),
-                        rank: z.nativeEnum(Rank).nullable(),
+                        rank: z.enum(Rank).nullable(),
                         achieved_score: z.number().nullable(),
                         pos: z.number().int().nullable(),
                         progress: z.number().nullable(),

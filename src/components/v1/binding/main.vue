@@ -7,7 +7,7 @@ const { t } = useI18n();
 const data = useData(
     z
         .object({
-            type: z.nativeEnum(Status),
+            type: z.enum(Status),
 
             platform: z.string(),
 

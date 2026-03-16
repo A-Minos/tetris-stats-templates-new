@@ -11,7 +11,7 @@ const data = useData(
                 adpm: z.number(),
                 vs: z.number(),
                 adpl: z.number(),
-                adpm_trending: z.nativeEnum(Trending),
+                adpm_trending: z.enum(Trending),
             }),
         })
         .readonly(),

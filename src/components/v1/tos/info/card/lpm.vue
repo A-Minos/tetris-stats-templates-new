@@ -10,7 +10,7 @@ const data = useData(
             multiplayer: z.object({
                 lpm: z.number(),
                 pps: z.number(),
-                lpm_trending: z.nativeEnum(Trending),
+                lpm_trending: z.enum(Trending),
             }),
         })
         .readonly(),

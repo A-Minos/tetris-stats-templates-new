@@ -22,7 +22,7 @@ const { locale } = useI18n();
 const data = useData(
     z
         .object({
-            items: z.record(
+            items: z.partialRecord(
                 ValidRank,
                 z.object({
                     require_tr: z.number(),

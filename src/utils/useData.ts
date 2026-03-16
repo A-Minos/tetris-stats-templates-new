@@ -68,6 +68,10 @@ function sanitizeDebugInput(value: unknown, depth = 0): unknown {
     return value;
 }
 
+function sanitizeIssuePath(path: readonly PropertyKey[]): Array<string | number> {
+    return path.map((segment) => (typeof segment === 'symbol' ? String(segment) : segment));
+}
+
 export type ZodDebugIssue = Readonly<{
     path: Array<string | number>;
     message: string;
@@ -90,11 +94,11 @@ export type ErrorWithZodDebugData = Error & {
 };
 
 function attachZodDebugData(error: Error, input: unknown, issues: z.ZodIssue[]): void {
-    const focusPath = issues[0]?.path ?? [];
+    const focusPath = sanitizeIssuePath(issues[0]?.path ?? []);
     const sanitizedInput = sanitizeDebugInput(input);
     const mappedIssues: ZodDebugIssue[] = issues.map((iss) => {
         return {
-            path: iss.path,
+            path: sanitizeIssuePath(iss.path),
             message: iss.message,
             code: iss.code,
             expected: 'expected' in iss ? (iss as { expected?: unknown }).expected : undefined,
