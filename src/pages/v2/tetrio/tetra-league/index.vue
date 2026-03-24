@@ -23,11 +23,6 @@ const data = useData(
                         points: z.number(),
                         average_data: StatisticalData,
                         data: z.array(StatisticalData),
-                        handling: z.object({
-                            arr: z.number(),
-                            das: z.number(),
-                            sdf: z.number(),
-                        }),
                     }),
                 )
                 .nonempty(),
@@ -81,16 +76,6 @@ useLang();
                             />
                         </n-grid-item>
                     </n-grid>
-                </n-grid-item>
-            </n-grid>
-
-            <n-grid :cols="data.games.length" :x-gap="10" :y-gap="10">
-                <n-grid-item v-for="game in data.games">
-                    <v2-tetrio-tetra-league-handling
-                        :arr="game.handling.arr"
-                        :das="game.handling.das"
-                        :sdf="game.handling.sdf"
-                    />
                 </n-grid-item>
             </n-grid>
         </n-flex>

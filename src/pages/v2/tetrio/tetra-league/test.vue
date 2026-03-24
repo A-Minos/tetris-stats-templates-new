@@ -39,11 +39,6 @@ onMounted(async () => {
                         adpl: 2.3,
                     },
                 ],
-                handling: {
-                    arr: 1,
-                    das: 2,
-                    sdf: 3,
-                },
             },
             {
                 user: {
@@ -74,11 +69,6 @@ onMounted(async () => {
                         adpl: 2.6,
                     },
                 ],
-                handling: {
-                    arr: 2,
-                    das: 3,
-                    sdf: 4,
-                },
             },
             {
                 user: {
@@ -109,11 +99,6 @@ onMounted(async () => {
                         adpl: 2.9,
                     },
                 ],
-                handling: {
-                    arr: 3,
-                    das: 4,
-                    sdf: 5,
-                },
             },
         ],
         play_at: new Date(),
