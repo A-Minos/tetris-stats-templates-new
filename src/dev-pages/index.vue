@@ -11,7 +11,6 @@ type PreviewTreeItem = {
     label: string;
     routePath: string | null;
     depth: number;
-    hasChildren: boolean;
 };
 
 function createNode(key: string, label: string): PreviewTreeNode {
@@ -30,7 +29,6 @@ function flattenTree(nodes: PreviewTreeNode[], depth = 0): PreviewTreeItem[] {
             label: node.label,
             routePath: node.routePath,
             depth,
-            hasChildren: node.children.length > 0,
         },
         ...flattenTree(node.children, depth + 1),
     ]);
