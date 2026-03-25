@@ -73,31 +73,40 @@ const previewTreeItems = computed<PreviewTreeItem[]>(() => {
 </script>
 
 <template>
-    <main class="mx-auto max-w-240 p-6">
-        <header class="mb-6">
-            <h1 class="text-7 font-bold">Dev Preview Pages</h1>
-            <p class="mt-2 text-3 text-white/60">
-                根据当前已注册的 <code>/dev/**</code> 路由生成目录树，和实际可访问页面保持一致。
-            </p>
-        </header>
+    <div class="fixed inset-0 w-full h-full overflow-y-auto bg-[#101014] text-white/80 font-sans">
+        <main class="mx-auto max-w-240 p-6 sm:p-10">
+            <header class="mb-8 pl-2 sm:pl-4 border-l-4 border-sky-500/50">
+                <h1 class="text-3xl font-bold tracking-tight text-white/90 m-0 leading-tight">Dev Preview Pages</h1>
+            </header>
 
-        <n-card size="small">
-            <ul class="m-0 list-none p-0">
-                <li v-for="item in previewTreeItems" :key="item.key" class="py-1">
-                    <div class="flex items-center gap-2" :style="{ paddingLeft: `${item.depth * 1.25}rem` }">
-                        <span class="font-mono text-white/40">{{ item.hasChildren ? 'dir' : 'page' }}</span>
-                        <NuxtLink
-                            v-if="item.routePath"
-                            class="font-mono text-sky-300 no-underline hover:underline"
-                            :to="item.routePath"
+            <div class="p-2 sm:p-4 bg-white/5 rounded-xl border border-white/5 shadow-2xl">
+                <ul class="m-0 flex flex-col gap-0.5 list-none p-0">
+                    <li v-for="item in previewTreeItems" :key="item.key">
+                        <div
+                            class="group flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors"
+                            :class="item.routePath ? 'cursor-pointer hover:bg-white/10' : ''"
+                            :style="{ paddingLeft: `${item.depth * 1.5 + 0.5}rem` }"
                         >
-                            {{ item.label }}
-                        </NuxtLink>
-                        <code v-else>{{ item.label }}</code>
-                        <span v-if="item.routePath" class="font-mono text-white/40">{{ item.routePath }}</span>
-                    </div>
-                </li>
-            </ul>
-        </n-card>
-    </main>
+                            <NuxtLink
+                                v-if="item.routePath"
+                                class="font-mono text-[14px] text-sky-400 no-underline transition-colors hover:text-sky-300"
+                                :to="item.routePath"
+                            >
+                                {{ item.label }}
+                            </NuxtLink>
+                            <span v-else class="font-mono text-[14px] text-white/40">{{ item.label }}</span>
+
+                            <div
+                                class="flex-1 h-0 border-0 border-b border-dashed border-white/20 mx-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                            ></div>
+
+                            <span v-if="item.routePath" class="font-mono text-[12px] text-white/30 hidden sm:block">
+                                {{ item.routePath }}
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
 </template>

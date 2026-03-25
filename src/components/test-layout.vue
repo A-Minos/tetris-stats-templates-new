@@ -9,10 +9,14 @@ const { setLocale } = useI18n();
 </script>
 
 <template>
-    <div>
-        <template v-for="(page, index) in props.pages" :key="index">
-            <Component :is="page" />
-        </template>
+    <div class="flex flex-col items-center justify-center gap-12 bg-[#2b2b36] p-12 min-h-screen isolate">
+        <div
+            v-for="(page, index) in props.pages"
+            :key="index"
+            class="relative border-2 border-dashed border-white/30 rounded p-0 w-max"
+        >
+            <Component :is="page" class="relative block h-max !static" />
+        </div>
 
         <div class="fixed bottom-4 right-4 z-9999 flex gap-2">
             <button

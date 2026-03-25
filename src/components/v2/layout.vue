@@ -10,8 +10,8 @@ defineProps<
 
 <template>
     <n-config-provider :theme="darkTheme" class="font-sans">
-        <n-layout position="absolute">
-            <n-layout-content id="content" :class="content_class" class="p-2">
+        <n-layout>
+            <n-layout-content id="content" :class="content_class" class="p-2 relative">
                 <n-flex vertical>
                     <slot />
                 </n-flex>
