@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import type { VNode } from 'vue';
+import type { Component } from 'vue';
 import V2TetrioDetailRank from '~/pages/v2/tetrio/rank/detail/index.vue';
 
-const { setLocale } = useI18n();
-
-const pages = ref<VNode[]>([]);
+const pages = ref<Component[]>([]);
 
 onMounted(async () => {
     window.__DATA__ = JSON.stringify({
@@ -54,20 +52,12 @@ onMounted(async () => {
 
     await nextTick();
 
-    const rendered = h(V2TetrioDetailRank);
-
-    pages.value.push(rendered);
+    pages.value.push(h(V2TetrioDetailRank));
 
     await nextTick();
 });
 </script>
 
 <template>
-    <div class="flex flex-col p-2 gap-2">
-        <button @click="setLocale('zh-CN')" style="z-index: 999999">zh-CN</button>
-        <button @click="setLocale('en-US')" style="z-index: 999999">en-US</button>
-        <template v-for="page in pages">
-            <Component :is="page" />
-        </template>
-    </div>
+    <test-layout :pages="pages" />
 </template>

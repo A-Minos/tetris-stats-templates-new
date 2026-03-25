@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { VNode } from 'vue';
+import type { Component } from 'vue';
 import V1TetrioRank from '~/pages/v1/tetrio/rank/index.vue';
 
-const pages = ref<VNode[]>([]);
+const pages = ref<Component[]>([]);
 
 onMounted(async () => {
     window.__DATA__ = JSON.stringify({
@@ -16,18 +16,12 @@ onMounted(async () => {
 
     await nextTick();
 
-    const rendered = h(V1TetrioRank);
-
-    pages.value.push(rendered);
+    pages.value.push(h(V1TetrioRank));
 
     await nextTick();
 });
 </script>
 
 <template>
-    <div class="flex flex-col p-2 gap-2">
-        <template v-for="page in pages">
-            <Component :is="page" />
-        </template>
-    </div>
+    <test-layout :pages="pages" />
 </template>

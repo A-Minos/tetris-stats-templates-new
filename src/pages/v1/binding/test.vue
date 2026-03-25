@@ -1,11 +1,9 @@
 <script lang="ts" setup>
-import type { VNode } from 'vue';
+import type { Component } from 'vue';
 import V1Binding from '~/pages/v1/binding/index.vue';
 import { Status } from '~/types/status';
 
-const { setLocale } = useI18n();
-
-const pages = ref<VNode[]>([]);
+const pages = ref<Component[]>([]);
 
 onMounted(async () => {
     for (const status of Object.values(Status)) {
@@ -25,9 +23,7 @@ onMounted(async () => {
 
         await nextTick();
 
-        const rendered = h(V1Binding);
-
-        pages.value.push(rendered);
+        pages.value.push(h(V1Binding));
 
         await nextTick();
     }
@@ -35,11 +31,5 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="flex flex-col p-2 gap-2">
-        <button @click="setLocale('zh-CN')" style="z-index: 999999">zh-CN</button>
-        <button @click="setLocale('en-US')" style="z-index: 999999">en-US</button>
-        <template v-for="page in pages">
-            <Component :is="page" />
-        </template>
-    </div>
+    <test-layout :pages="pages" />
 </template>
