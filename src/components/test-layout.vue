@@ -20,7 +20,7 @@ const { setLocale } = useI18n();
 
         <div class="fixed bottom-4 right-4 z-9999 flex gap-2">
             <button
-                v-for="locale in (['zh-CN', 'en-US'] as const)"
+                v-for="locale in ['zh-CN', 'en-US'] as const"
                 :key="locale"
                 class="cursor-pointer rounded-2 border-none bg-black/60 px-3 py-1.5 text-sm text-white/80 shadow backdrop-blur-sm hover:bg-black/80"
                 @click="setLocale(locale)"

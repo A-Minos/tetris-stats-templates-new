@@ -6,28 +6,31 @@ import { useDevPage } from '~/dev-pages/useDevPage';
 const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    await addPage({
-        user: {
-            avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
-            name: 'SCDHH',
+    await addPage(
+        {
+            user: {
+                avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
+                name: 'SCDHH',
+            },
+            today: {
+                lpm: 48.72,
+                pps: 2.03,
+                apm: 76.87,
+                apl: 1.58,
+                lpm_trending: Trending.UP,
+                apm_trending: Trending.DOWN,
+            },
+            historical: {
+                lpm: 48.72,
+                pps: 2.03,
+                apm: 76.87,
+                apl: 1.58,
+                lpm_trending: Trending.UP,
+                apm_trending: Trending.DOWN,
+            },
         },
-        today: {
-            lpm: 48.72,
-            pps: 2.03,
-            apm: 76.87,
-            apl: 1.58,
-            lpm_trending: Trending.UP,
-            apm_trending: Trending.DOWN,
-        },
-        historical: {
-            lpm: 48.72,
-            pps: 2.03,
-            apm: 76.87,
-            apl: 1.58,
-            lpm_trending: Trending.UP,
-            apm_trending: Trending.DOWN,
-        },
-    }, V1TopInfo);
+        V1TopInfo,
+    );
 });
 </script>
 
