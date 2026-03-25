@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import V2TetrioList from '~/pages/v2/tetrio/user/list/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         show_index: true,
         data: [
             {
@@ -30,13 +30,7 @@ onMounted(async () => {
                 },
             },
         ],
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V2TetrioList));
-
-    await nextTick();
+    }, V2TetrioList);
 });
 </script>
 

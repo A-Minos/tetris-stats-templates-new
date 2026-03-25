@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import { Trending } from '~/components/v1/trending/index.vue';
-
 import V1TopInfo from '~/pages/v1/top/info/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         user: {
             avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
             name: 'SCDHH',
@@ -28,13 +27,7 @@ onMounted(async () => {
             lpm_trending: Trending.UP,
             apm_trending: Trending.DOWN,
         },
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V1TopInfo));
-
-    await nextTick();
+    }, V1TopInfo);
 });
 </script>
 

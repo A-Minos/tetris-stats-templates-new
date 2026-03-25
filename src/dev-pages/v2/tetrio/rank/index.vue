@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import V2TetrioRank from '~/pages/v2/tetrio/rank/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         items: {
             u: {
                 require_tr: 1145,
@@ -21,13 +21,7 @@ onMounted(async () => {
             },
         },
         updated_at: new Date(),
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V2TetrioRank));
-
-    await nextTick();
+    }, V2TetrioRank);
 });
 </script>
 

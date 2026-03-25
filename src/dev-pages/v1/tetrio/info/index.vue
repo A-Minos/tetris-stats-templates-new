@@ -1,13 +1,12 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import { Trending } from '~/components/v1/trending/index.vue';
-
 import V1TetrioInfo from '~/pages/v1/tetrio/info/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         user: {
             avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
             name: 'SCDHH',
@@ -58,13 +57,7 @@ onMounted(async () => {
             sprint: '1m 10.2s',
             blitz: '289,085',
         },
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V1TetrioInfo));
-
-    await nextTick();
+    }, V1TetrioInfo);
 });
 </script>
 

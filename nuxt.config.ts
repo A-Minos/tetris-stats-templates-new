@@ -13,19 +13,13 @@ function walkVueFiles(dir: string): string[] {
 }
 
 function removePagesMatching(pattern: RegExp, pages: NuxtPage[] = []) {
-    const pagesToRemove: NuxtPage[] = [];
-
-    for (const page of pages) {
+    for (let i = pages.length - 1; i >= 0; i--) {
+        const page = pages[i]!;
         if (page.file && pattern.test(page.file)) {
-            pagesToRemove.push(page);
-            continue;
+            pages.splice(i, 1);
+        } else {
+            removePagesMatching(pattern, page.children);
         }
-
-        removePagesMatching(pattern, page.children);
-    }
-
-    for (const page of pagesToRemove) {
-        pages.splice(pages.indexOf(page), 1);
     }
 }
 
@@ -44,7 +38,7 @@ function createDevPages(): NuxtPage[] {
                 .join('/');
 
             return {
-                name: `dev-${routePath || 'index'}`.replaceAll('/', '-'),
+                name: `dev/${routePath || 'index'}`,
                 path: routePath ? `/dev/${routePath}` : '/dev',
                 file: `~/dev-pages/${relativePath}`,
             } satisfies NuxtPage;

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import V2TetrioTetraLeague from '~/pages/v2/tetrio/tetra-league/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         replay_id: 'test_replay',
         games: [
             {
@@ -100,13 +100,7 @@ onMounted(async () => {
             },
         ],
         play_at: new Date(),
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V2TetrioTetraLeague));
-
-    await nextTick();
+    }, V2TetrioTetraLeague);
 });
 </script>
 

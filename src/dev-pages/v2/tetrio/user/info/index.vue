@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import V2TetrioInfo from '~/pages/v2/tetrio/user/info/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         user: {
             banner: 'https://tetr.io/user-content/banners/62466f02f071b942778da44b.jpg',
             avatar: { type: 'identicon', hash: '5eb270aaeb7d4250d3f2fc47' },
@@ -258,13 +258,7 @@ onMounted(async () => {
             blitz: '289,085',
         },
         lang: 'zh-CN',
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V2TetrioInfo));
-
-    await nextTick();
+    }, V2TetrioInfo);
 });
 </script>
 

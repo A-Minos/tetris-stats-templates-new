@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { Component } from 'vue';
 import V2TetrioSprint from '~/pages/v2/tetrio/record/sprint/index.vue';
+import { useDevPage } from '~/dev-pages/useDevPage';
 
-const pages = ref<Component[]>([]);
+const { pages, addPage } = useDevPage();
 
 onMounted(async () => {
-    window.__DATA__ = JSON.stringify({
+    await addPage({
         type: 'best',
 
         user: {
@@ -61,13 +61,7 @@ onMounted(async () => {
         },
 
         play_at: new Date(),
-    });
-
-    await nextTick();
-
-    pages.value.push(h(V2TetrioSprint));
-
-    await nextTick();
+    }, V2TetrioSprint);
 });
 </script>
 
