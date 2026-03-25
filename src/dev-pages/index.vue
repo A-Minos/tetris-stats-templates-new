@@ -76,7 +76,9 @@ const previewTreeItems = computed<PreviewTreeItem[]>(() => {
     <main class="mx-auto max-w-240 p-6">
         <header class="mb-6">
             <h1 class="text-7 font-bold">Dev Preview Pages</h1>
-            <p class="mt-2 text-3 text-white/60">根据当前已注册的 <code>/dev/**</code> 路由生成目录树，和实际可访问页面保持一致。</p>
+            <p class="mt-2 text-3 text-white/60">
+                根据当前已注册的 <code>/dev/**</code> 路由生成目录树，和实际可访问页面保持一致。
+            </p>
         </header>
 
         <n-card size="small">
