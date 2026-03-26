@@ -1,21 +1,7 @@
-<script lang="ts">
-import { z } from 'zod';
-
-const AverageData = z.object({
-    pps: z.number(),
-    apm: z.number(),
-    apl: z.number(),
-    vs: z.number(),
-    adpl: z.number(),
-});
-
-type AverageData = z.infer<typeof AverageData>;
-
-export { AverageData };
-</script>
-
 <script lang="ts" setup>
+import { z } from 'zod';
 import { ValidRank } from '~/types/rank';
+import { AverageData } from '~/types/v2/tetrio/average-data';
 
 const { locale } = useI18n();
 

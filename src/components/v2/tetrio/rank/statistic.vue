@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { AverageData } from '~/pages/v2/tetrio/rank/index.vue';
+import type { AverageData } from '~/types/v2/tetrio/average-data';
 defineProps<{
     readonly average_data: AverageData;
 }>();
