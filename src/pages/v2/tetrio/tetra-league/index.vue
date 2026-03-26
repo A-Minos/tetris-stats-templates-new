@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { getAvatar } from '~/components/shared/avatar.vue';
 import Avatar from '~/types/avatar';
 
-const StatsSchema = z.object({
+const Stats = z.object({
     pps: z.number(),
     apm: z.number(),
     vs: z.number(),
@@ -22,14 +22,14 @@ const data = useData(
                         name: z.string(),
                         avatar: Avatar,
                         country: z.string().nullable(),
-                        stats: StatsSchema,
+                        stats: Stats,
                     }),
                     opponent: z.object({
                         id: z.string(),
                         name: z.string(),
                         avatar: Avatar,
                         country: z.string().nullable(),
-                        stats: StatsSchema,
+                        stats: Stats,
                     }),
                     is_winner: z.boolean(),
                     score: z.object({
@@ -45,7 +45,7 @@ const data = useData(
 const statKeys = ['pps', 'apm', 'vs'] as const;
 
 type StatKey = (typeof statKeys)[number];
-type Stats = z.infer<typeof StatsSchema>;
+type Stats = z.infer<typeof Stats>;
 
 const statRatios: Record<StatKey, number> = {
     pps: 1,
