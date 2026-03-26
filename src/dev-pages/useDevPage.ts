@@ -1,5 +1,4 @@
 import type { Component, VNode } from 'vue';
-import { h, nextTick, ref } from 'vue';
 
 export function useDevPage() {
     const pages = ref<VNode[]>([]);
