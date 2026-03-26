@@ -126,9 +126,8 @@ export default function useData<T extends z.ZodTypeAny>(model: T): z.output<T> {
     try {
         raw = JSON.parse(window.__DATA__);
     } catch (e) {
-        const error = e instanceof Error ? e : new Error(String(e));
-        attachModelLocationStack(error, modelLocation);
-        throw error;
+        attachModelLocationStack(e as Error, modelLocation);
+        throw e;
     }
 
     const result = model.safeParse(raw);

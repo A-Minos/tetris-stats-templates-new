@@ -4,20 +4,9 @@ import useData from '~/utils/useData';
 
 export default () => {
     try {
-        const data = useData(
-            z
-                .object({
-                    lang: z.enum(Languages).optional(),
-                })
-                .readonly(),
-        );
-        if (!data.lang) {
-            return;
-        }
-        const { setLocale } = useI18n();
-        setLocale(data.lang);
+        const data = useData(z.object({ lang: z.enum(Languages).optional() }).readonly());
+        if (data.lang) useI18n().setLocale(data.lang);
     } catch (e) {
         console.error(e);
-        return;
     }
 };
