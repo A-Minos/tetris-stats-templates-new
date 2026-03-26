@@ -14,28 +14,16 @@ const icon = asyncComputed(async () => {
 });
 
 const color = asyncComputed(async () => {
-    if (!icon.value) {
-        return undefined;
-    }
+    if (!icon.value) return undefined;
 
     const pixels = await rgbaster(icon.value);
     const primaryColor = pixels[0]?.color;
+    if (!primaryColor) throw new Error(`Cannot extract primary rank color for ${props.name}.`);
 
-    if (!primaryColor) {
-        throw new Error(`Cannot extract primary rank color for ${props.name}.`);
-    }
+    const [, colorStr] = primaryColor.match(/\(([^)]+)\)/) ?? [];
+    if (!colorStr) throw new Error(`Invalid rgbaster color format for ${props.name}: ${primaryColor}`);
 
-    const rgb = primaryColor
-        .match(/\(([^)]+)\)/)?.[1]
-        ?.split(',')
-        .slice(0, 3);
-
-    if (!rgb || rgb.length < 3) {
-        throw new Error(`Invalid rgbaster color format for ${props.name}: ${primaryColor}`);
-    }
-
-    const [r, g, b] = rgb.map((value) => value.trim());
-
+    const [r, g, b] = colorStr.split(',').map((v) => v.trim());
     return `rgba(${r}, ${g}, ${b}, 0.5)`;
 });
 </script>

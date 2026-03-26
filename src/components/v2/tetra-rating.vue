@@ -9,35 +9,17 @@ const props = defineProps<{
 }>();
 
 const attributes = computed(() => {
-    const result = {
-        depth: 3 as TextProps['depth'],
-        status: 'default',
+    const rdOverflow = !isNullish(props.rd) && props.rd >= 100;
+    const arrowStatus = !props.decaying ? 'default' : props.rd! >= 98 ? 'error' : 'warning';
 
+    return {
+        depth: rdOverflow ? undefined : (3 as TextProps['depth']),
+        status: rdOverflow ? 'error' : 'default',
         arrow: {
-            depth: 3 as TextProps['depth'],
-            status: 'default',
+            depth: props.decaying ? undefined : (3 as TextProps['depth']),
+            status: arrowStatus,
         },
     };
-
-    if (isNullish(props.rd)) {
-        return result;
-    }
-
-    if (props.decaying) {
-        delete result.arrow.depth;
-        result.arrow.status = 'warning';
-
-        if (props.rd >= 98) {
-            result.arrow.status = 'error';
-        }
-    }
-
-    if (props.rd >= 100) {
-        delete result.depth;
-        result.status = 'error';
-    }
-
-    return result;
 });
 </script>
 
