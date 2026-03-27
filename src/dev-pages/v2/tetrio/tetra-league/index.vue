@@ -43,7 +43,7 @@ onMounted(async () => {
                     opponent: {
                         id: '6ec381bbfc8e5361e4g3gd59',
                         name: 'osk',
-                        avatar: 'https://tetr.io/user-content/avatars/6ec381bbfc8e5361e4g3gd59.jpg?rv=1',
+                        avatar: { type: 'identicon', hash: '6ec381bbfc8e5361e4g3gd59' },
                         country: 'jp',
                         stats: { pps: 2.63, apm: 95.8, vs: 201.4 },
                     },
@@ -56,14 +56,14 @@ onMounted(async () => {
                     played_at: '2025-03-18T09:15:00Z',
                     user: {
                         id: '5eb270aaeb7d4250d3f2fc47',
-                        name: 'SCDHH',
+                        name: '1234567891234567',
                         avatar: 'https://tetr.io/user-content/avatars/5eb270aaeb7d4250d3f2fc47.jpg',
                         country: 'cn',
                         stats: { pps: 2.78, apm: 91.2, vs: 195.8 },
                     },
                     opponent: {
                         id: '7fd492ccgd9f6472f5h4he6a',
-                        name: 'caboozled_pie',
+                        name: 'ABCDEFGHIJKLMNOP',
                         avatar: { type: 'identicon', hash: '7fd492ccgd9f6472f5h4he6a' },
                         country: null,
                         stats: { pps: 2.55, apm: 88.7, vs: 190.2 },
