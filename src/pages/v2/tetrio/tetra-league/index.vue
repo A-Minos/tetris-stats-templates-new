@@ -95,11 +95,7 @@ useLang();
                         <div>
                             <div class="flex items-center gap-1">
                                 <n-text class="text-5 fw-bold ws-nowrap">{{ match.user.name }}</n-text>
-                                <v2-country
-                                    v-if="match.user.country"
-                                    :code="match.user.country"
-                                    class="[&>img]:h-4"
-                                />
+                                <v2-country v-if="match.user.country" :code="match.user.country" class="[&>img]:h-4" />
                             </div>
                             <n-text :depth="3" class="text-3">{{ match.user.id }}</n-text>
                         </div>
@@ -108,9 +104,7 @@ useLang();
                     <!-- 左柱状图 -->
                     <div class="mx-2 flex flex-col gap-0.5">
                         <div v-for="stat in statKeys" :key="stat" class="flex items-center gap-1 text-2.5">
-                            <span class="w-7 shrink-0 text-right ws-nowrap text-white/50 uppercase">{{
-                                stat
-                            }}</span>
+                            <span class="w-7 shrink-0 text-right ws-nowrap text-white/50 uppercase">{{ stat }}</span>
                             <div class="min-w-0 flex-1">
                                 <div
                                     class="h-2.5 rounded-0.5"
@@ -125,9 +119,7 @@ useLang();
                                     }"
                                 />
                             </div>
-                            <span class="ws-nowrap font-mono text-white/80">{{
-                                match.user.stats[stat]
-                            }}</span>
+                            <span class="ws-nowrap font-mono text-white/80">{{ match.user.stats[stat] }}</span>
                         </div>
                     </div>
 
@@ -135,9 +127,7 @@ useLang();
                     <n-text class="mx-2 text-8 fw-bold font-mono">
                         <n-text :type="match.is_winner ? 'success' : 'error'">{{ match.score.user }}</n-text>
                         <n-text :depth="3"> - </n-text>
-                        <n-text :type="match.is_winner ? 'error' : 'success'">{{
-                            match.score.opponent
-                        }}</n-text>
+                        <n-text :type="match.is_winner ? 'error' : 'success'">{{ match.score.opponent }}</n-text>
                     </n-text>
 
                     <!-- 右柱状图 -->
@@ -147,9 +137,7 @@ useLang();
                             :key="stat"
                             class="flex flex-row-reverse items-center gap-1 text-2.5"
                         >
-                            <span class="w-7 shrink-0 ws-nowrap text-left text-white/50 uppercase">{{
-                                stat
-                            }}</span>
+                            <span class="w-7 shrink-0 ws-nowrap text-left text-white/50 uppercase">{{ stat }}</span>
                             <div class="min-w-0 flex-1">
                                 <div
                                     class="ml-auto h-2.5 rounded-0.5"
@@ -164,9 +152,7 @@ useLang();
                                     }"
                                 />
                             </div>
-                            <span class="ws-nowrap font-mono text-white/80">{{
-                                match.opponent.stats[stat]
-                            }}</span>
+                            <span class="ws-nowrap font-mono text-white/80">{{ match.opponent.stats[stat] }}</span>
                         </div>
                     </div>
 
