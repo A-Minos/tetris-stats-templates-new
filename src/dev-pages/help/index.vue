@@ -12,6 +12,9 @@ onMounted(async () => {
             schema_version: 1,
             kind: 'help',
             breadcrumb: ['tstats'],
+            usage: '俄罗斯方块相关游戏数据查询。先用 bind 绑定账号，之后即可省略账号参数直接查询。',
+            examples: ['tstats TETR.IO query Teronya', 'tstats tos query 某玩家', 'tstats TETR.IO bind Teronya'],
+            shortcuts: ['io查 ...args', '茶服查 ...args'],
             command: {
                 name: 'tstats',
                 dest: 'Alconna::tstats',

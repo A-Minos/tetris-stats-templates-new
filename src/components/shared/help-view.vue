@@ -1,98 +1,106 @@
 <script lang="ts" setup>
 import type { HelpNodeT } from '~/types/help';
 
-defineProps<{
+const props = defineProps<{
     node: HelpNodeT;
+    /** Full breadcrumb to the current node, used to synthesize a usage line. */
+    breadcrumb: string[];
 }>();
+
+const visibleArgs = computed(() => props.node.args.filter((a) => !a.hidden));
+const visibleOptions = computed(() => props.node.options);
+const visibleSubcommands = computed(() => props.node.subcommands);
+
+/**
+ * Render an arg as `<name>` (required) or `[name]` (optional). This is the
+ * conventional CLI syntax users already understand from --help on classic
+ * tools, so we don't need a separate "required/optional" badge.
+ */
+const renderArgToken = (name: string, optional: boolean): string => (optional ? `[${name}]` : `<${name}>`);
+
+/** Synthesized one-line usage: `tstats TETR.IO query <account> [--template <template>] ...` */
+const usageLine = computed(() => {
+    const parts: string[] = [...props.breadcrumb];
+    for (const a of visibleArgs.value) parts.push(renderArgToken(a.name, a.optional));
+    for (const o of visibleOptions.value) {
+        const inner = [o.name, ...o.args.filter((a) => !a.hidden).map((a) => renderArgToken(a.name, a.optional))].join(
+            ' ',
+        );
+        parts.push(`[${inner}]`);
+    }
+    return parts.join(' ');
+});
+
+/** Limit alias visual noise: keep at most the first 2. */
+const trimAliases = (aliases: string[]): string[] => aliases.slice(0, 2);
 </script>
 
 <template>
-    <n-flex vertical :size="12">
-        <!-- Title + aliases + description -->
-        <n-card size="small">
-            <n-flex align="baseline" :size="8" wrap>
-                <n-text class="text-2xl" type="info" strong>{{ node.name }}</n-text>
-                <n-tag v-for="alias in node.aliases" :key="alias" size="small" type="info" :bordered="false">
+    <n-flex vertical :size="20">
+        <!-- Title -->
+        <div>
+            <n-flex align="baseline" :size="10" wrap>
+                <n-text class="text-3xl" strong>{{ node.name }}</n-text>
+                <n-text v-for="alias in trimAliases(node.aliases)" :key="alias" depth="3" class="text-sm">
                     {{ alias }}
-                </n-tag>
+                </n-text>
             </n-flex>
-            <n-text v-if="node.help_text" depth="2" class="text-sm">{{ node.help_text }}</n-text>
-        </n-card>
+            <n-text v-if="node.help_text" depth="1" class="text-base">{{ node.help_text }}</n-text>
+        </div>
 
-        <!-- Positional args -->
-        <n-card v-if="node.args.filter((a) => !a.hidden).length > 0" title="参数" size="small">
-            <n-table :bordered="false" :single-line="false" size="small">
-                <thead>
-                    <tr>
-                        <th>名称</th>
-                        <th>说明 / 类型</th>
-                        <th>可选</th>
-                        <th>默认值</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="arg in node.args.filter((a) => !a.hidden)" :key="arg.name">
-                        <td>
-                            <n-text code>{{ arg.name }}</n-text>
-                        </td>
-                        <td>
-                            <span v-if="arg.notice">{{ arg.notice }}</span>
-                            <n-text v-else-if="arg.type_repr" depth="3">
-                                <code>{{ arg.type_repr }}</code>
-                            </n-text>
-                        </td>
-                        <td>
-                            <n-tag v-if="arg.optional" size="tiny" type="success" :bordered="false">可选</n-tag>
-                            <n-tag v-else size="tiny" type="warning" :bordered="false">必填</n-tag>
-                        </td>
-                        <td>
-                            <n-text v-if="arg.default" code>{{ arg.default }}</n-text>
-                            <n-text v-else depth="3">-</n-text>
-                        </td>
-                    </tr>
-                </tbody>
-            </n-table>
-        </n-card>
+        <!-- Usage syntax -->
+        <div>
+            <n-text depth="3" class="text-xs uppercase tracking-wide">用法</n-text>
+            <div class="mt-1 font-mono text-base">{{ usageLine }}</div>
+        </div>
+
+        <!-- Args -->
+        <div v-if="visibleArgs.length > 0">
+            <n-text depth="3" class="text-xs uppercase tracking-wide">参数</n-text>
+            <div class="mt-2 flex flex-col gap-2">
+                <div v-for="arg in visibleArgs" :key="arg.name" class="flex items-baseline gap-3">
+                    <span class="font-mono text-base min-w-30">{{ renderArgToken(arg.name, arg.optional) }}</span>
+                    <span class="text-base">
+                        {{ arg.notice || arg.type_repr || '' }}
+                        <n-text v-if="arg.default" depth="3" class="ml-2 text-sm">默认 {{ arg.default }}</n-text>
+                    </span>
+                </div>
+            </div>
+        </div>
 
         <!-- Options -->
-        <n-card v-if="node.options.length > 0" title="选项" size="small">
-            <n-flex vertical :size="8">
-                <n-card v-for="opt in node.options" :key="opt.dest" size="small" embedded>
-                    <n-flex align="baseline" :size="8" wrap>
-                        <n-text code class="text-base">{{ opt.name }}</n-text>
-                        <n-tag v-for="a in opt.aliases" :key="a" size="tiny" :bordered="false">{{ a }}</n-tag>
-                    </n-flex>
-                    <n-text v-if="opt.help_text" depth="2" class="text-sm">{{ opt.help_text }}</n-text>
-                    <n-flex v-if="opt.args.filter((a) => !a.hidden).length > 0" :size="8" wrap class="mt-1">
-                        <n-tag
-                            v-for="arg in opt.args.filter((a) => !a.hidden)"
-                            :key="arg.name"
-                            size="small"
-                            :bordered="false"
+        <div v-if="visibleOptions.length > 0">
+            <n-text depth="3" class="text-xs uppercase tracking-wide">选项</n-text>
+            <div class="mt-2 flex flex-col gap-2">
+                <div v-for="opt in visibleOptions" :key="opt.dest" class="flex items-baseline gap-3">
+                    <span class="font-mono text-base">
+                        {{ opt.name
+                        }}<template v-if="trimAliases(opt.aliases).length"
+                            >, {{ trimAliases(opt.aliases).join(', ') }}</template
                         >
-                            <n-text code>{{ arg.name }}</n-text>
-                            <span v-if="arg.notice">: {{ arg.notice }}</span>
-                            <span v-else-if="arg.type_repr">: {{ arg.type_repr }}</span>
-                        </n-tag>
-                    </n-flex>
-                </n-card>
-            </n-flex>
-        </n-card>
+                        <template v-for="arg in opt.args.filter((a) => !a.hidden)" :key="arg.name">
+                            {{ ' ' }}{{ renderArgToken(arg.name, arg.optional) }}
+                        </template>
+                    </span>
+                    <span class="text-base">{{ opt.help_text || '' }}</span>
+                </div>
+            </div>
+        </div>
 
-        <!-- Subcommands (one-level summary) -->
-        <n-card v-if="node.subcommands.length > 0" title="子命令" size="small">
-            <n-flex vertical :size="8">
-                <n-card v-for="sub in node.subcommands" :key="sub.dest" size="small" embedded>
-                    <n-flex align="baseline" :size="8" wrap>
-                        <n-text class="text-base" type="info" strong>{{ sub.name }}</n-text>
-                        <n-tag v-for="a in sub.aliases" :key="a" size="tiny" :bordered="false">{{ a }}</n-tag>
-                    </n-flex>
-                    <n-text v-if="sub.help_text" depth="2" class="text-sm">{{ sub.help_text }}</n-text>
-                </n-card>
-            </n-flex>
-            <n-text depth="3" class="text-xs">
-                使用 <n-text code>tstats &lt;子命令&gt; --help</n-text> 查看详情
-            </n-text>
-        </n-card>
+        <!-- Subcommands -->
+        <div v-if="visibleSubcommands.length > 0">
+            <n-text depth="3" class="text-xs uppercase tracking-wide">子命令</n-text>
+            <div class="mt-2 flex flex-col gap-2">
+                <div v-for="sub in visibleSubcommands" :key="sub.dest" class="flex items-baseline gap-3">
+                    <span class="font-mono text-base min-w-30">{{ sub.name }}</span>
+                    <span class="text-base">
+                        {{ sub.help_text || '' }}
+                        <n-text v-if="trimAliases(sub.aliases).length" depth="3" class="ml-2 text-sm">
+                            ({{ trimAliases(sub.aliases).join(', ') }})
+                        </n-text>
+                    </span>
+                </div>
+            </div>
+        </div>
     </n-flex>
 </template>
