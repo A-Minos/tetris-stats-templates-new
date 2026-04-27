@@ -45,4 +45,7 @@ export const HelpData = z.object({
     kind: z.literal('help'),
     command: HelpNode,
     breadcrumb: z.array(z.string()),
+    usage: z.string().nullable().default(null),
+    examples: z.array(z.string()).default([]),
+    shortcuts: z.array(z.string()).default([]),
 });
