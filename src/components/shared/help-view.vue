@@ -7,7 +7,7 @@ const props = defineProps<{
     breadcrumb: string[];
 }>();
 
-const visibleArgs = computed(() => props.node.args.filter((a) => !a.hidden));
+const visibleArgs = computed(() => props.node.args);
 const visibleOptions = computed(() => props.node.options);
 const visibleSubcommands = computed(() => props.node.subcommands);
 
@@ -33,9 +33,7 @@ const usageTokens = computed<UsageToken[]>(() => {
         });
     }
     for (const o of visibleOptions.value) {
-        const inner = [o.name, ...o.args.filter((a) => !a.hidden).map((a) => renderArgToken(a.name, a.optional))].join(
-            ' ',
-        );
+        const inner = [o.name, ...o.args.map((a) => renderArgToken(a.name, a.optional))].join(' ');
         tokens.push({ text: `[${inner}]`, kind: 'flag' });
     }
     return tokens;
@@ -96,7 +94,7 @@ const usageTokens = computed<UsageToken[]>(() => {
                                 {{ trimAliases(opt.aliases).join(', ') }}
                             </span>
                         </template>
-                        <template v-for="arg in opt.args.filter((a) => !a.hidden)" :key="arg.name">
+                        <template v-for="arg in opt.args" :key="arg.name">
                             <span :class="['tok', arg.optional ? 'tok-optional' : 'tok-required']">
                                 {{ renderArgToken(arg.name, arg.optional) }}
                             </span>
