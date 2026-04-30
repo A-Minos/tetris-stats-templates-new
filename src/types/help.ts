@@ -39,6 +39,11 @@ export const HelpNode: z.ZodType<HelpNodeT> = z.lazy(() =>
     }),
 );
 
+export const HelpShortcut = z.object({
+    key: z.string(),
+    target: z.array(z.string()),
+});
+
 export const HelpData = z.object({
     lang: z.string(),
     schema_version: z.literal(1),
@@ -47,5 +52,5 @@ export const HelpData = z.object({
     breadcrumb: z.array(z.string()),
     usage: z.string().nullable().default(null),
     examples: z.array(z.string()).default([]),
-    shortcuts: z.array(z.string()).default([]),
+    shortcuts: z.array(HelpShortcut).default([]),
 });

@@ -8,6 +8,29 @@ useLang();
 
 /** Breadcrumb of length 1 means we're on the root help page. */
 const isRoot = computed(() => data.breadcrumb.length === 1);
+
+/**
+ * Group root-page shortcuts by their first-level subcommand (target[1]).
+ * Shortcuts whose target is the root itself fall into the '__root__' bucket.
+ * Returns an ordered list so groups appear in registration / discovery order.
+ */
+const shortcutGroups = computed(() => {
+    const order: string[] = [];
+    const buckets = new Map<string, { label: string; items: { key: string; target: string[] }[] }>();
+    for (const sc of data.shortcuts) {
+        const groupKey = sc.target.length > 1 ? sc.target[1] : '__root__';
+        const label = sc.target.length > 1 ? sc.target.slice(0, 2).join(' › ') : data.breadcrumb[0];
+        if (!buckets.has(groupKey)) {
+            buckets.set(groupKey, { label, items: [] });
+            order.push(groupKey);
+        }
+        buckets.get(groupKey)!.items.push(sc);
+    }
+    return order.map((k) => buckets.get(k)!);
+});
+
+/** On a non-root page we just need the keys. */
+const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
 </script>
 
 <template>
@@ -32,12 +55,25 @@ const isRoot = computed(() => data.breadcrumb.length === 1);
                 ><span v-for="(line, i) in data.examples" :key="line">{{ i === 0 ? '' : '\n' }}{{ line }}</span></pre>
             </section>
 
-            <!-- Root-only: shortcuts -->
-            <section v-if="isRoot && data.shortcuts.length > 0" class="extra-section">
+            <!-- Shortcuts -->
+            <section v-if="data.shortcuts.length > 0" class="extra-section">
                 <div class="section-label">快捷指令</div>
+
+                <!-- Root: grouped by first-level subcommand -->
+                <template v-if="isRoot">
+                    <div v-for="group in shortcutGroups" :key="group.label" class="shortcut-group">
+                        <div class="shortcut-group-label">{{ group.label }}</div>
+                        <pre
+                            class="code-block"
+                        ><span v-for="(sc, i) in group.items" :key="sc.key">{{ i === 0 ? '' : '\n' }}{{ sc.key }}</span></pre>
+                    </div>
+                </template>
+
+                <!-- Subcommand pages: just the keys -->
                 <pre
+                    v-else
                     class="code-block"
-                ><span v-for="(line, i) in data.shortcuts" :key="line">{{ i === 0 ? '' : '\n' }}{{ line }}</span></pre>
+                ><span v-for="(key, i) in flatShortcutKeys" :key="key">{{ i === 0 ? '' : '\n' }}{{ key }}</span></pre>
             </section>
         </div>
     </v2-layout>
@@ -97,5 +133,21 @@ const isRoot = computed(() => data.breadcrumb.length === 1);
     color: #1f2328;
     white-space: pre-wrap;
     word-break: break-word;
+}
+
+.shortcut-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    & + & {
+        margin-top: 8px;
+    }
+}
+
+.shortcut-group-label {
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 13px;
+    color: #475569;
 }
 </style>

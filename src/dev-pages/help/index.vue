@@ -14,7 +14,12 @@ onMounted(async () => {
             breadcrumb: ['tstats'],
             usage: '俄罗斯方块相关游戏数据查询。先用 bind 绑定账号，之后即可省略账号参数直接查询。',
             examples: ['tstats TETR.IO query Teronya', 'tstats tos query 某玩家', 'tstats TETR.IO bind Teronya'],
-            shortcuts: ['io查 ...args', '茶服查 ...args'],
+            shortcuts: [
+                { key: 'io查 ...args', target: ['tstats', 'TETR.IO', 'query'] },
+                { key: 'io绑定 ...args', target: ['tstats', 'TETR.IO', 'bind'] },
+                { key: '茶服查 ...args', target: ['tstats', 'tos', 'query'] },
+                { key: '茶服绑定 ...args', target: ['tstats', 'tos', 'bind'] },
+            ],
             command: {
                 name: 'tstats',
                 dest: 'Alconna::tstats',
@@ -119,6 +124,7 @@ onMounted(async () => {
             schema_version: 1,
             kind: 'help',
             breadcrumb: ['tstats', 'TETR.IO', 'query'],
+            shortcuts: [{ key: 'io查 ...args', target: ['tstats', 'TETR.IO', 'query'] }],
             command: {
                 name: 'query',
                 dest: 'query',
