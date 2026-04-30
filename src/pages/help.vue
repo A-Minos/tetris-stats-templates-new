@@ -19,7 +19,7 @@ const shortcutGroups = computed(() => {
     const buckets = new Map<string, { label: string; items: { key: string; target: string[] }[] }>();
     for (const sc of data.shortcuts) {
         const groupKey = sc.target.length > 1 ? sc.target[1] : '__root__';
-        const label = sc.target.length > 1 ? sc.target.slice(0, 2).join(' › ') : data.breadcrumb[0];
+        const label = sc.target.length > 1 ? sc.target[1] : data.breadcrumb[0];
         if (!buckets.has(groupKey)) {
             buckets.set(groupKey, { label, items: [] });
             order.push(groupKey);
