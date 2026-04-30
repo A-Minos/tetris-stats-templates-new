@@ -12,39 +12,90 @@ const isRoot = computed(() => data.breadcrumb.length === 1);
 
 <template>
     <v2-layout content_class="max-w-200">
-        <n-card size="small">
-            <n-flex vertical :size="20">
-                <!-- Breadcrumb -->
-                <n-text depth="3" class="text-sm">{{ data.breadcrumb.join(' › ') }}</n-text>
+        <div class="help-page">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">{{ data.breadcrumb.join(' › ') }}</nav>
 
-                <HelpView :node="data.command" :breadcrumb="data.breadcrumb" />
+            <HelpView :node="data.command" :breadcrumb="data.breadcrumb" />
 
-                <!-- Root-only: usage paragraph from CommandMeta.usage -->
-                <div v-if="isRoot && data.usage">
-                    <n-text depth="3" class="text-xs uppercase tracking-wide">说明</n-text>
-                    <div class="mt-1 whitespace-pre-line text-base">{{ data.usage }}</div>
-                </div>
+            <!-- Root-only: usage paragraph from CommandMeta.usage -->
+            <section v-if="isRoot && data.usage" class="extra-section">
+                <div class="section-label">说明</div>
+                <p class="prose">{{ data.usage }}</p>
+            </section>
 
-                <!-- Root-only: examples (one per line, monospace) -->
-                <div v-if="isRoot && data.examples.length > 0">
-                    <n-text depth="3" class="text-xs uppercase tracking-wide">示例</n-text>
-                    <div class="mt-2 flex flex-col gap-1 font-mono text-base">
-                        <div v-for="line in data.examples" :key="line">{{ line }}</div>
-                    </div>
-                </div>
+            <!-- Root-only: examples (one per line, monospace) -->
+            <section v-if="isRoot && data.examples.length > 0" class="extra-section">
+                <div class="section-label">示例</div>
+                <pre
+                    class="code-block"
+                ><span v-for="(line, i) in data.examples" :key="line">{{ i === 0 ? '' : '\n' }}{{ line }}</span></pre>
+            </section>
 
-                <!-- Root-only: shortcuts -->
-                <div v-if="isRoot && data.shortcuts.length > 0">
-                    <n-text depth="3" class="text-xs uppercase tracking-wide">快捷指令</n-text>
-                    <div class="mt-2 flex flex-col gap-1 font-mono text-base">
-                        <div v-for="line in data.shortcuts" :key="line">{{ line }}</div>
-                    </div>
-                </div>
-            </n-flex>
-        </n-card>
+            <!-- Root-only: shortcuts -->
+            <section v-if="isRoot && data.shortcuts.length > 0" class="extra-section">
+                <div class="section-label">快捷指令</div>
+                <pre
+                    class="code-block"
+                ><span v-for="(line, i) in data.shortcuts" :key="line">{{ i === 0 ? '' : '\n' }}{{ line }}</span></pre>
+            </section>
+        </div>
     </v2-layout>
 </template>
 
 <style lang="scss">
 @use '~/styles/v2';
+</style>
+
+<style lang="scss" scoped>
+.help-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 48px;
+    background: #ffffff;
+    color: #1f2328;
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+.extra-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #94a3b8;
+}
+
+.prose {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #334155;
+    white-space: pre-line;
+}
+
+.code-block {
+    margin: 0;
+    padding: 14px 18px;
+    background: #f6f8fa;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #1f2328;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
 </style>
