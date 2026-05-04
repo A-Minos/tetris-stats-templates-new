@@ -89,15 +89,15 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
     flex-direction: column;
     gap: 32px;
     padding: 40px 48px;
-    background: #ffffff;
-    color: #1f2328;
+    background: #0d1117;
+    color: #e6edf3;
     font-family:
         -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
 .breadcrumb {
     font-size: 13px;
-    color: #94a3b8;
+    color: #7d8590;
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 }
 
@@ -111,26 +111,26 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
-    color: #94a3b8;
+    color: #7d8590;
 }
 
 .prose {
     margin: 0;
     font-size: 15px;
     line-height: 1.7;
-    color: #334155;
+    color: #b1bac4;
     white-space: pre-line;
 }
 
 .code-block {
     margin: 0;
     padding: 14px 18px;
-    background: #f6f8fa;
+    background: #161b22;
     border-radius: 6px;
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 14px;
     line-height: 1.7;
-    color: #1f2328;
+    color: #e6edf3;
     white-space: pre-wrap;
     word-break: break-word;
 }
@@ -148,6 +148,6 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
 .shortcut-group-label {
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 13px;
-    color: #475569;
+    color: #8b949e;
 }
 </style>

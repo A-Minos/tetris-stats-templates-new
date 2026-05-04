@@ -128,7 +128,7 @@ const usageTokens = computed<UsageToken[]>(() => {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    color: #1f2328;
+    color: #e6edf3;
     font-family:
         -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
@@ -145,17 +145,17 @@ const usageTokens = computed<UsageToken[]>(() => {
         font-weight: 700;
         margin: 0;
         letter-spacing: -0.01em;
-        color: #0f172a;
+        color: #f0f6fc;
     }
     .alias {
         font-size: 13px;
-        color: #94a3b8;
+        color: #7d8590;
         font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
     }
     .desc {
         margin: 8px 0 0;
         font-size: 16px;
-        color: #475569;
+        color: #8b949e;
         line-height: 1.6;
     }
 }
@@ -170,13 +170,13 @@ const usageTokens = computed<UsageToken[]>(() => {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
-    color: #94a3b8;
+    color: #7d8590;
 }
 
 .code-block {
     margin: 0;
     padding: 14px 18px;
-    background: #f6f8fa;
+    background: #161b22;
     border-radius: 6px;
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
     font-size: 15px;
@@ -195,7 +195,7 @@ const usageTokens = computed<UsageToken[]>(() => {
     grid-template-columns: minmax(180px, max-content) 1fr;
     gap: 24px;
     padding: 12px 0;
-    border-top: 1px solid #eef0f3;
+    border-top: 1px solid #21262d;
     align-items: baseline;
 
     &:first-child {
@@ -215,7 +215,7 @@ const usageTokens = computed<UsageToken[]>(() => {
 
 .row-val {
     font-size: 15px;
-    color: #334155;
+    color: #b1bac4;
     line-height: 1.6;
     display: flex;
     flex-wrap: wrap;
@@ -227,30 +227,30 @@ const usageTokens = computed<UsageToken[]>(() => {
     font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 }
 .tok-path {
-    color: #1f2328;
+    color: #e6edf3;
     font-weight: 500;
 }
 .tok-required {
-    color: #f43f5e;
+    color: #f85149;
 }
 .tok-optional {
-    color: #94a3b8;
+    color: #7d8590;
 }
 .tok-flag {
-    color: #0066cc;
+    color: #58a6ff;
     font-weight: 500;
 }
 .tok-flag-alt {
-    color: #0066cc;
+    color: #58a6ff;
     opacity: 0.75;
 }
 .tok-sub {
-    color: #0f172a;
+    color: #f0f6fc;
     font-weight: 600;
 }
 
 .muted {
-    color: #94a3b8;
+    color: #7d8590;
 }
 .small {
     font-size: 13px;
