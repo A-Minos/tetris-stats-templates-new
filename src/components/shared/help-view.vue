@@ -11,10 +11,6 @@ const data = useData(
         .readonly(),
 );
 
-const visibleArgs = computed(() => data.command.args);
-const visibleOptions = computed(() => data.command.options);
-const visibleSubcommands = computed(() => data.command.subcommands);
-
 /**
  * Render an arg as `<name>` (required) or `[name]` (optional). This matches
  * the conventional CLI --help syntax users already understand.
@@ -30,13 +26,13 @@ type UsageToken = { text: string; kind: 'path' | 'required' | 'optional' | 'flag
 const usageTokens = computed<UsageToken[]>(() => {
     const tokens: UsageToken[] = [];
     for (const seg of data.breadcrumb) tokens.push({ text: seg, kind: 'path' });
-    for (const a of visibleArgs.value) {
+    for (const a of data.command.args) {
         tokens.push({
             text: renderArgToken(a.name, a.optional),
             kind: a.optional ? 'optional' : 'required',
         });
     }
-    for (const o of visibleOptions.value) {
+    for (const o of data.command.options) {
         const inner = [o.name, ...o.args.map((a) => renderArgToken(a.name, a.optional))].join(' ');
         tokens.push({ text: `[${inner}]`, kind: 'flag' });
     }
@@ -94,13 +90,13 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         </n-card>
 
         <!-- ARGUMENTS -->
-        <n-card v-if="visibleArgs.length > 0" size="small">
+        <n-card v-if="data.command.args.length > 0" size="small">
             <template #header>
                 <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">ARGUMENTS</n-text>
             </template>
             <n-flex vertical :size="0">
                 <div
-                    v-for="(arg, ri) in visibleArgs"
+                    v-for="(arg, ri) in data.command.args"
                     :key="arg.name"
                     class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
                     :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
@@ -119,13 +115,13 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         </n-card>
 
         <!-- OPTIONS -->
-        <n-card v-if="visibleOptions.length > 0" size="small">
+        <n-card v-if="data.command.options.length > 0" size="small">
             <template #header>
                 <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">OPTIONS</n-text>
             </template>
             <n-flex vertical :size="0">
                 <div
-                    v-for="(opt, ri) in visibleOptions"
+                    v-for="(opt, ri) in data.command.options"
                     :key="opt.dest"
                     class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
                     :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
@@ -150,13 +146,13 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         </n-card>
 
         <!-- SUBCOMMANDS -->
-        <n-card v-if="visibleSubcommands.length > 0" size="small">
+        <n-card v-if="data.command.subcommands.length > 0" size="small">
             <template #header>
                 <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">SUBCOMMANDS</n-text>
             </template>
             <n-flex vertical :size="0">
                 <div
-                    v-for="(sub, ri) in visibleSubcommands"
+                    v-for="(sub, ri) in data.command.subcommands"
                     :key="sub.dest"
                     class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
                     :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
