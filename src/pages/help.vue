@@ -39,7 +39,7 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
             <!-- Breadcrumb (only on non-root pages; root page's title already shows the name) -->
             <n-text v-if="!isRoot" class="font-mono text-3.5" :depth="3">{{ data.breadcrumb.join(' › ') }}</n-text>
 
-            <HelpView :node="data.command" :breadcrumb="data.breadcrumb" />
+            <HelpView />
 
             <!-- Root-only: usage paragraph from CommandMeta.usage -->
             <n-card v-if="isRoot && data.usage" size="small">

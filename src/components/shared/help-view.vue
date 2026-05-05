@@ -1,15 +1,19 @@
 <script lang="ts" setup>
-import type { HelpNodeT } from '~/types/help';
+import { z } from 'zod';
+import { HelpNode } from '~/types/help';
 
-const props = defineProps<{
-    node: HelpNodeT;
-    /** Full breadcrumb to the current node, used to synthesize a usage line. */
-    breadcrumb: string[];
-}>();
+const data = useData(
+    z
+        .object({
+            command: HelpNode,
+            breadcrumb: z.array(z.string()),
+        })
+        .readonly(),
+);
 
-const visibleArgs = computed(() => props.node.args);
-const visibleOptions = computed(() => props.node.options);
-const visibleSubcommands = computed(() => props.node.subcommands);
+const visibleArgs = computed(() => data.command.args);
+const visibleOptions = computed(() => data.command.options);
+const visibleSubcommands = computed(() => data.command.subcommands);
 
 /**
  * Render an arg as `<name>` (required) or `[name]` (optional). This matches
@@ -25,7 +29,7 @@ type UsageToken = { text: string; kind: 'path' | 'required' | 'optional' | 'flag
 
 const usageTokens = computed<UsageToken[]>(() => {
     const tokens: UsageToken[] = [];
-    for (const seg of props.breadcrumb) tokens.push({ text: seg, kind: 'path' });
+    for (const seg of data.breadcrumb) tokens.push({ text: seg, kind: 'path' });
     for (const a of visibleArgs.value) {
         tokens.push({
             text: renderArgToken(a.name, a.optional),
@@ -60,13 +64,18 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- Hero: title + aliases + description -->
         <div>
             <n-flex align="baseline" :size="12" :wrap="true">
-                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ node.name }}</n-text>
-                <n-text v-for="alias in trimAliases(node.aliases)" :key="alias" class="font-mono text-3.25" :depth="3">
+                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ data.command.name }}</n-text>
+                <n-text
+                    v-for="alias in trimAliases(data.command.aliases)"
+                    :key="alias"
+                    class="font-mono text-3.25"
+                    :depth="3"
+                >
                     {{ alias }}
                 </n-text>
             </n-flex>
-            <n-text v-if="node.help_text" class="block mt-2 text-4 leading-6" :depth="2">
-                {{ node.help_text }}
+            <n-text v-if="data.command.help_text" class="block mt-2 text-4 leading-6" :depth="2">
+                {{ data.command.help_text }}
             </n-text>
         </div>
 
