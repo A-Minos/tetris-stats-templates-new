@@ -78,7 +78,12 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <div>
             <n-flex align="baseline" :size="12" :wrap="true">
                 <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ displayName }}</n-text>
-                <n-text v-for="alias in trimAliases(displayAliases)" :key="alias" class="font-mono text-3.25" :depth="3">
+                <n-text
+                    v-for="alias in trimAliases(displayAliases)"
+                    :key="alias"
+                    class="font-mono text-3.25"
+                    :depth="3"
+                >
                     {{ alias }}
                 </n-text>
             </n-flex>
