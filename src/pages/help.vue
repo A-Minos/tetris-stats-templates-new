@@ -10,12 +10,6 @@ useLang();
 const isRoot = computed(() => data.breadcrumb.length === 1);
 
 /**
- * Alconna 的 header_display 形如 "tetris-stats|tstats"。多别名通过 `|`
- * 拼成一个 token，在面包屑里展开会重复显示。这里只保留主名（第一个）。
- */
-const cleanBreadcrumb = computed(() => data.breadcrumb.map((seg) => seg.split('|')[0]!));
-
-/**
  * Group root-page shortcuts by their first-level subcommand (target[1]).
  * Shortcuts whose target is the root itself fall into the '__root__' bucket.
  * Returns an ordered list so groups appear in registration / discovery order.
@@ -24,8 +18,8 @@ const shortcutGroups = computed(() => {
     const order: string[] = [];
     const buckets = new Map<string, { label: string; items: { key: string; target: string[] }[] }>();
     for (const sc of data.shortcuts) {
-        const groupKey = sc.target.length > 1 ? sc.target[1]!.split('|')[0]! : '__root__';
-        const label = sc.target.length > 1 ? groupKey : cleanBreadcrumb.value[0]!;
+        const groupKey = sc.target.length > 1 ? sc.target[1]! : '__root__';
+        const label = sc.target.length > 1 ? groupKey : data.breadcrumb[0]!;
         if (!buckets.has(groupKey)) {
             buckets.set(groupKey, { label, items: [] });
             order.push(groupKey);
@@ -43,9 +37,9 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
     <v2-layout content_class="max-w-200 !p-10">
         <n-flex vertical :size="28">
             <!-- Breadcrumb (only on non-root pages; root page's title already shows the name) -->
-            <n-text v-if="!isRoot" class="font-mono text-3.5" :depth="3">{{ cleanBreadcrumb.join(' › ') }}</n-text>
+            <n-text v-if="!isRoot" class="font-mono text-3.5" :depth="3">{{ data.breadcrumb.join(' › ') }}</n-text>
 
-            <HelpView :node="data.command" :breadcrumb="cleanBreadcrumb" />
+            <HelpView :node="data.command" :breadcrumb="data.breadcrumb" />
 
             <!-- Root-only: usage paragraph from CommandMeta.usage -->
             <n-card v-if="isRoot && data.usage" size="small">
@@ -74,7 +68,7 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
                 <!-- Root: grouped by first-level subcommand -->
                 <n-flex v-if="isRoot" vertical :size="14">
                     <n-flex v-for="group in shortcutGroups" :key="group.label" vertical :size="6">
-                        <n-text v-if="group.label !== cleanBreadcrumb[0]" class="font-mono text-3.25" :depth="2">
+                        <n-text v-if="group.label !== data.breadcrumb[0]" class="font-mono text-3.25" :depth="2">
                             {{ group.label }}
                         </n-text>
                         <pre class="m-0 font-mono text-3.5 leading-7 whitespace-pre-wrap break-words">{{

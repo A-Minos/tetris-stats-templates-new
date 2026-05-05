@@ -12,23 +12,6 @@ const visibleOptions = computed(() => props.node.options);
 const visibleSubcommands = computed(() => props.node.subcommands);
 
 /**
- * Alconna 的 header_display 把多个别名拼成 "tetris-stats|tstats"。
- * 拆开后第一段作为主名展示，剩余的作为别名（与 node.aliases 合并去重）。
- */
-const nameParts = computed(() => props.node.name.split('|').filter(Boolean));
-const displayName = computed(() => nameParts.value[0] ?? props.node.name);
-const displayAliases = computed(() => {
-    const seen = new Set<string>([displayName.value]);
-    const result: string[] = [];
-    for (const a of [...nameParts.value.slice(1), ...props.node.aliases]) {
-        if (seen.has(a)) continue;
-        seen.add(a);
-        result.push(a);
-    }
-    return result;
-});
-
-/**
  * Render an arg as `<name>` (required) or `[name]` (optional). This matches
  * the conventional CLI --help syntax users already understand.
  */
@@ -77,13 +60,8 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- Hero: title + aliases + description -->
         <div>
             <n-flex align="baseline" :size="12" :wrap="true">
-                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ displayName }}</n-text>
-                <n-text
-                    v-for="alias in trimAliases(displayAliases)"
-                    :key="alias"
-                    class="font-mono text-3.25"
-                    :depth="3"
-                >
+                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ node.name }}</n-text>
+                <n-text v-for="alias in trimAliases(node.aliases)" :key="alias" class="font-mono text-3.25" :depth="3">
                     {{ alias }}
                 </n-text>
             </n-flex>
