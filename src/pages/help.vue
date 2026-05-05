@@ -10,6 +10,12 @@ useLang();
 const isRoot = computed(() => data.breadcrumb.length === 1);
 
 /**
+ * Alconna 的 header_display 形如 "tetris-stats|tstats"。多别名通过 `|`
+ * 拼成一个 token，在面包屑里展开会重复显示。这里只保留主名（第一个）。
+ */
+const cleanBreadcrumb = computed(() => data.breadcrumb.map((seg) => seg.split('|')[0]!));
+
+/**
  * Group root-page shortcuts by their first-level subcommand (target[1]).
  * Shortcuts whose target is the root itself fall into the '__root__' bucket.
  * Returns an ordered list so groups appear in registration / discovery order.
@@ -18,8 +24,8 @@ const shortcutGroups = computed(() => {
     const order: string[] = [];
     const buckets = new Map<string, { label: string; items: { key: string; target: string[] }[] }>();
     for (const sc of data.shortcuts) {
-        const groupKey = sc.target.length > 1 ? sc.target[1] : '__root__';
-        const label = sc.target.length > 1 ? sc.target[1] : data.breadcrumb[0];
+        const groupKey = sc.target.length > 1 ? sc.target[1]!.split('|')[0]! : '__root__';
+        const label = sc.target.length > 1 ? groupKey : cleanBreadcrumb.value[0]!;
         if (!buckets.has(groupKey)) {
             buckets.set(groupKey, { label, items: [] });
             order.push(groupKey);
@@ -34,120 +40,58 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
 </script>
 
 <template>
-    <v2-layout content_class="max-w-200">
-        <div class="help-page">
-            <!-- Breadcrumb -->
-            <nav class="breadcrumb">{{ data.breadcrumb.join(' › ') }}</nav>
+    <v2-layout content_class="max-w-200 !p-10">
+        <n-flex vertical :size="28">
+            <!-- Breadcrumb (only on non-root pages; root page's title already shows the name) -->
+            <n-text v-if="!isRoot" class="font-mono text-3.5" :depth="3">{{ cleanBreadcrumb.join(' › ') }}</n-text>
 
-            <HelpView :node="data.command" :breadcrumb="data.breadcrumb" />
+            <HelpView :node="data.command" :breadcrumb="cleanBreadcrumb" />
 
             <!-- Root-only: usage paragraph from CommandMeta.usage -->
-            <section v-if="isRoot && data.usage" class="extra-section">
-                <div class="section-label">说明</div>
-                <p class="prose">{{ data.usage }}</p>
-            </section>
+            <n-card v-if="isRoot && data.usage" size="small">
+                <template #header>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">说明</n-text>
+                </template>
+                <n-text class="text-3.75 leading-7 whitespace-pre-line">{{ data.usage }}</n-text>
+            </n-card>
 
             <!-- Root-only: examples (one per line, monospace) -->
-            <section v-if="isRoot && data.examples.length > 0" class="extra-section">
-                <div class="section-label">示例</div>
-                <pre
-                    class="code-block"
-                ><span v-for="(line, i) in data.examples" :key="line">{{ i === 0 ? '' : '\n' }}{{ line }}</span></pre>
-            </section>
+            <n-card v-if="isRoot && data.examples.length > 0" size="small">
+                <template #header>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">示例</n-text>
+                </template>
+                <pre class="m-0 font-mono text-3.5 leading-7 whitespace-pre-wrap break-words">{{
+                    data.examples.join('\n')
+                }}</pre>
+            </n-card>
 
             <!-- Shortcuts -->
-            <section v-if="data.shortcuts.length > 0" class="extra-section">
-                <div class="section-label">快捷指令</div>
-
-                <!-- Root: grouped by first-level subcommand -->
-                <template v-if="isRoot">
-                    <div v-for="group in shortcutGroups" :key="group.label" class="shortcut-group">
-                        <div class="shortcut-group-label">{{ group.label }}</div>
-                        <pre
-                            class="code-block"
-                        ><span v-for="(sc, i) in group.items" :key="sc.key">{{ i === 0 ? '' : '\n' }}{{ sc.key }}</span></pre>
-                    </div>
+            <n-card v-if="data.shortcuts.length > 0" size="small">
+                <template #header>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">快捷指令</n-text>
                 </template>
 
+                <!-- Root: grouped by first-level subcommand -->
+                <n-flex v-if="isRoot" vertical :size="14">
+                    <n-flex v-for="group in shortcutGroups" :key="group.label" vertical :size="6">
+                        <n-text v-if="group.label !== cleanBreadcrumb[0]" class="font-mono text-3.25" :depth="2">
+                            {{ group.label }}
+                        </n-text>
+                        <pre class="m-0 font-mono text-3.5 leading-7 whitespace-pre-wrap break-words">{{
+                            group.items.map((sc) => sc.key).join('\n')
+                        }}</pre>
+                    </n-flex>
+                </n-flex>
+
                 <!-- Subcommand pages: just the keys -->
-                <pre
-                    v-else
-                    class="code-block"
-                ><span v-for="(key, i) in flatShortcutKeys" :key="key">{{ i === 0 ? '' : '\n' }}{{ key }}</span></pre>
-            </section>
-        </div>
+                <pre v-else class="m-0 font-mono text-3.5 leading-7 whitespace-pre-wrap break-words">{{
+                    flatShortcutKeys.join('\n')
+                }}</pre>
+            </n-card>
+        </n-flex>
     </v2-layout>
 </template>
 
 <style lang="scss">
 @use '~/styles/v2';
-</style>
-
-<style lang="scss" scoped>
-.help-page {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 40px 48px;
-    background: #0d1117;
-    color: #e6edf3;
-    font-family:
-        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-}
-
-.breadcrumb {
-    font-size: 13px;
-    color: #7d8590;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-}
-
-.extra-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #7d8590;
-}
-
-.prose {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #b1bac4;
-    white-space: pre-line;
-}
-
-.code-block {
-    margin: 0;
-    padding: 14px 18px;
-    background: #161b22;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #e6edf3;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-.shortcut-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    & + & {
-        margin-top: 8px;
-    }
-}
-
-.shortcut-group-label {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 13px;
-    color: #8b949e;
-}
 </style>

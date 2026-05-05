@@ -12,6 +12,23 @@ const visibleOptions = computed(() => props.node.options);
 const visibleSubcommands = computed(() => props.node.subcommands);
 
 /**
+ * Alconna 的 header_display 把多个别名拼成 "tetris-stats|tstats"。
+ * 拆开后第一段作为主名展示，剩余的作为别名（与 node.aliases 合并去重）。
+ */
+const nameParts = computed(() => props.node.name.split('|').filter(Boolean));
+const displayName = computed(() => nameParts.value[0] ?? props.node.name);
+const displayAliases = computed(() => {
+    const seen = new Set<string>([displayName.value]);
+    const result: string[] = [];
+    for (const a of [...nameParts.value.slice(1), ...props.node.aliases]) {
+        if (seen.has(a)) continue;
+        seen.add(a);
+        result.push(a);
+    }
+    return result;
+});
+
+/**
  * Render an arg as `<name>` (required) or `[name]` (optional). This matches
  * the conventional CLI --help syntax users already understand.
  */
@@ -38,221 +55,129 @@ const usageTokens = computed<UsageToken[]>(() => {
     }
     return tokens;
 });
+
+/** Map token kinds to Naive UI text types so colours follow the dark theme. */
+const tokTypeOf = (kind: UsageToken['kind']): 'default' | 'error' | 'info' => {
+    switch (kind) {
+        case 'required':
+            return 'error';
+        case 'flag':
+            return 'info';
+        default:
+            return 'default';
+    }
+};
+const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
+    return kind === 'optional' ? 3 : undefined;
+};
 </script>
 
 <template>
-    <div class="help-view">
+    <n-flex vertical :size="20">
         <!-- Hero: title + aliases + description -->
-        <header class="hero">
-            <div class="title-row">
-                <h1 class="title">{{ node.name }}</h1>
-                <span v-for="alias in trimAliases(node.aliases)" :key="alias" class="alias">
+        <div>
+            <n-flex align="baseline" :size="12" :wrap="true">
+                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ displayName }}</n-text>
+                <n-text v-for="alias in trimAliases(displayAliases)" :key="alias" class="font-mono text-3.25" :depth="3">
                     {{ alias }}
-                </span>
-            </div>
-            <p v-if="node.help_text" class="desc">{{ node.help_text }}</p>
-        </header>
+                </n-text>
+            </n-flex>
+            <n-text v-if="node.help_text" class="block mt-2 text-4 leading-6" :depth="2">
+                {{ node.help_text }}
+            </n-text>
+        </div>
 
-        <!-- USAGE code block -->
-        <section class="section">
-            <div class="section-label">USAGE</div>
-            <pre class="code-block"><span
+        <!-- USAGE -->
+        <n-card size="small">
+            <template #header>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">USAGE</n-text>
+            </template>
+            <pre class="m-0 font-mono text-3.75 leading-6 whitespace-pre-wrap break-words"><n-text
                 v-for="(t, i) in usageTokens"
                 :key="i"
-                :class="['tok', `tok-${t.kind}`]"
-            >{{ i === 0 ? '' : ' ' }}{{ t.text }}</span></pre>
-        </section>
+                :type="tokTypeOf(t.kind)"
+                :depth="tokDepthOf(t.kind)"
+                :class="t.kind === 'flag' || t.kind === 'path' ? 'fw-500' : ''"
+            >{{ i === 0 ? '' : ' ' }}{{ t.text }}</n-text></pre>
+        </n-card>
 
         <!-- ARGUMENTS -->
-        <section v-if="visibleArgs.length > 0" class="section">
-            <div class="section-label">ARGUMENTS</div>
-            <div class="rows">
-                <div v-for="arg in visibleArgs" :key="arg.name" class="row">
-                    <div class="row-key">
-                        <span :class="['tok', arg.optional ? 'tok-optional' : 'tok-required']">
+        <n-card v-if="visibleArgs.length > 0" size="small">
+            <template #header>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">ARGUMENTS</n-text>
+            </template>
+            <n-flex vertical :size="0">
+                <div
+                    v-for="(arg, ri) in visibleArgs"
+                    :key="arg.name"
+                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
+                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
+                >
+                    <div class="font-mono text-3.5">
+                        <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
                             {{ renderArgToken(arg.name, arg.optional) }}
-                        </span>
+                        </n-text>
                     </div>
-                    <div class="row-val">
-                        <span>{{ arg.notice || arg.type_repr || '' }}</span>
-                        <span v-if="arg.default" class="muted small">默认 {{ arg.default }}</span>
-                    </div>
+                    <n-flex align="baseline" :size="8" :wrap="true">
+                        <n-text class="text-3.75 leading-6" :depth="2">{{ arg.notice || arg.type_repr || '' }}</n-text>
+                        <n-text v-if="arg.default" class="text-3.25" :depth="3">默认 {{ arg.default }}</n-text>
+                    </n-flex>
                 </div>
-            </div>
-        </section>
+            </n-flex>
+        </n-card>
 
         <!-- OPTIONS -->
-        <section v-if="visibleOptions.length > 0" class="section">
-            <div class="section-label">OPTIONS</div>
-            <div class="rows">
-                <div v-for="opt in visibleOptions" :key="opt.dest" class="row">
-                    <div class="row-key">
-                        <span class="tok tok-flag">{{ opt.name }}</span>
+        <n-card v-if="visibleOptions.length > 0" size="small">
+            <template #header>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">OPTIONS</n-text>
+            </template>
+            <n-flex vertical :size="0">
+                <div
+                    v-for="(opt, ri) in visibleOptions"
+                    :key="opt.dest"
+                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
+                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
+                >
+                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
+                        <n-text type="info" class="fw-500">{{ opt.name }}</n-text>
                         <template v-if="trimAliases(opt.aliases).length">
-                            <span class="muted small">,</span>
-                            <span class="tok tok-flag-alt">
+                            <n-text class="text-3.25" :depth="3">,</n-text>
+                            <n-text type="info" class="op-75">
                                 {{ trimAliases(opt.aliases).join(', ') }}
-                            </span>
+                            </n-text>
                         </template>
                         <template v-for="arg in opt.args" :key="arg.name">
-                            <span :class="['tok', arg.optional ? 'tok-optional' : 'tok-required']">
+                            <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
                                 {{ renderArgToken(arg.name, arg.optional) }}
-                            </span>
+                            </n-text>
                         </template>
-                    </div>
-                    <div class="row-val">{{ opt.help_text || '' }}</div>
+                    </n-flex>
+                    <n-text class="text-3.75 leading-6" :depth="2">{{ opt.help_text || '' }}</n-text>
                 </div>
-            </div>
-        </section>
+            </n-flex>
+        </n-card>
 
         <!-- SUBCOMMANDS -->
-        <section v-if="visibleSubcommands.length > 0" class="section">
-            <div class="section-label">SUBCOMMANDS</div>
-            <div class="rows">
-                <div v-for="sub in visibleSubcommands" :key="sub.dest" class="row">
-                    <div class="row-key">
-                        <span class="tok tok-sub">{{ sub.name }}</span>
-                        <span v-if="trimAliases(sub.aliases).length" class="muted small">
+        <n-card v-if="visibleSubcommands.length > 0" size="small">
+            <template #header>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">SUBCOMMANDS</n-text>
+            </template>
+            <n-flex vertical :size="0">
+                <div
+                    v-for="(sub, ri) in visibleSubcommands"
+                    :key="sub.dest"
+                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
+                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
+                >
+                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
+                        <n-text class="fw-600" :depth="1">{{ sub.name }}</n-text>
+                        <n-text v-if="trimAliases(sub.aliases).length" class="text-3.25" :depth="3">
                             {{ trimAliases(sub.aliases).join(', ') }}
-                        </span>
-                    </div>
-                    <div class="row-val">{{ sub.help_text || '' }}</div>
+                        </n-text>
+                    </n-flex>
+                    <n-text class="text-3.75 leading-6" :depth="2">{{ sub.help_text || '' }}</n-text>
                 </div>
-            </div>
-        </section>
-    </div>
+            </n-flex>
+        </n-card>
+    </n-flex>
 </template>
-
-<style lang="scss" scoped>
-.help-view {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    color: #e6edf3;
-    font-family:
-        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-}
-
-.hero {
-    .title-row {
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-    .title {
-        font-size: 36px;
-        font-weight: 700;
-        margin: 0;
-        letter-spacing: -0.01em;
-        color: #f0f6fc;
-    }
-    .alias {
-        font-size: 13px;
-        color: #7d8590;
-        font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    }
-    .desc {
-        margin: 8px 0 0;
-        font-size: 16px;
-        color: #8b949e;
-        line-height: 1.6;
-    }
-}
-
-.section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.section-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #7d8590;
-}
-
-.code-block {
-    margin: 0;
-    padding: 14px 18px;
-    background: #161b22;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 15px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-    word-break: break-word;
-}
-
-.rows {
-    display: flex;
-    flex-direction: column;
-}
-
-.row {
-    display: grid;
-    grid-template-columns: minmax(180px, max-content) 1fr;
-    gap: 24px;
-    padding: 12px 0;
-    border-top: 1px solid #21262d;
-    align-items: baseline;
-
-    &:first-child {
-        border-top: none;
-        padding-top: 4px;
-    }
-}
-
-.row-key {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 6px;
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 14px;
-}
-
-.row-val {
-    font-size: 15px;
-    color: #b1bac4;
-    line-height: 1.6;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: baseline;
-}
-
-.tok {
-    font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-}
-.tok-path {
-    color: #e6edf3;
-    font-weight: 500;
-}
-.tok-required {
-    color: #f85149;
-}
-.tok-optional {
-    color: #7d8590;
-}
-.tok-flag {
-    color: #58a6ff;
-    font-weight: 500;
-}
-.tok-flag-alt {
-    color: #58a6ff;
-    opacity: 0.75;
-}
-.tok-sub {
-    color: #f0f6fc;
-    font-weight: 600;
-}
-
-.muted {
-    color: #7d8590;
-}
-.small {
-    font-size: 13px;
-}
-</style>
