@@ -46,7 +46,6 @@ export const HelpShortcut = z.object({
 
 export const HelpData = z.object({
     lang: z.string(),
-    schema_version: z.literal(1),
     command: HelpNode,
     breadcrumb: z.array(z.string()),
     usage: z.string().nullable().default(null),
