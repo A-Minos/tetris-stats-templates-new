@@ -55,7 +55,7 @@ const xp_progress = computed(() => {
                                 {{
                                     $t('v2.tetrio.user.info.detail.level', {
                                         level: Math.trunc(xp_level),
-                                        xp: new Intl.NumberFormat(locale).format(xp_level),
+                                        xp: new Intl.NumberFormat(locale).format(data.user.xp),
                                     })
                                 }}
                             </n-text>
