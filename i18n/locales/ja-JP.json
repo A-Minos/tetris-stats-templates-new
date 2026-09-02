@@ -1,7 +1,7 @@
 {
   "common": {
     "avatar_alt": "アバター",
-    "player": "{count}人のプレイヤー",
+    "player": "{count}人",
     "level": "レベル {level}",
     "ranking": "順位",
     "rankings": "ランキング",
