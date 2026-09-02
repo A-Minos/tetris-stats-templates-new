@@ -72,11 +72,13 @@ const symbols = computed(() => {
 </script>
 
 <template>
-    <n-card v-if="isNonNullish(data.zen) && confirmShow()" size="small" title="Zen">
+    <n-card v-if="isNonNullish(data.zen) && confirmShow()" size="small" :title="$t('common.game_mode.zen')">
         <n-flex align="center" justify="space-between">
             <n-flex :size="0" align="start" vertical>
                 <n-text class="text-3xl fw-bold">{{ new Intl.NumberFormat(locale).format(data.zen.score) }}</n-text>
-                <n-text :depth="3" class="text-xl fw-bold">Level {{ data.zen.level }}</n-text>
+                <n-text :depth="3" class="text-xl fw-bold">
+                    {{ $t('common.level', { level: data.zen.level }) }}
+                </n-text>
             </n-flex>
 
             <n-text :depth="3" class="text-4xl font-[HUN] tracking-0.1">

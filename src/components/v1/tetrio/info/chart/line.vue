@@ -253,7 +253,9 @@ onMounted(async () => {
             </div>
 
             <div class="absolute top-4.75 left-6">
-                <span class="font-template text-6.25 fw-800 text-[#fafafa]">Tetra Rating (TR)</span>
+                <span class="font-template text-6.25 fw-800 text-[#fafafa]">
+                    {{ $t('common.tetra_rating') }} (TR)
+                </span>
             </div>
 
             <div class="absolute top-22.5 left-6.75">

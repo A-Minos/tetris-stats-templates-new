@@ -19,6 +19,7 @@ const data = useData(
         })
         .readonly(),
 );
+const { locale } = useI18n();
 
 const colorMappings: Record<
     Rank,
@@ -127,7 +128,7 @@ useLang();
 
 <template>
     <div id="content" class="w-fit p-6.25 bg-[#f1f1f1]">
-        <span class="font-template text-8.75 font-black">Rankings</span>
+        <span class="font-template text-8.75 font-black">{{ $t('common.rankings') }}</span>
 
         <div class="flex flex-col gap-2.5">
             <div
@@ -155,14 +156,20 @@ useLang();
                     >
                         <span class="font-template font-extrabold text-11.25">{{ rank.require_tr }}</span>
                         <br />
-                        <span class="font-template text-7.5">{{ rank.players }} players</span>
+                        <span class="font-template text-7.5">
+                            {{ $t('common.player', { count: rank.players }, rank.players) }}
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="font-template w-150 h-12.5 font-bold text-7.5 flex flex-col justify-center items-center">
-            Updated on {{ data.updated_at.toLocaleString('zh-CN') }}
+            {{
+                $t('v1.rank.updated_at', {
+                    time: data.updated_at.toLocaleString(locale),
+                })
+            }}
         </div>
     </div>
 </template>

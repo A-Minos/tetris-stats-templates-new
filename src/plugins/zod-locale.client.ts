@@ -1,13 +1,19 @@
 import { z } from 'zod';
-import { en, zhCN } from 'zod/locales';
+import { en, es, ja, ko, zhCN, zhTW } from 'zod/locales';
+import type { Language } from '~/constants/enum/languages';
 
 const localeMapping = {
-    'en-US': en,
     'zh-CN': zhCN,
-} as const;
+    'zh-TW': zhTW,
+    'en-US': en,
+    'es-ES': es,
+    'ja-JP': ja,
+    'ko-KR': ko,
+} satisfies Record<Language, typeof en>;
 
 function applyZodLocale(locale: string): void {
-    const createLocale = localeMapping[locale as keyof typeof localeMapping] ?? en;
+    const createLocale = localeMapping[locale as Language];
+    if (!createLocale) throw new Error(`Unsupported locale: ${locale}`);
     z.config(createLocale());
 }
 

@@ -25,7 +25,7 @@ useLang();
 <template>
     <v2-layout content_class="max-w-320">
         <v2-tetrio-record-result
-            title="Blitz"
+            :title="$t('common.game_mode.blitz')"
             :result-value="new Intl.NumberFormat(locale).format(data.statistic.score)"
             :statistic="data.statistic"
         />

@@ -38,7 +38,11 @@ const record = computed(() => {
 </script>
 
 <template>
-    <n-card :class="{ 'opacity-50': isNullish(week) && isNonNullish(best) }" size="small" title="Quick Play">
+    <n-card
+        :class="{ 'opacity-50': isNullish(week) && isNonNullish(best) }"
+        size="small"
+        :title="$t('common.game_mode.quick_play')"
+    >
         <template #header-extra>
             <template v-for="mod_icon in mod_icons">
                 <n-image :img-props="{ class: 'size-6' }" :src="mod_icon" class="opacity-50" />

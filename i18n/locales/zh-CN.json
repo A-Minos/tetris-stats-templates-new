@@ -1,4 +1,21 @@
 {
+  "common": {
+    "avatar_alt": "头像",
+    "player": "{count} 玩家",
+    "level": "Level {level}",
+    "ranking": "Ranking",
+    "rankings": "Rankings",
+    "rating": "Rating",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "Blitz",
+      "sprint": "40L",
+      "challenge": "Challenge",
+      "marathon": "Marathon",
+      "zen": "Zen",
+      "quick_play": "Quick Play"
+    }
+  },
   "error": {
     "title": "错误发生",
     "route": "当前路由",
@@ -12,9 +29,25 @@
     "no_stack": "无堆栈信息",
     "snippet": "代码片段",
     "snippet_loading": "正在加载代码片段…",
-    "snippet_failed": "无法加载代码片段"
+    "snippet_failed": "无法加载代码片段",
+    "snippet_unsupported_url": "Unsupported URL",
+    "snippet_line_out_of_range": "Line out of range"
+  },
+  "help": {
+    "usage": "USAGE",
+    "arguments": "ARGUMENTS",
+    "options": "OPTIONS",
+    "subcommands": "SUBCOMMANDS",
+    "default": "默认 {value}",
+    "description": "说明",
+    "examples": "示例",
+    "shortcuts": "快捷指令"
   },
   "v1": {
+    "footer": {
+      "powered_by": "POWERED BY",
+      "graphic_design_by": "Graphic Design by"
+    },
     "binding": {
       "main": {
         "success": {
@@ -61,6 +94,9 @@
         }
       }
     },
+    "rank": {
+      "updated_at": "Updated on {time}"
+    },
     "tetrio": {
       "info": {
         "account": {
@@ -100,9 +136,12 @@
     }
   },
   "v2": {
+    "footer": {
+      "powered_by": "Powered by {product}",
+      "designed_by": "Designed by {designer} Using {framework}"
+    },
     "tetrio": {
       "rank": {
-        "player": "{value} 玩家",
         "update_time": "更新时间: {time}",
         "detail": {
           "minimum_data": "最低数据",
@@ -147,6 +186,15 @@
         "info": {
           "multi_player": "多人游戏",
           "single_player": "单人游戏",
+          "status": {
+            "bad_standing": {
+              "title": "BAD STANDING",
+              "description": "近期有一次或多次违禁行为"
+            },
+            "banned": "BANNED",
+            "bot": "BOT",
+            "developer": "开发者: {name}"
+          },
           "tetra_league": {
             "win_rate": "胜率: {wins} / {total} ({rate}%)",
             "highest": "历史最高:"
