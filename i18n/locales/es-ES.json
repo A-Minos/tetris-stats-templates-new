@@ -1,0 +1,245 @@
+{
+  "common": {
+    "avatar_alt": "Avatar",
+    "player": "1 jugador | {count} jugadores",
+    "level": "Nivel {level}",
+    "ranking": "Clasificación",
+    "rankings": "Clasificaciones",
+    "rating": "Valoración",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "Blitz",
+      "sprint": "Sprint",
+      "challenge": "Desafío",
+      "marathon": "Maratón",
+      "zen": "Zen",
+      "quick_play": "Partida rápida"
+    }
+  },
+  "error": {
+    "title": "Se ha producido un error",
+    "route": "Ruta",
+    "location": "Ubicación de origen",
+    "validation_title": "Error de validación",
+    "validation_focus": "Ruta del error",
+    "validation_input": "Datos de entrada",
+    "validation_truncated": "(truncado)",
+    "validation_no_input": "No hay datos de entrada",
+    "stack": "Traza de la pila",
+    "no_stack": "No hay traza de la pila",
+    "snippet": "Fragmento de código",
+    "snippet_loading": "Cargando fragmento…",
+    "snippet_failed": "No se ha podido cargar el fragmento",
+    "snippet_unsupported_url": "URL no compatible",
+    "snippet_line_out_of_range": "Línea fuera de rango"
+  },
+  "help": {
+    "usage": "USO",
+    "arguments": "ARGUMENTOS",
+    "options": "OPCIONES",
+    "subcommands": "SUBCOMANDOS",
+    "default": "Predeterminado: {value}",
+    "description": "DESCRIPCIÓN",
+    "examples": "EJEMPLOS",
+    "shortcuts": "ATAJOS"
+  },
+  "v1": {
+    "footer": {
+      "powered_by": "CON TECNOLOGÍA DE",
+      "graphic_design_by": "Diseño gráfico de"
+    },
+    "binding": {
+      "main": {
+        "success": {
+          "text": "{userName}, tu cuenta de {gamePlatform} se ha verificado y vinculado correctamente a {botName}.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unverified": {
+          "text": "{userName}, tu cuenta de {gamePlatform} se ha vinculado a {botName}.\nSin embargo, aún no está verificada.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unknown": {
+          "text": "{userName}, tu cuenta de {gamePlatform} se ha vinculado a {botName},\npero aún no podemos verificar tu identidad.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unbind": {
+          "text": "{userName}, tu cuenta de {gamePlatform} se ha desvinculado correctamente de {botName}.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "error": {
+          "text": "{userName}, ha surgido un problema al vincular tu cuenta de {gamePlatform} a {botName}.",
+          "styles": {
+            "fw": "400"
+          }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "Ahora puedes escribir {prompt} para consultar tus estadísticas en esa plataforma.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unverified": {
+          "text": "Ahora puedes escribir {prompt} para iniciar el proceso de verificación.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unknown": {
+          "text": "Ahora puedes escribir {prompt} para consultar tus estadísticas en esa plataforma.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unbind": {
+          "text": "Ahora puedes escribir {prompt} para volver a vincular tu cuenta de esa plataforma a {botName}.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "error": {
+          "text": "{prompt}",
+          "styles": {
+            "fw": "500"
+          }
+        }
+      }
+    },
+    "rank": {
+      "updated_at": "Actualizado el {time}"
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "Cuenta y clasificaciones"
+        },
+        "multi": {
+          "title": "Estadísticas multijugador"
+        },
+        "single": {
+          "title": "Estadísticas de un jugador"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": {
+          "title": "Información de la cuenta"
+        },
+        "historical": {
+          "title": "Estadísticas históricas"
+        },
+        "today": {
+          "title": "Estadísticas de hoy"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "Cuenta y clasificaciones"
+        },
+        "multi": {
+          "title": "Estadísticas multijugador"
+        },
+        "single": {
+          "title": "Estadísticas de un jugador"
+        }
+      }
+    }
+  },
+  "v2": {
+    "footer": {
+      "powered_by": "Con tecnología de {product}",
+      "designed_by": "Diseñado por {designer} con {framework}"
+    },
+    "tetrio": {
+      "rank": {
+        "update_time": "Actualización: {time}",
+        "detail": {
+          "minimum_data": "Mínimo",
+          "average_data": "Media",
+          "maximum_data": "Máximo"
+        }
+      },
+      "replay": "ID de repetición",
+      "record": {
+        "key": {
+          "keys": "Pulsaciones",
+          "kpp": "Pulsaciones/Pieza",
+          "kps": "Pulsaciones/Segundo"
+        },
+        "max": {
+          "combo": "Combo máximo",
+          "b2b": "B2B máximo"
+        },
+        "block": {
+          "pieces": "Piezas",
+          "pps": "PPS",
+          "lines": "Líneas",
+          "lpm": "Líneas/Minuto",
+          "holds": "Reserva",
+          "level": "Nivel",
+          "blitz": {
+            "score": "Puntuación",
+            "spp": "Puntuación/Pieza"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / Mini T",
+          "mini_tspin_single_double": "Mini T1 / Mini T2",
+          "all_clear": "Perfect Clear"
+        },
+        "finesse": {
+          "title": "Finesse",
+          "faults": "Fallos"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "Multijugador",
+          "single_player": "Un jugador",
+          "status": {
+            "bad_standing": {
+              "title": "MALA CONDUCTA",
+              "description": "Una o más infracciones recientes"
+            },
+            "banned": "BANEADO",
+            "bot": "BOT",
+            "developer": "Desarrollador: {name}"
+          },
+          "tetra_league": {
+            "win_rate": "Tasa de victorias: {wins} / {total} ({rate} %)",
+            "highest": "Máximo histórico:"
+          },
+          "quick_play_2": {
+            "achieve_time": "Fecha del logro: {time} (hace {when})",
+            "highest": "Máximo histórico: {height} m (n.º {global_rank}) el {time} (hace {when})"
+          },
+          "detail": {
+            "level": "Nivel {level} ({xp} XP)",
+            "win_rate": "Tasa de victorias: {wins} / {total} ({rate} %)",
+            "played_games": "Partidas jugadas: {count}",
+            "wins": "Victorias: {count}",
+            "join_time": "Fecha de registro: {time} (hace {when})"
+          },
+          "single": {
+            "achieve_time": "Fecha del logro: {time} (hace {when})"
+          }
+        },
+        "list": {
+          "level": "Nivel {level} ({xp} XP)"
+        }
+      }
+    }
+  }
+}
