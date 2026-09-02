@@ -1,0 +1,245 @@
+{
+  "common": {
+    "avatar_alt": "頭像",
+    "player": "{count} 位玩家",
+    "level": "等級 {level}",
+    "ranking": "排名",
+    "rankings": "排行榜",
+    "rating": "評分",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "閃電戰",
+      "sprint": "40行",
+      "challenge": "挑戰",
+      "marathon": "馬拉松",
+      "zen": "禪模式",
+      "quick_play": "快速遊戲"
+    }
+  },
+  "error": {
+    "title": "發生錯誤",
+    "route": "目前路由",
+    "location": "原始碼位置",
+    "validation_title": "資料驗證失敗",
+    "validation_focus": "錯誤位置",
+    "validation_input": "輸入資料",
+    "validation_truncated": "（已截斷）",
+    "validation_no_input": "沒有輸入資料",
+    "stack": "堆疊資訊",
+    "no_stack": "沒有堆疊資訊",
+    "snippet": "程式碼片段",
+    "snippet_loading": "正在載入程式碼片段…",
+    "snippet_failed": "無法載入程式碼片段",
+    "snippet_unsupported_url": "不支援的網址",
+    "snippet_line_out_of_range": "行號超出範圍"
+  },
+  "help": {
+    "usage": "用法",
+    "arguments": "參數",
+    "options": "選項",
+    "subcommands": "子指令",
+    "default": "預設值：{value}",
+    "description": "說明",
+    "examples": "範例",
+    "shortcuts": "快捷指令"
+  },
+  "v1": {
+    "footer": {
+      "powered_by": "技術支援",
+      "graphic_design_by": "視覺設計"
+    },
+    "binding": {
+      "main": {
+        "success": {
+          "text": "已成功驗證您在 {gamePlatform} 上的帳號 {userName}，並連結至 {botName}。",
+          "styles": {
+            "fw": "350"
+          }
+        },
+        "unverified": {
+          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName}，但尚未完成驗證。",
+          "styles": {
+            "fw": "350"
+          }
+        },
+        "unknown": {
+          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName}，但目前無法驗證您的身分。",
+          "styles": {
+            "fw": "350"
+          }
+        },
+        "unbind": {
+          "text": "已成功解除您在 {gamePlatform} 上的帳號 {userName} 與 {botName} 的連結。",
+          "styles": {
+            "fw": "350"
+          }
+        },
+        "error": {
+          "text": "將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName} 時發生錯誤。",
+          "styles": {
+            "fw": "350"
+          }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "您可以輸入 {prompt} 指令，查詢您在該平台上的統計資料。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unverified": {
+          "text": "您可以輸入 {prompt} 指令，開始驗證您的帳號。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unknown": {
+          "text": "您可以輸入 {prompt} 指令，查詢您在該平台上的統計資料。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unbind": {
+          "text": "您可以輸入 {prompt} 指令，重新將您在該平台上的帳號連結至 {botName}。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "error": {
+          "text": "{prompt}",
+          "styles": {
+            "fw": "500"
+          }
+        }
+      }
+    },
+    "rank": {
+      "updated_at": "更新於 {time}"
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "帳號與排名"
+        },
+        "multi": {
+          "title": "多人遊戲資料"
+        },
+        "single": {
+          "title": "單人遊戲資料"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": {
+          "title": "帳號資訊"
+        },
+        "historical": {
+          "title": "歷史資料"
+        },
+        "today": {
+          "title": "今日資料"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "帳號與排名"
+        },
+        "multi": {
+          "title": "多人遊戲資料"
+        },
+        "single": {
+          "title": "單人遊戲資料"
+        }
+      }
+    }
+  },
+  "v2": {
+    "footer": {
+      "powered_by": "由 {product} 提供技術支援",
+      "designed_by": "由 {designer} 使用 {framework} 設計"
+    },
+    "tetrio": {
+      "rank": {
+        "update_time": "更新時間：{time}",
+        "detail": {
+          "minimum_data": "最低值",
+          "average_data": "平均值",
+          "maximum_data": "最高值"
+        }
+      },
+      "replay": "重播 ID",
+      "record": {
+        "key": {
+          "keys": "按鍵數",
+          "kpp": "每塊按鍵數",
+          "kps": "每秒按鍵數"
+        },
+        "max": {
+          "combo": "最大連擊",
+          "b2b": "最高 B2B"
+        },
+        "block": {
+          "pieces": "塊數",
+          "pps": "PPS",
+          "lines": "行數",
+          "lpm": "每分鐘行數",
+          "holds": "Hold 次數",
+          "level": "等級",
+          "blitz": {
+            "score": "分數",
+            "spp": "每塊分數"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / Mini T",
+          "mini_tspin_single_double": "Mini T1 / Mini T2",
+          "all_clear": "全清"
+        },
+        "finesse": {
+          "title": "極簡",
+          "faults": "多餘操作"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "多人遊戲",
+          "single_player": "單人遊戲",
+          "status": {
+            "bad_standing": {
+              "title": "信譽不良",
+              "description": "近期曾有一次或多次違規行為"
+            },
+            "banned": "已封禁",
+            "bot": "機器人",
+            "developer": "開發者：{name}"
+          },
+          "tetra_league": {
+            "win_rate": "勝率：{wins} / {total}（{rate}%）",
+            "highest": "歷史最高："
+          },
+          "quick_play_2": {
+            "achieve_time": "達成時間：{time}（{when}前）",
+            "highest": "歷史最高：{height}m（全球第 {global_rank} 名），於 {time}（{when}前）達成"
+          },
+          "detail": {
+            "level": "等級 {level}（{xp} XP）",
+            "win_rate": "勝率：{wins} / {total}（{rate}%）",
+            "played_games": "遊玩場次：{count}",
+            "wins": "勝場數：{count}",
+            "join_time": "註冊時間：{time}（{when}前）"
+          },
+          "single": {
+            "achieve_time": "達成時間：{time}（{when}前）"
+          }
+        },
+        "list": {
+          "level": "等級 {level}（{xp} XP）"
+        }
+      }
+    }
+  }
+}
