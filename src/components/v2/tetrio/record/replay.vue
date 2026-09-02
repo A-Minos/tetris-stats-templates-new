@@ -14,7 +14,7 @@ const data = useData(
     <n-card size="small">
         <n-flex :size="0" vertical>
             <n-flex justify="space-between">
-                <n-text>{{ $t('v2.tetrio.record.replay') }}</n-text>
+                <n-text>{{ $t('v2.tetrio.replay') }}</n-text>
                 <n-a :href="`https://tetr.io/#R:${data.replay_id}`" target="_blank"> r:{{ data.replay_id }} </n-a>
             </n-flex>
         </n-flex>
