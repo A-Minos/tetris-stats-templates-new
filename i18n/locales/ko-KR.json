@@ -1,0 +1,245 @@
+{
+  "common": {
+    "avatar_alt": "프로필 이미지",
+    "player": "{count}명의 플레이어",
+    "level": "레벨 {level}",
+    "ranking": "순위",
+    "rankings": "순위표",
+    "rating": "레이팅",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "블리츠",
+      "sprint": "스프린트",
+      "challenge": "챌린지",
+      "marathon": "마라톤",
+      "zen": "젠",
+      "quick_play": "퀵 플레이"
+    }
+  },
+  "error": {
+    "title": "오류가 발생했습니다",
+    "route": "경로",
+    "location": "발생 위치",
+    "validation_title": "유효성 검사에 실패했습니다",
+    "validation_focus": "오류 경로",
+    "validation_input": "입력 데이터",
+    "validation_truncated": "(일부 생략됨)",
+    "validation_no_input": "입력 데이터가 없습니다",
+    "stack": "스택 추적",
+    "no_stack": "스택 추적이 없습니다",
+    "snippet": "코드 조각",
+    "snippet_loading": "코드 조각을 불러오는 중…",
+    "snippet_failed": "코드 조각을 불러오지 못했습니다",
+    "snippet_unsupported_url": "지원하지 않는 URL입니다",
+    "snippet_line_out_of_range": "줄 번호가 범위를 벗어났습니다"
+  },
+  "help": {
+    "usage": "사용법",
+    "arguments": "인수",
+    "options": "옵션",
+    "subcommands": "하위 명령어",
+    "default": "기본값: {value}",
+    "description": "설명",
+    "examples": "예시",
+    "shortcuts": "단축 명령어"
+  },
+  "v1": {
+    "footer": {
+      "powered_by": "기반 기술",
+      "graphic_design_by": "그래픽 디자인"
+    },
+    "binding": {
+      "main": {
+        "success": {
+          "text": "{userName}님, {gamePlatform} 계정이 인증되었으며 {botName}에 성공적으로 연결되었습니다.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unverified": {
+          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연결되었습니다.\n하지만 아직 계정 인증이 완료되지 않았습니다.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unknown": {
+          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연결되었습니다.\n하지만 아직 본인 여부를 확인할 수 없습니다.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unbind": {
+          "text": "{userName}님, {gamePlatform} 계정과 {botName}의 연결이 해제되었습니다.",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "error": {
+          "text": "{userName}님, {gamePlatform} 계정을 {botName}에 연결하는 중 문제가 발생했습니다.",
+          "styles": {
+            "fw": "400"
+          }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "{prompt} 명령어를 입력하면 해당 플랫폼의 전적을 확인할 수 있습니다.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unverified": {
+          "text": "{prompt} 명령어를 입력하면 인증을 시작할 수 있습니다.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unknown": {
+          "text": "{prompt} 명령어를 입력하면 해당 플랫폼의 전적을 확인할 수 있습니다.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unbind": {
+          "text": "{prompt} 명령어를 입력하면 해당 플랫폼 계정을 {botName}에 다시 연결할 수 있습니다.",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "error": {
+          "text": "{prompt}",
+          "styles": {
+            "fw": "500"
+          }
+        }
+      }
+    },
+    "rank": {
+      "updated_at": "{time}에 업데이트됨"
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "계정 및 순위"
+        },
+        "multi": {
+          "title": "멀티플레이 전적"
+        },
+        "single": {
+          "title": "싱글플레이 전적"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": {
+          "title": "계정 정보"
+        },
+        "historical": {
+          "title": "역대 전적"
+        },
+        "today": {
+          "title": "오늘의 전적"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "계정 및 순위"
+        },
+        "multi": {
+          "title": "멀티플레이 전적"
+        },
+        "single": {
+          "title": "싱글플레이 전적"
+        }
+      }
+    }
+  },
+  "v2": {
+    "footer": {
+      "powered_by": "{product} 기반",
+      "designed_by": "{designer} 디자인 · {framework} 사용"
+    },
+    "tetrio": {
+      "rank": {
+        "update_time": "업데이트 시각: {time}",
+        "detail": {
+          "minimum_data": "최솟값",
+          "average_data": "평균값",
+          "maximum_data": "최댓값"
+        }
+      },
+      "replay": "리플레이 ID",
+      "record": {
+        "key": {
+          "keys": "키 입력 수",
+          "kpp": "미노당 키 입력 수",
+          "kps": "초당 키 입력 수"
+        },
+        "max": {
+          "combo": "최대 콤보",
+          "b2b": "최대 B2B"
+        },
+        "block": {
+          "pieces": "미노 수",
+          "pps": "PPS",
+          "lines": "줄 수",
+          "lpm": "분당 줄 수",
+          "holds": "홀드",
+          "level": "레벨",
+          "blitz": {
+            "score": "점수",
+            "spp": "미노당 점수"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / Mini T",
+          "mini_tspin_single_double": "Mini T1 / Mini T2",
+          "all_clear": "퍼펙트 클리어"
+        },
+        "finesse": {
+          "title": "피네스",
+          "faults": "오류 수"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "멀티플레이",
+          "single_player": "싱글플레이",
+          "status": {
+            "bad_standing": {
+              "title": "계정 상태 불량",
+              "description": "최근 한 번 이상 규정을 위반했습니다"
+            },
+            "banned": "이용 정지",
+            "bot": "봇",
+            "developer": "개발자: {name}"
+          },
+          "tetra_league": {
+            "win_rate": "승률: {wins} / {total} ({rate}%)",
+            "highest": "역대 최고:"
+          },
+          "quick_play_2": {
+            "achieve_time": "달성 시각: {time} ({when} 전)",
+            "highest": "역대 최고: {height}m (세계 #{global_rank}) · {time} ({when} 전)"
+          },
+          "detail": {
+            "level": "레벨 {level} ({xp} XP)",
+            "win_rate": "승률: {wins} / {total} ({rate}%)",
+            "played_games": "플레이 횟수: {count}",
+            "wins": "승리: {count}",
+            "join_time": "가입 시각: {time} ({when} 전)"
+          },
+          "single": {
+            "achieve_time": "달성 시각: {time} ({when} 전)"
+          }
+        },
+        "list": {
+          "level": "레벨 {level} ({xp} XP)"
+        }
+      }
+    }
+  }
+}
