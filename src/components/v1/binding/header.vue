@@ -31,7 +31,6 @@ const valid = computed(() => {
             <template v-if="isNonNullish(data.user.avatar)">
                 <shared-avatar
                     :avatar="data.user.avatar"
-                    alt="user.avatar"
                     class="size-24 rounded-5 shadow-[0rem_0.6875rem_1.4375rem_0rem_rgba(0,0,0,0.22)]"
                 />
             </template>
@@ -41,7 +40,6 @@ const valid = computed(() => {
             <template v-if="isNonNullish(data.bot.avatar)">
                 <shared-avatar
                     :avatar="data.bot.avatar"
-                    alt="bot.avatar"
                     class="size-24 rounded-5 shadow-[0rem_0.6875rem_1.4375rem_0rem_rgba(0,0,0,0.22)]"
                 />
             </template>

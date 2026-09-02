@@ -28,7 +28,7 @@ const data = useData(
 </script>
 
 <template>
-    <n-card v-if="isNonNullish(data.sprint) && confirmShow()" size="small" title="40L">
+    <n-card v-if="isNonNullish(data.sprint) && confirmShow()" size="small" :title="$t('common.game_mode.sprint')">
         <n-flex align="center" justify="space-between">
             <n-flex :size="0" vertical>
                 <n-text class="text-3xl fw-bold">{{ data.sprint.time }}</n-text>

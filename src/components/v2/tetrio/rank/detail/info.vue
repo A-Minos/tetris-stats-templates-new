@@ -14,7 +14,7 @@ defineProps<{
 
         <n-flex :size="0" vertical>
             <n-text class="text-4 fw-bold">{{ require_tr }} TR</n-text>
-            <n-text class="text-2 fw-bold">{{ players }} 玩家</n-text>
+            <n-text class="text-2 fw-bold">{{ $t('common.player', { count: players }, players) }}</n-text>
         </n-flex>
     </n-flex>
 </template>

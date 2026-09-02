@@ -1,4 +1,21 @@
 {
+  "common": {
+    "avatar_alt": "头像",
+    "player": "{count} Players",
+    "level": "Level {level}",
+    "ranking": "Ranking",
+    "rankings": "Rankings",
+    "rating": "Rating",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "Blitz",
+      "sprint": "40L",
+      "challenge": "Challenge",
+      "marathon": "Marathon",
+      "zen": "Zen",
+      "quick_play": "Quick Play"
+    }
+  },
   "error": {
     "title": "An error occurred",
     "route": "Route",
@@ -12,9 +29,25 @@
     "no_stack": "No stack trace",
     "snippet": "Code snippet",
     "snippet_loading": "Loading snippet…",
-    "snippet_failed": "Failed to load snippet"
+    "snippet_failed": "Failed to load snippet",
+    "snippet_unsupported_url": "Unsupported URL",
+    "snippet_line_out_of_range": "Line out of range"
+  },
+  "help": {
+    "usage": "USAGE",
+    "arguments": "ARGUMENTS",
+    "options": "OPTIONS",
+    "subcommands": "SUBCOMMANDS",
+    "default": "默认 {value}",
+    "description": "说明",
+    "examples": "示例",
+    "shortcuts": "快捷指令"
   },
   "v1": {
+    "footer": {
+      "powered_by": "POWERED BY",
+      "graphic_design_by": "Graphic Design by"
+    },
     "binding": {
       "main": {
         "success": {
@@ -61,6 +94,9 @@
         }
       }
     },
+    "rank": {
+      "updated_at": "Updated on {time}"
+    },
     "tetrio": {
       "info": {
         "account": {
@@ -100,9 +136,12 @@
     }
   },
   "v2": {
+    "footer": {
+      "powered_by": "Powered by {product}",
+      "designed_by": "Designed by {designer} Using {framework}"
+    },
     "tetrio": {
       "rank": {
-        "player": "{value} Players",
         "update_time": "Update Time: {time}",
         "detail": {
           "minimum_data": "Minimum Data",
@@ -147,6 +186,15 @@
         "info": {
           "multi_player": "Multiplayer",
           "single_player": "Singleplayer",
+          "status": {
+            "bad_standing": {
+              "title": "BAD STANDING",
+              "description": "近期有一次或多次违禁行为"
+            },
+            "banned": "BANNED",
+            "bot": "BOT",
+            "developer": "开发者: {name}"
+          },
           "tetra_league": {
             "win_rate": "Win Rate: {wins} / {total} ({rate}%)",
             "highest": "Highest Ever:"

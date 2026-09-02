@@ -38,7 +38,7 @@ const valid = computed(() => {
                 >
                     <div class="size-full p-7.5 box-border">
                         <div class="flex gap-7 items-center">
-                            <img :src="data.user.avatar" alt="user.avatar" class="size-15 rounded-full" />
+                            <img :src="data.user.avatar" :alt="$t('common.avatar_alt')" class="size-15 rounded-full" />
                             <span class="font-template text-7.5 fw-800 text-[#000000]">{{ data.user.name }}</span>
                         </div>
                     </div>

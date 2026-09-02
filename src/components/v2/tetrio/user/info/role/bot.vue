@@ -10,10 +10,12 @@ defineProps<{
     <n-alert :show-icon="false" type="warning">
         <div class="text-center">
             <n-flex :size="0" vertical>
-                <n-text class="text-5xl fw-bold">BOT</n-text>
+                <n-text class="text-5xl fw-bold">{{ $t('v2.tetrio.user.info.status.bot') }}</n-text>
 
                 <template v-if="isNonNullish(master)">
-                    <n-text class="text-xl mt-2 fw-bold">开发者: {{ master }}</n-text>
+                    <n-text class="text-xl mt-2 fw-bold">
+                        {{ $t('v2.tetrio.user.info.status.developer', { name: master }) }}
+                    </n-text>
                 </template>
             </n-flex>
         </div>
