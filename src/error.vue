@@ -67,6 +67,7 @@ const props = defineProps<{
 }>();
 
 useLang();
+const { t } = useI18n();
 
 const route = useRoute();
 
@@ -918,7 +919,7 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
     try {
         const url = getSameOriginHttpUrl(frame.url);
         if (!url) {
-            snippet.error = 'Unsupported URL';
+            snippet.error = t('error.snippet_unsupported_url');
             return;
         }
 
@@ -935,7 +936,7 @@ async function loadSnippet(frame: StackFrame): Promise<void> {
         const result = mappedSnippet ?? bundleSnippet;
 
         if (!result) {
-            snippet.error = 'Line out of range';
+            snippet.error = t('error.snippet_line_out_of_range');
             return;
         }
 

@@ -78,7 +78,9 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- USAGE -->
         <n-card size="small">
             <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">USAGE</n-text>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                    {{ $t('help.usage') }}
+                </n-text>
             </template>
             <pre class="m-0 font-mono text-3.75 leading-6 whitespace-pre-wrap break-words"><n-text
                 v-for="(t, i) in usageTokens"
@@ -92,7 +94,9 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- ARGUMENTS -->
         <n-card v-if="data.command.args.length > 0" size="small">
             <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">ARGUMENTS</n-text>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                    {{ $t('help.arguments') }}
+                </n-text>
             </template>
             <n-flex vertical :size="0">
                 <div
@@ -108,7 +112,9 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
                     </div>
                     <n-flex align="baseline" :size="8" :wrap="true">
                         <n-text class="text-3.75 leading-6" :depth="2">{{ arg.notice || arg.type_repr || '' }}</n-text>
-                        <n-text v-if="arg.default" class="text-3.25" :depth="3">默认 {{ arg.default }}</n-text>
+                        <n-text v-if="arg.default" class="text-3.25" :depth="3">
+                            {{ $t('help.default', { value: arg.default }) }}
+                        </n-text>
                     </n-flex>
                 </div>
             </n-flex>
@@ -117,7 +123,9 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- OPTIONS -->
         <n-card v-if="data.command.options.length > 0" size="small">
             <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">OPTIONS</n-text>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                    {{ $t('help.options') }}
+                </n-text>
             </template>
             <n-flex vertical :size="0">
                 <div
@@ -148,7 +156,9 @@ const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
         <!-- SUBCOMMANDS -->
         <n-card v-if="data.command.subcommands.length > 0" size="small">
             <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">SUBCOMMANDS</n-text>
+                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                    {{ $t('help.subcommands') }}
+                </n-text>
             </template>
             <n-flex vertical :size="0">
                 <div

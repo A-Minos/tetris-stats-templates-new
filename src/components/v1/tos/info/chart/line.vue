@@ -273,7 +273,7 @@ const valid = computed(() => {
                 <chart :option="option" />
             </div>
             <div class="absolute top-4.75 left-6">
-                <span class="font-template text-6.25 fw-800 text-[#fafafa]">Rating</span>
+                <span class="font-template text-6.25 fw-800 text-[#fafafa]">{{ $t('common.rating') }}</span>
             </div>
         </div>
     </template>

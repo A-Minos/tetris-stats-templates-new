@@ -18,8 +18,12 @@ const data = useData(
         <n-alert :show-icon="false" type="error">
             <div class="text-center">
                 <n-flex :size="0" vertical>
-                    <n-text class="text-2xl fw-bold">BAD STANDING</n-text>
-                    <n-text class="my-2">近期有一次或多次违禁行为</n-text>
+                    <n-text class="text-2xl fw-bold">
+                        {{ $t('v2.tetrio.user.info.status.bad_standing.title') }}
+                    </n-text>
+                    <n-text class="my-2">
+                        {{ $t('v2.tetrio.user.info.status.bad_standing.description') }}
+                    </n-text>
                 </n-flex>
             </div>
         </n-alert>

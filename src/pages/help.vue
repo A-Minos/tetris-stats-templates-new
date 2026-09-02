@@ -44,7 +44,9 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
             <!-- Root-only: usage paragraph from CommandMeta.usage -->
             <n-card v-if="isRoot && data.usage" size="small">
                 <template #header>
-                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">说明</n-text>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                        {{ $t('help.description') }}
+                    </n-text>
                 </template>
                 <n-text class="text-3.75 leading-7 whitespace-pre-line">{{ data.usage }}</n-text>
             </n-card>
@@ -52,7 +54,9 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
             <!-- Root-only: examples (one per line, monospace) -->
             <n-card v-if="isRoot && data.examples.length > 0" size="small">
                 <template #header>
-                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">示例</n-text>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                        {{ $t('help.examples') }}
+                    </n-text>
                 </template>
                 <pre class="m-0 font-mono text-3.5 leading-7 whitespace-pre-wrap break-words">{{
                     data.examples.join('\n')
@@ -62,7 +66,9 @@ const flatShortcutKeys = computed(() => data.shortcuts.map((sc) => sc.key));
             <!-- Shortcuts -->
             <n-card v-if="data.shortcuts.length > 0" size="small">
                 <template #header>
-                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">快捷指令</n-text>
+                    <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">
+                        {{ $t('help.shortcuts') }}
+                    </n-text>
                 </template>
 
                 <!-- Root: grouped by first-level subcommand -->

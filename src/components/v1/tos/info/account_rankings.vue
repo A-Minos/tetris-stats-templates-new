@@ -47,11 +47,7 @@ onMounted(async () => {
                 >
                     <div class="size-full px-15.5 py-7.5 box-border">
                         <div class="flex flex-col items-center gap-7">
-                            <shared-avatar
-                                :avatar="data.user.avatar"
-                                alt="user.avatar"
-                                class="size-31.25 rounded-full"
-                            />
+                            <shared-avatar :avatar="data.user.avatar" class="size-31.25 rounded-full" />
                             <span class="font-template text-7.5 fw-800 text-[#000000]">{{ data.user.name }}</span>
                         </div>
                     </div>
