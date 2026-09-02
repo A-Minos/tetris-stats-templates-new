@@ -1,15 +1,15 @@
 {
   "common": {
-    "avatar_alt": "头像",
-    "player": "{count} Players",
+    "avatar_alt": "Avatar",
+    "player": "1 player | {count} players",
     "level": "Level {level}",
-    "ranking": "Ranking",
+    "ranking": "Rank",
     "rankings": "Rankings",
     "rating": "Rating",
     "tetra_rating": "Tetra Rating",
     "game_mode": {
       "blitz": "Blitz",
-      "sprint": "40L",
+      "sprint": "Sprint",
       "challenge": "Challenge",
       "marathon": "Marathon",
       "zen": "Zen",
@@ -17,7 +17,7 @@
     }
   },
   "error": {
-    "title": "An error occurred",
+    "title": "Something went wrong",
     "route": "Route",
     "location": "Source location",
     "validation_title": "Validation failed",
@@ -26,76 +26,96 @@
     "validation_truncated": "(truncated)",
     "validation_no_input": "No input data",
     "stack": "Stack trace",
-    "no_stack": "No stack trace",
+    "no_stack": "No stack trace available",
     "snippet": "Code snippet",
     "snippet_loading": "Loading snippet…",
-    "snippet_failed": "Failed to load snippet",
+    "snippet_failed": "Couldn’t load snippet",
     "snippet_unsupported_url": "Unsupported URL",
-    "snippet_line_out_of_range": "Line out of range"
+    "snippet_line_out_of_range": "Line number out of range"
   },
   "help": {
     "usage": "USAGE",
     "arguments": "ARGUMENTS",
     "options": "OPTIONS",
     "subcommands": "SUBCOMMANDS",
-    "default": "默认 {value}",
-    "description": "说明",
-    "examples": "示例",
-    "shortcuts": "快捷指令"
+    "default": "Default: {value}",
+    "description": "DESCRIPTION",
+    "examples": "EXAMPLES",
+    "shortcuts": "SHORTCUTS"
   },
   "v1": {
     "footer": {
       "powered_by": "POWERED BY",
-      "graphic_design_by": "Graphic Design by"
+      "graphic_design_by": "Graphic design by"
     },
     "binding": {
       "main": {
         "success": {
-          "text": "{userName}, your account on {gamePlatform} was verified and successfully linked to {botName}.",
-          "styles": { "fw": "400" }
+          "text": "{userName}, your {gamePlatform} account has been verified and linked to {botName}.",
+          "styles": {
+            "fw": "400"
+          }
         },
         "unverified": {
-          "text": "{userName}, your account on {gamePlatform} was linked to {botName}.\nHowever, your account is not yet verified.",
-          "styles": { "fw": "400" }
+          "text": "{userName}, your {gamePlatform} account has been linked to {botName}.\nHowever, it has not yet been verified.",
+          "styles": {
+            "fw": "400"
+          }
         },
         "unknown": {
-          "text": "{userName}, your account on {gamePlatform} was linked to {botName},\nBut we can't verify your identity yet.",
-          "styles": { "fw": "400" }
+          "text": "{userName}, your {gamePlatform} account has been linked to {botName},\nbut your identity could not be verified.",
+          "styles": {
+            "fw": "400"
+          }
         },
         "unbind": {
-          "text": "{userName}, your account on {gamePlatform} was successfully unlinked from {botName}.",
-          "styles": { "fw": "400" }
+          "text": "{userName}, your {gamePlatform} account has been unlinked from {botName}.",
+          "styles": {
+            "fw": "400"
+          }
         },
         "error": {
-          "text": "{userName}, there was an issue when linking your account on {gamePlatform} to {botName}.",
-          "styles": { "fw": "400" }
+          "text": "{userName}, we couldn’t link your {gamePlatform} account to {botName}.",
+          "styles": {
+            "fw": "400"
+          }
         }
       },
       "footer": {
         "success": {
-          "text": "You can now type in {prompt} to retrieve your stats on that platform.",
-          "styles": { "fw": "500" }
+          "text": "Enter {prompt} to view your stats for that platform.",
+          "styles": {
+            "fw": "500"
+          }
         },
         "unverified": {
-          "text": "You can now type in {prompt} to start the verification process.",
-          "styles": { "fw": "500" }
+          "text": "Enter {prompt} to begin verification.",
+          "styles": {
+            "fw": "500"
+          }
         },
         "unknown": {
-          "text": "You can now type in {prompt} to retrieve your stats on that platform.",
-          "styles": { "fw": "500" }
+          "text": "Enter {prompt} to view your stats for that platform.",
+          "styles": {
+            "fw": "500"
+          }
         },
         "unbind": {
-          "text": "You can now type in {prompt} to relink your account on that platform to {botName}.",
-          "styles": { "fw": "500" }
+          "text": "Enter {prompt} to relink your account on that platform to {botName}.",
+          "styles": {
+            "fw": "500"
+          }
         },
         "error": {
           "text": "{prompt}",
-          "styles": { "fw": "500" }
+          "styles": {
+            "fw": "500"
+          }
         }
       }
     },
     "rank": {
-      "updated_at": "Updated on {time}"
+      "updated_at": "Updated {time}"
     },
     "tetrio": {
       "info": {
@@ -112,7 +132,9 @@
     },
     "top": {
       "info": {
-        "account": { "title": "Account Info" },
+        "account": {
+          "title": "Account Info"
+        },
         "historical": {
           "title": "Historical Stats"
         },
@@ -138,44 +160,44 @@
   "v2": {
     "footer": {
       "powered_by": "Powered by {product}",
-      "designed_by": "Designed by {designer} Using {framework}"
+      "designed_by": "Designed by {designer} with {framework}"
     },
     "tetrio": {
       "rank": {
-        "update_time": "Update Time: {time}",
+        "update_time": "Updated: {time}",
         "detail": {
-          "minimum_data": "Minimum Data",
-          "average_data": "Average Data",
-          "maximum_data": "Maximum Data"
+          "minimum_data": "Minimum",
+          "average_data": "Average",
+          "maximum_data": "Maximum"
         }
       },
       "replay": "Replay ID",
       "record": {
         "key": {
           "keys": "Keys",
-          "kpp": "Keys/Block",
-          "kps": "Keys/Second"
+          "kpp": "KPP",
+          "kps": "KPS"
         },
         "max": {
           "combo": "Max Combo",
           "b2b": "Max B2B"
         },
         "block": {
-          "pieces": "Blocks",
-          "pps": "Blocks/Second",
+          "pieces": "Pieces",
+          "pps": "PPS",
           "lines": "Lines",
-          "lpm": "Lines/Minute",
+          "lpm": "L'PM",
           "holds": "Holds",
           "level": "Level",
           "blitz": {
             "score": "Score",
-            "spp": "Score/Block"
+            "spp": "SPP"
           }
         },
         "clear": {
           "tspin_mini": "T / Mini T",
           "mini_tspin_single_double": "Mini T1 / Mini T2",
-          "all_clear": "All Clear"
+          "all_clear": "All Clears"
         },
         "finesse": {
           "title": "Finesse",
@@ -189,29 +211,29 @@
           "status": {
             "bad_standing": {
               "title": "BAD STANDING",
-              "description": "近期有一次或多次违禁行为"
+              "description": "One or more recent rule violations"
             },
             "banned": "BANNED",
             "bot": "BOT",
-            "developer": "开发者: {name}"
+            "developer": "Developer: {name}"
           },
           "tetra_league": {
-            "win_rate": "Win Rate: {wins} / {total} ({rate}%)",
-            "highest": "Highest Ever:"
+            "win_rate": "Win rate: {wins} / {total} ({rate}%)",
+            "highest": "All-time best:"
           },
           "quick_play_2": {
-            "achieve_time": "Achieved Time: {time} ({when} ago)",
-            "highest": "Highest Ever: {height}m (#{global_rank}) at {time} ({when} ago)"
+            "achieve_time": "Achieved: {time} ({when} ago)",
+            "highest": "All-time best: {height} m (#{global_rank}), achieved {time} ({when} ago)"
           },
           "detail": {
             "level": "Level {level} ({xp} XP)",
-            "win_rate": "Win Rate: {wins} / {total} ({rate}%)",
-            "played_games": "Games Played: {count}",
+            "win_rate": "Win rate: {wins} / {total} ({rate}%)",
+            "played_games": "Games played: {count}",
             "wins": "Wins: {count}",
-            "join_time": "Join Time: {time} ({when} ago)"
+            "join_time": "Joined: {time} ({when} ago)"
           },
           "single": {
-            "achieve_time": "Achieved Time: {time} ({when} ago)"
+            "achieve_time": "Achieved: {time} ({when} ago)"
           }
         },
         "list": {
