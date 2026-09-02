@@ -1,0 +1,245 @@
+{
+  "common": {
+    "avatar_alt": "アバター",
+    "player": "{count}人",
+    "level": "レベル {level}",
+    "ranking": "順位",
+    "rankings": "ランキング",
+    "rating": "レーティング",
+    "tetra_rating": "Tetra Rating",
+    "game_mode": {
+      "blitz": "ブリッツ",
+      "sprint": "スプリント",
+      "challenge": "チャレンジ",
+      "marathon": "マラソン",
+      "zen": "zen",
+      "quick_play": "クイックプレイ"
+    }
+  },
+  "error": {
+    "title": "エラーが発生しました",
+    "route": "ルート",
+    "location": "発生箇所",
+    "validation_title": "検証に失敗しました",
+    "validation_focus": "エラー箇所",
+    "validation_input": "入力データ",
+    "validation_truncated": "（省略）",
+    "validation_no_input": "入力データなし",
+    "stack": "スタックトレース",
+    "no_stack": "スタックトレースなし",
+    "snippet": "コードスニペット",
+    "snippet_loading": "コードスニペットを読み込み中…",
+    "snippet_failed": "コードスニペットを読み込めませんでした",
+    "snippet_unsupported_url": "未対応のURLです",
+    "snippet_line_out_of_range": "行番号が範囲外です"
+  },
+  "help": {
+    "usage": "使用法",
+    "arguments": "引数",
+    "options": "オプション",
+    "subcommands": "サブコマンド",
+    "default": "デフォルト：{value}",
+    "description": "説明",
+    "examples": "例",
+    "shortcuts": "ショートカット"
+  },
+  "v1": {
+    "footer": {
+      "powered_by": "提供",
+      "graphic_design_by": "グラフィックデザイン"
+    },
+    "binding": {
+      "main": {
+        "success": {
+          "text": "{userName}さんの{gamePlatform}アカウントを確認し、{botName}との連携が完了しました。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unverified": {
+          "text": "{userName}さんの{gamePlatform}アカウントを{botName}と連携しました。\nただし、アカウントはまだ確認されていません。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unknown": {
+          "text": "{userName}さんの{gamePlatform}アカウントを{botName}と連携しました。\nただし、現時点では本人確認ができません。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "unbind": {
+          "text": "{userName}さんの{gamePlatform}アカウントと{botName}の連携を解除しました。",
+          "styles": {
+            "fw": "400"
+          }
+        },
+        "error": {
+          "text": "{userName}さんの{gamePlatform}アカウントを{botName}と連携する際に問題が発生しました。",
+          "styles": {
+            "fw": "400"
+          }
+        }
+      },
+      "footer": {
+        "success": {
+          "text": "{prompt} と入力すると、このプラットフォームの統計を確認できます。",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unverified": {
+          "text": "{prompt} と入力すると、確認手続きを開始できます。",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unknown": {
+          "text": "{prompt} と入力すると、このプラットフォームの統計を確認できます。",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "unbind": {
+          "text": "{prompt} と入力すると、このプラットフォームのアカウントを{botName}と再連携できます。",
+          "styles": {
+            "fw": "500"
+          }
+        },
+        "error": {
+          "text": "{prompt}",
+          "styles": {
+            "fw": "500"
+          }
+        }
+      }
+    },
+    "rank": {
+      "updated_at": "更新日時：{time}"
+    },
+    "tetrio": {
+      "info": {
+        "account": {
+          "title": "アカウント・ランキング"
+        },
+        "multi": {
+          "title": "マルチプレイ統計"
+        },
+        "single": {
+          "title": "シングルプレイ統計"
+        }
+      }
+    },
+    "top": {
+      "info": {
+        "account": {
+          "title": "アカウント情報"
+        },
+        "historical": {
+          "title": "通算統計"
+        },
+        "today": {
+          "title": "今日の統計"
+        }
+      }
+    },
+    "tos": {
+      "info": {
+        "account": {
+          "title": "アカウント・ランキング"
+        },
+        "multi": {
+          "title": "マルチプレイ統計"
+        },
+        "single": {
+          "title": "シングルプレイ統計"
+        }
+      }
+    }
+  },
+  "v2": {
+    "footer": {
+      "powered_by": "提供：{product}",
+      "designed_by": "{framework}を使用／デザイン：{designer}"
+    },
+    "tetrio": {
+      "rank": {
+        "update_time": "更新日時：{time}",
+        "detail": {
+          "minimum_data": "最小値",
+          "average_data": "平均値",
+          "maximum_data": "最大値"
+        }
+      },
+      "replay": "リプレイID",
+      "record": {
+        "key": {
+          "keys": "キー数",
+          "kpp": "キー数/ミノ",
+          "kps": "キー数/秒"
+        },
+        "max": {
+          "combo": "最大コンボ",
+          "b2b": "最大B2B"
+        },
+        "block": {
+          "pieces": "ミノ数",
+          "pps": "PPS",
+          "lines": "line数",
+          "lpm": "line数/分",
+          "holds": "ホールド",
+          "level": "レベル",
+          "blitz": {
+            "score": "スコア",
+            "spp": "スコア/ミノ"
+          }
+        },
+        "clear": {
+          "tspin_mini": "T / Mini T",
+          "mini_tspin_single_double": "Mini T1 / Mini T2",
+          "all_clear": "Perfect Clear"
+        },
+        "finesse": {
+          "title": "フィネス",
+          "faults": "ミス数"
+        }
+      },
+      "user": {
+        "info": {
+          "multi_player": "マルチプレイ",
+          "single_player": "シングルプレイ",
+          "status": {
+            "bad_standing": {
+              "title": "要注意",
+              "description": "最近、規約違反が1件以上ありました"
+            },
+            "banned": "BAN済み",
+            "bot": "BOT",
+            "developer": "開発者：{name}"
+          },
+          "tetra_league": {
+            "win_rate": "勝率：{wins} / {total}（{rate}%）",
+            "highest": "過去最高："
+          },
+          "quick_play_2": {
+            "achieve_time": "達成日時：{time}（{when}前）",
+            "highest": "過去最高：{height}m（世界#{global_rank}）／{time}（{when}前）"
+          },
+          "detail": {
+            "level": "レベル {level}（{xp} XP）",
+            "win_rate": "勝率：{wins} / {total}（{rate}%）",
+            "played_games": "プレイ回数：{count}",
+            "wins": "勝利数：{count}",
+            "join_time": "登録日時：{time}（{when}前）"
+          },
+          "single": {
+            "achieve_time": "達成日時：{time}（{when}前）"
+          }
+        },
+        "list": {
+          "level": "レベル {level}（{xp} XP）"
+        }
+      }
+    }
+  }
+}
