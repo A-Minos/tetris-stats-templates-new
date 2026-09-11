@@ -17,17 +17,16 @@ const data = useData(
 </script>
 
 <template>
-    <n-card class="w-fit">
-        <div class="flex flex-col justify-center items-center h-full">
-            <n-flex align="center" vertical>
-                <n-image :img-props="{ class: 'size-32' }" :src="getAvatar(data.user.avatar)" />
-
-                <n-text class="text-(6 current) fw-bold leading-none">
-                    {{ data.user.name }}
-                </n-text>
-
-                <n-text :depth="3" class="text-xs">{{ data.user.id }}</n-text>
-            </n-flex>
+    <div class="flex items-center gap-3 min-w-0">
+        <n-image
+            :img-props="{ class: 'size-16 rounded-sm object-cover' }"
+            :src="getAvatar(data.user.avatar)"
+            :alt="data.user.name"
+            preview-disabled
+        />
+        <div class="min-w-0">
+            <n-text class="block text-2xl fw-bold break-all">{{ data.user.name }}</n-text>
+            <n-text :depth="3" class="block text-xs break-all">{{ data.user.id }}</n-text>
         </div>
-    </n-card>
+    </div>
 </template>

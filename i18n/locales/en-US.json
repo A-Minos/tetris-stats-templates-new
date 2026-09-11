@@ -112,6 +112,16 @@
       },
       "replay": "Replay ID",
       "record": {
+        "personal_best": {
+          "current": "Current PB",
+          "former": "Former PB"
+        },
+        "query": {
+          "top": "Personal Top #{index}",
+          "recent": "Recent #{index}",
+          "progression": "PB History #{index}"
+        },
+        "disputed": "Disputed",
         "key": {
           "keys": "Keys",
           "kpp": "Keys/Block",
