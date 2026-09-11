@@ -112,6 +112,23 @@
       },
       "replay": "回放 ID",
       "record": {
+        "personal_best": {
+          "current": "当前最佳",
+          "former": "历史最佳"
+        },
+        "query": {
+          "top": "个人 Top #{index}",
+          "recent": "最近记录 #{index}",
+          "progression": "PB 历史 #{index}"
+        },
+        "global_rank": "全球排名 #{rank}",
+        "country_rank": "地区排名 #{rank}",
+        "disputed": "争议成绩",
+        "groups": {
+          "operation": "操作",
+          "efficiency": "效率",
+          "clear": "消行"
+        },
         "key": {
           "keys": "按键",
           "kpp": "按键/块",

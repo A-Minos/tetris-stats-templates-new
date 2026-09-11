@@ -112,6 +112,23 @@
       },
       "replay": "Replay ID",
       "record": {
+        "personal_best": {
+          "current": "Current PB",
+          "former": "Former PB"
+        },
+        "query": {
+          "top": "Personal Top #{index}",
+          "recent": "Recent #{index}",
+          "progression": "PB History #{index}"
+        },
+        "global_rank": "Global Rank #{rank}",
+        "country_rank": "Country Rank #{rank}",
+        "disputed": "Disputed",
+        "groups": {
+          "operation": "INPUTS",
+          "efficiency": "EFFICIENCY",
+          "clear": "CLEARS"
+        },
         "key": {
           "keys": "Keys",
           "kpp": "Keys/Block",
