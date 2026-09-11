@@ -38,9 +38,8 @@ const accent = computed(() => {
                 <div
                     class="report-score"
                     :class="{
-                        'report-score-best': data.personal_best !== null && !data.disputed,
+                        'report-score-accent': data.personal_best !== null || data.disputed,
                         'report-score-current': data.personal_best === 'current' && !data.disputed,
-                        'report-score-disputed': data.disputed,
                     }"
                 >
                     {{ resultValue }}
@@ -67,47 +66,29 @@ const accent = computed(() => {
                             class="[&>img]:(h-4) rounded-sm"
                             preview-disabled
                         />
-                        <n-text
-                            type="info"
-                            :aria-label="t('v2.tetrio.record.country_rank', { rank: data.country_rank })"
-                        >
-                            #{{ data.country_rank }}
-                        </n-text>
+                        <n-text type="info"> #{{ data.country_rank }} </n-text>
                     </n-flex>
-                    <n-text
-                        v-if="isNonNullish(data.global_rank)"
-                        type="success"
-                        :aria-label="t('v2.tetrio.record.global_rank', { rank: data.global_rank })"
-                    >
-                        🌏 #{{ data.global_rank }}
-                    </n-text>
+                    <n-text v-if="isNonNullish(data.global_rank)" type="success"> 🌏 #{{ data.global_rank }} </n-text>
                 </n-flex>
             </div>
             <div class="report-context">
                 <div>{{ t(`v2.tetrio.record.query.${data.query.type}`, { index: data.query.index }) }}</div>
-                <time :datetime="data.play_at.toISOString()">{{ data.play_at.toLocaleString(locale) }}</time>
+                <time>{{ data.play_at.toLocaleString(locale) }}</time>
             </div>
         </header>
 
         <div class="report-statistics">
-            <section>
-                <h2 class="sr-only">{{ t('v2.tetrio.record.groups.operation') }}</h2>
-                <n-flex vertical size="large">
-                    <v2-tetrio-record-statistic-key :statistic="statistic" />
-                    <v2-tetrio-record-statistic-finesse :statistic="statistic" />
-                </n-flex>
-            </section>
-            <section>
-                <h2 class="sr-only">{{ t('v2.tetrio.record.groups.efficiency') }}</h2>
+            <n-flex vertical size="large" class="min-w-0">
+                <v2-tetrio-record-statistic-key :statistic="statistic" />
+                <v2-tetrio-record-statistic-finesse :statistic="statistic" />
+            </n-flex>
+            <div class="min-w-0">
                 <slot name="efficiency" />
-            </section>
-            <section>
-                <h2 class="sr-only">{{ t('v2.tetrio.record.groups.clear') }}</h2>
-                <n-flex vertical size="large">
-                    <v2-tetrio-record-statistic-clear :statistic="statistic" />
-                    <v2-tetrio-record-statistic-max :statistic="statistic" />
-                </n-flex>
-            </section>
+            </div>
+            <n-flex vertical size="large" class="min-w-0">
+                <v2-tetrio-record-statistic-clear :statistic="statistic" />
+                <v2-tetrio-record-statistic-max :statistic="statistic" />
+            </n-flex>
         </div>
 
         <footer class="report-footer">
@@ -176,17 +157,13 @@ const accent = computed(() => {
     letter-spacing: -0.035em;
 }
 
-.report-score-best {
+.report-score-accent {
     color: var(--record-accent);
 }
 
 .report-score-current {
     color: #facc15;
     text-shadow: 0 0 1rem;
-}
-
-.report-score-disputed {
-    color: var(--record-accent);
 }
 
 .report-ranks {
@@ -201,10 +178,6 @@ const accent = computed(() => {
     padding: 22px 0;
     border-top: 1px solid #ffffff12;
     font-size: 14px;
-
-    section {
-        min-width: 0;
-    }
 }
 
 .report-footer {
