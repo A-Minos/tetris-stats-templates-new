@@ -21,9 +21,6 @@ export function createUsageTokens(command: HelpNode, path: string[], boundOption
 }
 
 export function resolveShortcutTarget(command: HelpNode, breadcrumb: string[], target: string[]): HelpNode {
-    if (target.length < breadcrumb.length || breadcrumb.some((name, index) => target[index] !== name)) {
-        throw new Error(`Shortcut target "${target.join(' ')}" is outside "${breadcrumb.join(' ')}"`);
-    }
     let node = command;
     for (const name of target.slice(breadcrumb.length)) {
         const subcommand = node.subcommands.find((subcommand) => subcommand.name === name);

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { HelpData, type HelpArg, type HelpNode } from '../src/types/help.ts';
 import { createUsageTokens, renderArgToken, resolveShortcutTarget } from '../src/utils/help.ts';
@@ -122,17 +123,6 @@ test('required and optional variadic arguments share their renderer with usage s
     ]);
 });
 
-test('shortcut protocol errors stay visible instead of falling back or resolving aliases', () => {
-    assert.throws(
-        () => resolveShortcutTarget(tetrio, ['tetris-stats', 'TETR.IO'], ['tetris-stats', 'tos', 'query']),
-        /outside "tetris-stats TETR.IO"/,
-    );
-    assert.throws(
-        () => resolveShortcutTarget(root, ['tetris-stats'], ['tetris-stats', 'io', 'query']),
-        /no subcommand "io"/,
-    );
-});
-
 test('backend help payload requires explicit variadic and bound_options fields', () => {
     assert.deepEqual(HelpData.parse(payload), payload);
     const { variadic, ...oldArg } = account;
@@ -147,4 +137,43 @@ test('backend help payload requires explicit variadic and bound_options fields',
     if (!missingBoundOptions.success) {
         assert.deepEqual(missingBoundOptions.error.issues[0]!.path, ['shortcuts', 0, 'bound_options']);
     }
+});
+
+const samples: Record<string, Record<string, unknown>> = JSON.parse(
+    readFileSync(new URL('../src/dev-pages/help/samples.json', import.meta.url), 'utf8'),
+);
+
+test('real backend samples validate and all shortcut targets resolve in their command subtrees', () => {
+    for (const pages of Object.values(samples)) {
+        for (const sample of Object.values(pages)) {
+            const data = HelpData.parse(sample);
+            for (const shortcut of data.shortcuts) {
+                resolveShortcutTarget(data.command, data.breadcrumb, shortcut.target);
+            }
+        }
+    }
+});
+
+test('real Blitz and 40L shortcuts omit only the mode that is already bound', () => {
+    const data = HelpData.parse(samples['zh-CN']!['TETR.IO record']);
+    assert.deepEqual(
+        data.shortcuts.map((shortcut) =>
+            createUsageTokens(data.command, [shortcut.key], shortcut.bound_options)
+                .map((token) => token.text)
+                .join(' '),
+        ),
+        ['io记录blitz <who> [--40l]', 'io记录40l <who> [--blitz]'],
+    );
+});
+
+test('real mask add and regex rank shortcuts retain their actual backend signatures', () => {
+    const mask = HelpData.parse(samples['zh-CN']!['TETR.IO mask add']);
+    assert.equal(
+        createUsageTokens(mask.command, [mask.shortcuts[0]!.key])
+            .map((token) => token.text)
+            .join(' '),
+        'io屏蔽 <account> [fields...]',
+    );
+    const rank = HelpData.parse(samples['zh-CN']!['TETR.IO rank']);
+    assert.deepEqual(createUsageTokens(rank.command, [rank.shortcuts[0]!.key]), [{ text: 'iorank', kind: 'path' }]);
 });

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import type { NuxtPage } from '@nuxt/schema';
+import type { LocaleObject } from '@nuxtjs/i18n';
 import Languages, { languageNames } from './src/constants/enum/languages';
 import type { Language } from './src/constants/enum/languages';
 
@@ -118,11 +119,12 @@ function discoverLocales() {
         if (candidate) validateMessages(locale, reference, candidate);
     }
 
+    // Nuxt generates its locale union from these same discovered files.
     return Languages.filter((code) => messages[code] !== undefined).map((code) => ({
         code,
         name: languageNames[code],
         file: `${code}.json`,
-    }));
+    })) as LocaleObject[];
 }
 
 const locales = discoverLocales();
