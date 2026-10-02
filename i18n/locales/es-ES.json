@@ -34,14 +34,16 @@
     "snippet_line_out_of_range": "Línea fuera de rango"
   },
   "help": {
-    "usage": "USO",
-    "arguments": "ARGUMENTOS",
-    "options": "OPCIONES",
-    "subcommands": "SUBCOMANDOS",
+    "usage": "Uso",
+    "arguments": "Argumentos",
+    "options": "Opciones",
+    "subcommands": "Subcomandos",
     "default": "Predeterminado: {value}",
-    "description": "DESCRIPCIÓN",
-    "examples": "EJEMPLOS",
-    "shortcuts": "ATAJOS"
+    "description": "Descripción",
+    "examples": "Ejemplos",
+    "shortcuts": "Atajos",
+    "subcommand": "Subcomando",
+    "details_hint": "Escribe {command} --help para obtener ayuda"
   },
   "v1": {
     "footer": {
@@ -173,6 +175,16 @@
       },
       "replay": "ID de repetición",
       "record": {
+        "personal_best": {
+          "current": "Mejor marca actual",
+          "former": "Mejor marca anterior"
+        },
+        "query": {
+          "top": "Top personal #{index}",
+          "recent": "Registro reciente #{index}",
+          "progression": "Historial de mejores marcas #{index}"
+        },
+        "disputed": "Marca en disputa",
         "key": {
           "keys": "Pulsaciones",
           "kpp": "Pulsaciones/Pieza",
