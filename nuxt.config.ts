@@ -160,12 +160,15 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            script: [
-                {
-                    innerHTML: 'window.__DATA__ = {{ data | tojson }};',
-                    type: 'text/javascript',
-                },
-            ],
+            script:
+                process.env.NODE_ENV === 'production'
+                    ? [
+                          {
+                              innerHTML: 'window.__DATA__ = {{ data | tojson }};',
+                              type: 'text/javascript',
+                          },
+                      ]
+                    : [],
         },
         cdnURL: './',
     },
