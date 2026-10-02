@@ -34,14 +34,16 @@
     "snippet_line_out_of_range": "Line out of range"
   },
   "help": {
-    "usage": "USAGE",
-    "arguments": "ARGUMENTS",
-    "options": "OPTIONS",
-    "subcommands": "SUBCOMMANDS",
-    "default": "默认 {value}",
+    "usage": "用法",
+    "arguments": "参数",
+    "options": "选项",
+    "subcommands": "子命令",
+    "default": "默认值：{value}",
     "description": "说明",
     "examples": "示例",
-    "shortcuts": "快捷指令"
+    "shortcuts": "快捷指令",
+    "subcommand": "子命令",
+    "details_hint": "输入 {command} --help 查看帮助"
   },
   "v1": {
     "footer": {
