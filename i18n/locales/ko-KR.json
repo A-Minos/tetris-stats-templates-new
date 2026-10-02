@@ -41,7 +41,9 @@
     "default": "기본값: {value}",
     "description": "설명",
     "examples": "예시",
-    "shortcuts": "단축 명령어"
+    "shortcuts": "단축 명령어",
+    "subcommand": "하위 명령어",
+    "details_hint": "도움말을 보려면 {command} --help를 입력하세요"
   },
   "v1": {
     "footer": {
@@ -51,31 +53,31 @@
     "binding": {
       "main": {
         "success": {
-          "text": "{userName}님, {gamePlatform} 계정이 인증되었으며 {botName}에 성공적으로 연결되었습니다.",
+          "text": "{userName}님, {gamePlatform} 계정이 인증되었으며 {botName}에 성공적으로 연동되었습니다.",
           "styles": {
             "fw": "400"
           }
         },
         "unverified": {
-          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연결되었습니다.\n하지만 아직 계정 인증이 완료되지 않았습니다.",
+          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연동되었습니다.\n하지만 아직 계정 인증이 완료되지 않았습니다.",
           "styles": {
             "fw": "400"
           }
         },
         "unknown": {
-          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연결되었습니다.\n하지만 아직 본인 여부를 확인할 수 없습니다.",
+          "text": "{userName}님, {gamePlatform} 계정이 {botName}에 연동되었습니다.\n하지만 아직 본인 여부를 확인할 수 없습니다.",
           "styles": {
             "fw": "400"
           }
         },
         "unbind": {
-          "text": "{userName}님, {gamePlatform} 계정과 {botName}의 연결이 해제되었습니다.",
+          "text": "{userName}님, {gamePlatform} 계정과 {botName}의 연동이 해제되었습니다.",
           "styles": {
             "fw": "400"
           }
         },
         "error": {
-          "text": "{userName}님, {gamePlatform} 계정을 {botName}에 연결하는 중 문제가 발생했습니다.",
+          "text": "{userName}님, {gamePlatform} 계정을 {botName}에 연동하는 중 문제가 발생했습니다.",
           "styles": {
             "fw": "400"
           }
@@ -101,7 +103,7 @@
           }
         },
         "unbind": {
-          "text": "{prompt} 명령어를 입력하면 해당 플랫폼 계정을 {botName}에 다시 연결할 수 있습니다.",
+          "text": "{prompt} 명령어를 입력하면 해당 플랫폼 계정을 {botName}에 다시 연동할 수 있습니다.",
           "styles": {
             "fw": "500"
           }
@@ -173,6 +175,16 @@
       },
       "replay": "리플레이 ID",
       "record": {
+        "personal_best": {
+          "current": "현재 개인 최고 기록",
+          "former": "이전 개인 최고 기록"
+        },
+        "query": {
+          "top": "개인 최고 기록 #{index}",
+          "recent": "최근 기록 #{index}",
+          "progression": "개인 최고 기록 이력 #{index}"
+        },
+        "disputed": "이의가 제기된 기록",
         "key": {
           "keys": "키 입력 수",
           "kpp": "미노당 키 입력 수",
