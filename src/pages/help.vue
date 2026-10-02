@@ -20,6 +20,11 @@ const shortcuts = data.shortcuts.map((shortcut) => {
         ...shortcut,
         node,
         tokens: createUsageTokens(node, [shortcut.key], shortcut.bound_options),
+        descriptions: shortcut.bound_options.length
+            ? node.options
+                  .filter((option) => shortcut.bound_options.includes(option.name))
+                  .map((option) => option.help_text)
+            : [node.help_text],
     };
 });
 const games = data.command.subcommands.map((game) => ({
@@ -90,7 +95,11 @@ const helpCommand = computed(() =>
                                 v-for="shortcut in command.shortcuts"
                                 :key="shortcut.key"
                                 :tokens="shortcut.tokens"
-                                :description="shortcut.node.name !== command.name ? shortcut.node.help_text : undefined"
+                                :descriptions="
+                                    shortcut.bound_options.length || shortcut.node.name !== command.name
+                                        ? shortcut.descriptions
+                                        : undefined
+                                "
                             />
                         </n-flex>
                     </n-flex>
@@ -115,7 +124,7 @@ const helpCommand = computed(() =>
                         v-for="shortcut in shortcuts"
                         :key="shortcut.key"
                         :tokens="shortcut.tokens"
-                        :description="shortcut.node.help_text"
+                        :descriptions="shortcut.descriptions"
                     />
                 </n-flex>
             </n-card>
