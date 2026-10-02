@@ -1,171 +1,62 @@
 <script lang="ts" setup>
-import { z } from 'zod';
-import { HelpNode } from '~/types/help';
+import type { HelpArg, HelpNode } from '~/types/help';
+import { createUsageTokens, renderArgToken } from '~/utils/help';
+import HelpSection from '~/components/shared/help-section.vue';
+import HelpSignature from '~/components/shared/help-signature.vue';
 
-const data = useData(
-    z
-        .object({
-            command: HelpNode,
-            breadcrumb: z.array(z.string()),
-        })
-        .readonly(),
+const props = defineProps<{
+    readonly command: HelpNode;
+    readonly breadcrumb: string[];
+}>();
+
+// A pure command group's usage is just its own path; the subcommand list says more.
+const showUsage = computed(
+    () => props.command.args.length || props.command.options.length || !props.command.subcommands.length,
 );
-
-/**
- * Render an arg as `<name>` (required) or `[name]` (optional). This matches
- * the conventional CLI --help syntax users already understand.
- */
-const renderArgToken = (name: string, optional: boolean): string => (optional ? `[${name}]` : `<${name}>`);
-
-/** Limit alias visual noise: keep at most the first 2. */
-const trimAliases = (aliases: string[]): string[] => aliases.slice(0, 2);
-
-/** Tokenized usage line so we can color required/optional/flag pieces. */
-type UsageToken = { text: string; kind: 'path' | 'required' | 'optional' | 'flag' };
-
-const usageTokens = computed<UsageToken[]>(() => {
-    const tokens: UsageToken[] = [];
-    for (const seg of data.breadcrumb) tokens.push({ text: seg, kind: 'path' });
-    for (const a of data.command.args) {
-        tokens.push({
-            text: renderArgToken(a.name, a.optional),
-            kind: a.optional ? 'optional' : 'required',
-        });
-    }
-    for (const o of data.command.options) {
-        const inner = [o.name, ...o.args.map((a) => renderArgToken(a.name, a.optional))].join(' ');
-        tokens.push({ text: `[${inner}]`, kind: 'flag' });
-    }
-    return tokens;
-});
-
-/** Map token kinds to Naive UI text types so colours follow the dark theme. */
-const tokTypeOf = (kind: UsageToken['kind']): 'default' | 'error' | 'info' => {
-    switch (kind) {
-        case 'required':
-            return 'error';
-        case 'flag':
-            return 'info';
-        default:
-            return 'default';
-    }
-};
-const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
-    return kind === 'optional' ? 3 : undefined;
-};
+const argClass = (arg: HelpArg) => (arg.optional ? 'help-token--optional' : 'help-token--required');
 </script>
 
 <template>
-    <n-flex vertical :size="20">
-        <!-- Hero: title + aliases + description -->
-        <div>
-            <n-flex align="baseline" :size="12" :wrap="true">
-                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ data.command.name }}</n-text>
-                <n-text
-                    v-for="alias in trimAliases(data.command.aliases)"
-                    :key="alias"
-                    class="font-mono text-3.25"
-                    :depth="3"
-                >
-                    {{ alias }}
-                </n-text>
-            </n-flex>
-            <n-text v-if="data.command.help_text" class="block mt-2 text-4 leading-6" :depth="2">
-                {{ data.command.help_text }}
-            </n-text>
+    <HelpSection v-if="showUsage" :title="$t('help.usage')">
+        <div class="help-panel">
+            <HelpSignature :tokens="createUsageTokens(command, breadcrumb)" large />
         </div>
+    </HelpSection>
 
-        <!-- USAGE -->
-        <n-card size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">USAGE</n-text>
-            </template>
-            <pre class="m-0 font-mono text-3.75 leading-6 whitespace-pre-wrap break-words"><n-text
-                v-for="(t, i) in usageTokens"
-                :key="i"
-                :type="tokTypeOf(t.kind)"
-                :depth="tokDepthOf(t.kind)"
-                :class="t.kind === 'flag' || t.kind === 'path' ? 'fw-500' : ''"
-            >{{ i === 0 ? '' : ' ' }}{{ t.text }}</n-text></pre>
-        </n-card>
-
-        <!-- ARGUMENTS -->
-        <n-card v-if="data.command.args.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">ARGUMENTS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(arg, ri) in data.command.args"
-                    :key="arg.name"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
-                >
-                    <div class="font-mono text-3.5">
-                        <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
-                            {{ renderArgToken(arg.name, arg.optional) }}
-                        </n-text>
-                    </div>
-                    <n-flex align="baseline" :size="8" :wrap="true">
-                        <n-text class="text-3.75 leading-6" :depth="2">{{ arg.notice || arg.type_repr || '' }}</n-text>
-                        <n-text v-if="arg.default" class="text-3.25" :depth="3">默认 {{ arg.default }}</n-text>
-                    </n-flex>
+    <HelpSection v-if="command.args.length" :title="$t('help.arguments')">
+        <div class="help-panel help-rows">
+            <div v-for="arg in command.args" :key="arg.name" class="help-row">
+                <code class="help-row-term" :class="argClass(arg)">{{ renderArgToken(arg) }}</code>
+                <div class="help-row-description">
+                    {{ arg.notice || arg.type_repr }}
+                    <span v-if="arg.default !== null" class="help-default">
+                        {{ $t('help.default', { value: arg.default }) }}
+                    </span>
                 </div>
-            </n-flex>
-        </n-card>
+            </div>
+        </div>
+    </HelpSection>
 
-        <!-- OPTIONS -->
-        <n-card v-if="data.command.options.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">OPTIONS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(opt, ri) in data.command.options"
-                    :key="opt.dest"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
-                >
-                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
-                        <n-text type="info" class="fw-500">{{ opt.name }}</n-text>
-                        <template v-if="trimAliases(opt.aliases).length">
-                            <n-text class="text-3.25" :depth="3">,</n-text>
-                            <n-text type="info" class="op-75">
-                                {{ trimAliases(opt.aliases).join(', ') }}
-                            </n-text>
-                        </template>
-                        <template v-for="arg in opt.args" :key="arg.name">
-                            <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
-                                {{ renderArgToken(arg.name, arg.optional) }}
-                            </n-text>
-                        </template>
-                    </n-flex>
-                    <n-text class="text-3.75 leading-6" :depth="2">{{ opt.help_text || '' }}</n-text>
+    <HelpSection v-if="command.options.length" :title="$t('help.options')">
+        <div class="help-panel help-rows">
+            <div v-for="option in command.options" :key="option.dest" class="help-row">
+                <code class="help-row-term">
+                    <span class="help-row-option">{{ option.name }}</span>
+                    <span v-for="alias in option.aliases" :key="alias" class="help-row-alias">{{ alias }}</span>
+                    <span v-for="arg in option.args" :key="arg.name" :class="argClass(arg)">
+                        {{ renderArgToken(arg) }}
+                    </span>
+                </code>
+                <div class="help-row-description">
+                    {{ option.help_text }}
+                    <template v-for="arg in option.args" :key="arg.name">
+                        <span v-if="arg.default !== null" class="help-default">
+                            {{ $t('help.default', { value: arg.default }) }}
+                        </span>
+                        <span v-if="arg.notice" class="help-row-note">{{ arg.notice }}</span>
+                    </template>
                 </div>
-            </n-flex>
-        </n-card>
-
-        <!-- SUBCOMMANDS -->
-        <n-card v-if="data.command.subcommands.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">SUBCOMMANDS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(sub, ri) in data.command.subcommands"
-                    :key="sub.dest"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
-                >
-                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
-                        <n-text class="fw-600" :depth="1">{{ sub.name }}</n-text>
-                        <n-text v-if="trimAliases(sub.aliases).length" class="text-3.25" :depth="3">
-                            {{ trimAliases(sub.aliases).join(', ') }}
-                        </n-text>
-                    </n-flex>
-                    <n-text class="text-3.75 leading-6" :depth="2">{{ sub.help_text || '' }}</n-text>
-                </div>
-            </n-flex>
-        </n-card>
-    </n-flex>
+            </div>
+        </div>
+    </HelpSection>
 </template>
