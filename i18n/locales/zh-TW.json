@@ -41,7 +41,9 @@
     "default": "預設值：{value}",
     "description": "說明",
     "examples": "範例",
-    "shortcuts": "快捷指令"
+    "shortcuts": "快捷指令",
+    "subcommand": "子指令",
+    "details_hint": "輸入 {command} --help 查看說明"
   },
   "v1": {
     "footer": {
@@ -51,31 +53,31 @@
     "binding": {
       "main": {
         "success": {
-          "text": "已成功驗證您在 {gamePlatform} 上的帳號 {userName}，並連結至 {botName}。",
+          "text": "已成功驗證您在 {gamePlatform} 上的帳號 {userName}，並綁定至 {botName}。",
           "styles": {
             "fw": "350"
           }
         },
         "unverified": {
-          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName}，但尚未完成驗證。",
+          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 綁定至 {botName}，但尚未完成驗證。",
           "styles": {
             "fw": "350"
           }
         },
         "unknown": {
-          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName}，但目前無法驗證您的身分。",
+          "text": "已將您在 {gamePlatform} 上的帳號 {userName} 綁定至 {botName}，但目前無法驗證您的身分。",
           "styles": {
             "fw": "350"
           }
         },
         "unbind": {
-          "text": "已成功解除您在 {gamePlatform} 上的帳號 {userName} 與 {botName} 的連結。",
+          "text": "已成功解除您在 {gamePlatform} 上的帳號 {userName} 與 {botName} 的綁定。",
           "styles": {
             "fw": "350"
           }
         },
         "error": {
-          "text": "將您在 {gamePlatform} 上的帳號 {userName} 連結至 {botName} 時發生錯誤。",
+          "text": "將您在 {gamePlatform} 上的帳號 {userName} 綁定至 {botName} 時發生錯誤。",
           "styles": {
             "fw": "350"
           }
@@ -101,7 +103,7 @@
           }
         },
         "unbind": {
-          "text": "您可以輸入 {prompt} 指令，重新將您在該平台上的帳號連結至 {botName}。",
+          "text": "您可以輸入 {prompt} 指令，重新將您在該平台上的帳號綁定至 {botName}。",
           "styles": {
             "fw": "400"
           }
@@ -173,6 +175,16 @@
       },
       "replay": "重播 ID",
       "record": {
+        "personal_best": {
+          "current": "目前最佳",
+          "former": "歷史最佳"
+        },
+        "query": {
+          "top": "個人 Top #{index}",
+          "recent": "最近紀錄 #{index}",
+          "progression": "PB 歷史 #{index}"
+        },
+        "disputed": "爭議成績",
         "key": {
           "keys": "按鍵數",
           "kpp": "每塊按鍵數",
