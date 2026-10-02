@@ -5,9 +5,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "俄罗斯方块相关游戏数据查询",
         "args": [],
         "options": [],
@@ -15,12 +13,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "TETR.IO 游戏命令",
             "args": [],
             "options": [],
@@ -53,10 +46,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -73,10 +63,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -186,9 +173,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -209,9 +194,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "查询指定段位的详细信息",
                     "args": [
                       {
@@ -343,9 +326,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -362,9 +343,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -481,10 +460,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -521,9 +497,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -588,10 +562,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -628,9 +599,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -652,195 +621,103 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "先用 io绑定 / top绑定 / 茶服绑定 绑定自己的账号，之后查询时用「我」代替账号即可。查询别人时 @ 对方或直接输入用户名。",
-      "examples": [
-        "io绑定 Teronya",
-        "io查 我",
-        "io查 我 --compare 7d",
-        "io记录40l 我",
-        "iorank x+",
-        "茶服查 我"
-      ],
+      "examples": ["io绑定 Teronya", "io查 我", "io查 我 --compare 7d", "io记录40l 我", "iorank x+", "茶服查 我"],
       "shortcuts": [
         {
           "key": "io绑定",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "io配置",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "io查",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "io记录blitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "io记录40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "io解绑",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "io验证",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "top绑定",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "top解绑",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "top查",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "top配置",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "茶服绑定",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "茶服解绑",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "茶服查",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "茶服配置",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -850,12 +727,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "TETR.IO 游戏命令",
         "args": [],
         "options": [],
@@ -888,10 +760,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -908,10 +777,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -1021,9 +887,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -1044,9 +908,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "查询指定段位的详细信息",
                 "args": [
                   {
@@ -1178,9 +1040,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -1197,9 +1057,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -1271,117 +1129,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io绑定",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "io配置",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "io查",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "io记录blitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "io记录40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "io解绑",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "io验证",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -1407,9 +1211,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -1426,9 +1228,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -1446,21 +1246,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io查",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -1484,9 +1276,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -1507,9 +1297,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "查询指定段位的详细信息",
             "args": [
               {
@@ -1527,21 +1315,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -1551,9 +1331,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "查询指定段位的详细信息",
         "args": [
           {
@@ -1569,12 +1347,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -1609,23 +1382,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -1666,35 +1429,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io记录blitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "io记录40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -1795,11 +1542,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -1851,10 +1594,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -1891,9 +1631,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -1913,47 +1651,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "top绑定",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "top解绑",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "top查",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "top配置",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -2005,10 +1724,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -2045,9 +1761,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -2067,47 +1781,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "茶服绑定",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "茶服解绑",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "茶服查",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "茶服配置",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -2119,9 +1814,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "查詢俄羅斯方塊相關遊戲的玩家資料",
         "args": [],
         "options": [],
@@ -2129,12 +1822,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "TETR.IO 遊戲指令",
             "args": [],
             "options": [],
@@ -2167,10 +1855,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -2187,10 +1872,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -2300,9 +1982,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -2323,9 +2003,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "查詢特定段位的詳細資訊",
                     "args": [
                       {
@@ -2457,9 +2135,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -2476,9 +2152,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -2595,10 +2269,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -2635,9 +2306,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -2702,10 +2371,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -2742,9 +2408,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -2766,9 +2430,7 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "先用 iobind / topbind / tosbind 綁定自己的帳號，之後查詢時用「我」代替帳號即可。查詢他人時 @ 對方或直接輸入使用者名稱。",
       "examples": [
         "iobind Teronya",
@@ -2781,180 +2443,97 @@
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -2964,12 +2543,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "TETR.IO 遊戲指令",
         "args": [],
         "options": [],
@@ -3002,10 +2576,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -3022,10 +2593,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -3135,9 +2703,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -3158,9 +2724,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "查詢特定段位的詳細資訊",
                 "args": [
                   {
@@ -3292,9 +2856,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -3311,9 +2873,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -3385,117 +2945,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -3521,9 +3027,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -3540,9 +3044,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -3560,21 +3062,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -3598,9 +3092,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -3621,9 +3113,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "查詢特定段位的詳細資訊",
             "args": [
               {
@@ -3641,21 +3131,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -3665,9 +3147,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "查詢特定段位的詳細資訊",
         "args": [
           {
@@ -3683,12 +3163,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -3723,23 +3198,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -3780,35 +3245,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -3909,11 +3358,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -3965,10 +3410,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -4005,9 +3447,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -4027,47 +3467,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -4119,10 +3540,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -4159,9 +3577,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -4181,47 +3597,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -4233,9 +3630,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "Query player data for Tetris-related games",
         "args": [],
         "options": [],
@@ -4243,12 +3638,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "TETR.IO game commands",
             "args": [],
             "options": [],
@@ -4281,10 +3671,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -4301,10 +3688,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -4414,9 +3798,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -4437,9 +3819,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "View details for a specific rank",
                     "args": [
                       {
@@ -4571,9 +3951,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -4590,9 +3968,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -4709,10 +4085,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -4749,9 +4122,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -4816,10 +4187,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -4856,9 +4224,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -4880,9 +4246,7 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "Bind your own account first with iobind / topbind / tosbind; after that, use me instead of an account when querying. To look up someone else, @mention them or enter their username.",
       "examples": [
         "iobind Teronya",
@@ -4895,180 +4259,97 @@
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -5078,12 +4359,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "TETR.IO game commands",
         "args": [],
         "options": [],
@@ -5116,10 +4392,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -5136,10 +4409,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -5249,9 +4519,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -5272,9 +4540,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "View details for a specific rank",
                 "args": [
                   {
@@ -5406,9 +4672,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -5425,9 +4689,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -5499,117 +4761,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -5635,9 +4843,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -5654,9 +4860,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -5674,21 +4878,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -5712,9 +4908,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -5735,9 +4929,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "View details for a specific rank",
             "args": [
               {
@@ -5755,21 +4947,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -5779,9 +4963,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "View details for a specific rank",
         "args": [
           {
@@ -5797,12 +4979,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -5837,23 +5014,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -5894,35 +5061,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -6023,11 +5174,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -6079,10 +5226,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -6119,9 +5263,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -6141,47 +5283,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -6233,10 +5356,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -6273,9 +5393,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -6295,47 +5413,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -6347,9 +5446,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "Consultar datos de jugadores de juegos relacionados con Tetris",
         "args": [],
         "options": [],
@@ -6357,12 +5454,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "Comandos de TETR.IO",
             "args": [],
             "options": [],
@@ -6395,10 +5487,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -6415,10 +5504,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -6528,9 +5614,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -6551,9 +5635,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "Consultar los detalles de un rango concreto",
                     "args": [
                       {
@@ -6685,9 +5767,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -6704,9 +5784,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -6823,10 +5901,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -6863,9 +5938,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -6930,10 +6003,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -6970,9 +6040,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -6994,9 +6062,7 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "Primero vincula tu cuenta con iobind / topbind / tosbind; después puedes usar me en lugar de la cuenta al consultar. Para consultar a otra persona, menciónala con @ o escribe su nombre de usuario.",
       "examples": [
         "iobind Teronya",
@@ -7009,180 +6075,97 @@
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -7192,12 +6175,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "Comandos de TETR.IO",
         "args": [],
         "options": [],
@@ -7230,10 +6208,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -7250,10 +6225,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -7363,9 +6335,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -7386,9 +6356,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "Consultar los detalles de un rango concreto",
                 "args": [
                   {
@@ -7520,9 +6488,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -7539,9 +6505,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -7613,117 +6577,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -7749,9 +6659,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -7768,9 +6676,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -7788,21 +6694,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -7826,9 +6724,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -7849,9 +6745,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "Consultar los detalles de un rango concreto",
             "args": [
               {
@@ -7869,21 +6763,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -7893,9 +6779,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "Consultar los detalles de un rango concreto",
         "args": [
           {
@@ -7911,12 +6795,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -7951,23 +6830,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -8008,35 +6877,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -8137,11 +6990,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -8193,10 +7042,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -8233,9 +7079,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -8255,47 +7099,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -8347,10 +7172,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -8387,9 +7209,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -8409,47 +7229,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -8461,9 +7262,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "テトリス系ゲームのプレイヤーデータを検索します",
         "args": [],
         "options": [],
@@ -8471,12 +7270,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "TETR.IOのゲームコマンド",
             "args": [],
             "options": [],
@@ -8509,10 +7303,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -8529,10 +7320,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -8642,9 +7430,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -8665,9 +7451,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "指定したランクの詳細を表示",
                     "args": [
                       {
@@ -8799,9 +7583,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -8818,9 +7600,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -8937,10 +7717,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -8977,9 +7754,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -9044,10 +7819,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -9084,9 +7856,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -9108,9 +7878,7 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "まず iobind / topbind / tosbind で自分のアカウントを連携してください。以降は検索時にアカウントの代わりに me を使えます。他の人を検索するときは @ でメンションするか、ユーザー名を入力してください。",
       "examples": [
         "iobind Teronya",
@@ -9123,180 +7891,97 @@
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -9306,12 +7991,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "TETR.IOのゲームコマンド",
         "args": [],
         "options": [],
@@ -9344,10 +8024,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -9364,10 +8041,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -9477,9 +8151,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -9500,9 +8172,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "指定したランクの詳細を表示",
                 "args": [
                   {
@@ -9634,9 +8304,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -9653,9 +8321,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -9727,117 +8393,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -9863,9 +8475,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -9882,9 +8492,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -9902,21 +8510,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -9940,9 +8540,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -9963,9 +8561,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "指定したランクの詳細を表示",
             "args": [
               {
@@ -9983,21 +8579,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -10007,9 +8595,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "指定したランクの詳細を表示",
         "args": [
           {
@@ -10025,12 +8611,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -10065,23 +8646,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -10122,35 +8693,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -10251,11 +8806,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -10307,10 +8858,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -10347,9 +8895,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -10369,47 +8915,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -10461,10 +8988,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -10501,9 +9025,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -10523,47 +9045,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -10575,9 +9078,7 @@
       "command": {
         "name": "tetris-stats",
         "dest": "tetris_stats::tetris-stats",
-        "aliases": [
-          "tstats"
-        ],
+        "aliases": ["tstats"],
         "help_text": "테트리스 관련 게임의 플레이어 데이터 조회",
         "args": [],
         "options": [],
@@ -10585,12 +9086,7 @@
           {
             "name": "TETR.IO",
             "dest": "TETRIO",
-            "aliases": [
-              "io",
-              "TETRIO",
-              "tetrio",
-              "tetr.io"
-            ],
+            "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
             "help_text": "TETR.IO 게임 명령어",
             "args": [],
             "options": [],
@@ -10623,10 +9119,7 @@
                 "options": [
                   {
                     "name": "--default-template",
-                    "aliases": [
-                      "-DT",
-                      "DefaultTemplate"
-                    ],
+                    "aliases": ["-DT", "DefaultTemplate"],
                     "dest": "default-template",
                     "args": [
                       {
@@ -10643,10 +9136,7 @@
                   },
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -10756,9 +9246,7 @@
                     "options": [
                       {
                         "name": "--template",
-                        "aliases": [
-                          "-T"
-                        ],
+                        "aliases": ["-T"],
                         "dest": "template",
                         "args": [
                           {
@@ -10779,9 +9267,7 @@
                   {
                     "name": "--detail",
                     "dest": "detail",
-                    "aliases": [
-                      "-D"
-                    ],
+                    "aliases": ["-D"],
                     "help_text": "특정 랭크의 상세 정보 조회",
                     "args": [
                       {
@@ -10913,9 +9399,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -10932,9 +9416,7 @@
                   },
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -11051,10 +9533,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -11091,9 +9570,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -11158,10 +9635,7 @@
                 "options": [
                   {
                     "name": "--default-compare",
-                    "aliases": [
-                      "-DC",
-                      "DefaultCompare"
-                    ],
+                    "aliases": ["-DC", "DefaultCompare"],
                     "dest": "default-compare",
                     "args": [
                       {
@@ -11198,9 +9672,7 @@
                 "options": [
                   {
                     "name": "--compare",
-                    "aliases": [
-                      "-C"
-                    ],
+                    "aliases": ["-C"],
                     "dest": "compare",
                     "args": [
                       {
@@ -11222,9 +9694,7 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats"
-      ],
+      "breadcrumb": ["tetris-stats"],
       "usage": "먼저 iobind / topbind / tosbind로 내 계정을 연동하세요. 이후 조회할 때는 계정 대신 me를 쓰면 됩니다. 다른 사람을 조회하려면 @로 멘션하거나 사용자명을 입력하세요.",
       "examples": [
         "iobind Teronya",
@@ -11237,180 +9707,97 @@
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         },
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         },
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
@@ -11420,12 +9807,7 @@
       "command": {
         "name": "TETR.IO",
         "dest": "TETRIO",
-        "aliases": [
-          "io",
-          "TETRIO",
-          "tetrio",
-          "tetr.io"
-        ],
+        "aliases": ["io", "TETRIO", "tetrio", "tetr.io"],
         "help_text": "TETR.IO 게임 명령어",
         "args": [],
         "options": [],
@@ -11458,10 +9840,7 @@
             "options": [
               {
                 "name": "--default-template",
-                "aliases": [
-                  "-DT",
-                  "DefaultTemplate"
-                ],
+                "aliases": ["-DT", "DefaultTemplate"],
                 "dest": "default-template",
                 "args": [
                   {
@@ -11478,10 +9857,7 @@
               },
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -11591,9 +9967,7 @@
                 "options": [
                   {
                     "name": "--template",
-                    "aliases": [
-                      "-T"
-                    ],
+                    "aliases": ["-T"],
                     "dest": "template",
                     "args": [
                       {
@@ -11614,9 +9988,7 @@
               {
                 "name": "--detail",
                 "dest": "detail",
-                "aliases": [
-                  "-D"
-                ],
+                "aliases": ["-D"],
                 "help_text": "특정 랭크의 상세 정보 조회",
                 "args": [
                   {
@@ -11748,9 +10120,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -11767,9 +10137,7 @@
               },
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -11841,117 +10209,63 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iobind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "bind"],
           "bound_options": []
         },
         {
           "key": "ioconfig",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "config"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "config"],
           "bound_options": []
         },
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         },
         {
           "key": "io屏蔽列表",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "list"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "list"],
           "bound_options": []
         },
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         },
         {
           "key": "io解屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "remove"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "remove"],
           "bound_options": []
         },
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         },
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         },
         {
           "key": "iounbind",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "unbind"],
           "bound_options": []
         },
         {
           "key": "ioverify",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "verify"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "verify"],
           "bound_options": []
         }
       ]
@@ -11977,9 +10291,7 @@
         "options": [
           {
             "name": "--template",
-            "aliases": [
-              "-T"
-            ],
+            "aliases": ["-T"],
             "dest": "template",
             "args": [
               {
@@ -11996,9 +10308,7 @@
           },
           {
             "name": "--compare",
-            "aliases": [
-              "-C"
-            ],
+            "aliases": ["-C"],
             "dest": "compare",
             "args": [
               {
@@ -12016,21 +10326,13 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "query"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "query"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "ioquery",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "query"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "query"],
           "bound_options": []
         }
       ]
@@ -12054,9 +10356,7 @@
             "options": [
               {
                 "name": "--template",
-                "aliases": [
-                  "-T"
-                ],
+                "aliases": ["-T"],
                 "dest": "template",
                 "args": [
                   {
@@ -12077,9 +10377,7 @@
           {
             "name": "--detail",
             "dest": "detail",
-            "aliases": [
-              "-D"
-            ],
+            "aliases": ["-D"],
             "help_text": "특정 랭크의 상세 정보 조회",
             "args": [
               {
@@ -12097,21 +10395,13 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorank",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "rank"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "rank"],
           "bound_options": []
         }
       ]
@@ -12121,9 +10411,7 @@
       "command": {
         "name": "--detail",
         "dest": "detail",
-        "aliases": [
-          "-D"
-        ],
+        "aliases": ["-D"],
         "help_text": "특정 랭크의 상세 정보 조회",
         "args": [
           {
@@ -12139,12 +10427,7 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "rank",
-        "--detail"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "rank", "--detail"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -12179,23 +10462,13 @@
         "options": [],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "mask",
-        "add"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "mask", "add"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "io屏蔽",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "mask",
-            "add"
-          ],
+          "target": ["tetris-stats", "TETR.IO", "mask", "add"],
           "bound_options": []
         }
       ]
@@ -12236,35 +10509,19 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "record"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "record"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "iorecordblitz",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--blitz"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--blitz"]
         },
         {
           "key": "iorecord40l",
-          "target": [
-            "tetris-stats",
-            "TETR.IO",
-            "record"
-          ],
-          "bound_options": [
-            "--40l"
-          ]
+          "target": ["tetris-stats", "TETR.IO", "record"],
+          "bound_options": ["--40l"]
         }
       ]
     },
@@ -12365,11 +10622,7 @@
         ],
         "subcommands": []
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TETR.IO",
-        "list"
-      ],
+      "breadcrumb": ["tetris-stats", "TETR.IO", "list"],
       "usage": null,
       "examples": [],
       "shortcuts": []
@@ -12421,10 +10674,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -12461,9 +10711,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -12483,47 +10731,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOP"
-      ],
+      "breadcrumb": ["tetris-stats", "TOP"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "topbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOP", "bind"],
           "bound_options": []
         },
         {
           "key": "topunbind",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOP", "unbind"],
           "bound_options": []
         },
         {
           "key": "topquery",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOP", "query"],
           "bound_options": []
         },
         {
           "key": "topconfig",
-          "target": [
-            "tetris-stats",
-            "TOP",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOP", "config"],
           "bound_options": []
         }
       ]
@@ -12575,10 +10804,7 @@
             "options": [
               {
                 "name": "--default-compare",
-                "aliases": [
-                  "-DC",
-                  "DefaultCompare"
-                ],
+                "aliases": ["-DC", "DefaultCompare"],
                 "dest": "default-compare",
                 "args": [
                   {
@@ -12615,9 +10841,7 @@
             "options": [
               {
                 "name": "--compare",
-                "aliases": [
-                  "-C"
-                ],
+                "aliases": ["-C"],
                 "dest": "compare",
                 "args": [
                   {
@@ -12637,47 +10861,28 @@
           }
         ]
       },
-      "breadcrumb": [
-        "tetris-stats",
-        "TOS"
-      ],
+      "breadcrumb": ["tetris-stats", "TOS"],
       "usage": null,
       "examples": [],
       "shortcuts": [
         {
           "key": "tosbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "bind"
-          ],
+          "target": ["tetris-stats", "TOS", "bind"],
           "bound_options": []
         },
         {
           "key": "tosunbind",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "unbind"
-          ],
+          "target": ["tetris-stats", "TOS", "unbind"],
           "bound_options": []
         },
         {
           "key": "tosquery",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "query"
-          ],
+          "target": ["tetris-stats", "TOS", "query"],
           "bound_options": []
         },
         {
           "key": "tosconfig",
-          "target": [
-            "tetris-stats",
-            "TOS",
-            "config"
-          ],
+          "target": ["tetris-stats", "TOS", "config"],
           "bound_options": []
         }
       ]
