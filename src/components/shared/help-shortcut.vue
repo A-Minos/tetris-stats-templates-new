@@ -1,18 +1,27 @@
 <script lang="ts" setup>
-import type { UsageToken } from '~/utils/help';
+import type { HelpNode } from '~/types/help';
+import type { ShortcutView } from '~/utils/help';
 import HelpSignature from '~/components/shared/help-signature.vue';
 
-defineProps<{
-    readonly tokens: UsageToken[];
-    readonly descriptions?: Array<string | null>;
+const props = defineProps<{
+    readonly shortcut: ShortcutView;
+    /** The command already described by the surrounding block; its own help text is not repeated. */
+    readonly context: HelpNode;
 }>();
+
+const notes = computed(() =>
+    props.shortcut.bound_options.length || props.shortcut.node !== props.context
+        ? props.shortcut.notes.filter(Boolean)
+        : [],
+);
 </script>
 
 <template>
-    <div class="inline-flex flex-col gap-1 rounded-lg border border-white/12 bg-white/4 px-3 py-2 max-w-full">
-        <HelpSignature :tokens="tokens" class="text-sm" />
-        <template v-for="(description, index) in descriptions" :key="index">
-            <n-text v-if="description" :depth="3" class="text-xs leading-5">{{ description }}</n-text>
-        </template>
+    <div class="help-shortcut">
+        <div class="help-shortcut-line">
+            <kbd class="help-key">{{ shortcut.key }}</kbd>
+            <HelpSignature v-if="shortcut.tokens.length > 1" :tokens="shortcut.tokens.slice(1)" />
+        </div>
+        <span v-for="note in notes" :key="note!" class="help-shortcut-note">{{ note }}</span>
     </div>
 </template>

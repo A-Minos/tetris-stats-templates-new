@@ -1,0 +1,358 @@
+:root,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+@font-face {
+    font-family: 'HarmonyOS Sans SC';
+    src: url('~/assets/fonts/HarmonyOS_Sans_SC_Medium.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: CabinetGrotesk;
+    src: url('~/assets/fonts/CabinetGrotesk.woff2') format('woff2');
+    font-display: swap;
+}
+
+.help {
+    --help-accent: #f2b544;
+    --help-line: rgba(255, 255, 255, 0.07);
+    --help-panel: rgba(255, 255, 255, 0.035);
+    --help-text-1: rgba(255, 255, 255, 0.92);
+    --help-text-2: rgba(255, 255, 255, 0.64);
+    --help-text-3: rgba(255, 255, 255, 0.4);
+    --help-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', 'HarmonyOS Sans SC', monospace;
+    --help-display: CabinetGrotesk, 'HarmonyOS Sans SC', sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 44px 28px;
+    color: var(--help-text-1);
+    font-family: 'HarmonyOS Sans SC', sans-serif;
+    line-height: 1.5;
+    background-color: #0f1116;
+    // Faint playfield grid: the page itself reads as a Tetris well.
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+
+    code {
+        font-family: var(--help-mono);
+    }
+}
+
+.help-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--help-line);
+}
+
+.help-breadcrumb {
+    font-family: var(--help-mono);
+    font-size: 13px;
+    color: var(--help-text-3);
+}
+
+.help-title {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0;
+    font-family: var(--help-display);
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.help-aliases {
+    font-family: var(--help-mono);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--help-text-3);
+}
+
+.help-description {
+    margin: 0;
+    font-size: 18px;
+    color: var(--help-text-2);
+}
+
+.help-usage-text {
+    max-width: 760px;
+    margin: 8px 0 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--help-text-2);
+    white-space: pre-line;
+}
+
+.help-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.help-section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--help-text-2);
+
+    &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 1px;
+        background: var(--help-accent);
+    }
+}
+
+.help-panel {
+    padding: 16px 20px;
+    border: 1px solid var(--help-line);
+    border-radius: 6px;
+    background: var(--help-panel);
+}
+
+.help-games {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 20px;
+}
+
+.help-game--wide {
+    grid-column: 1 / -1;
+}
+
+.help-game-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+}
+
+.help-game-name {
+    margin: 0;
+    font-family: var(--help-display);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.help-game-description {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--help-text-3);
+}
+
+.help-grid {
+    // Masonry columns: tiles keep their natural height instead of stretching to the tallest neighbour.
+    columns: var(--help-columns);
+    column-gap: 10px;
+
+    > * {
+        break-inside: avoid;
+        margin-bottom: 10px;
+    }
+}
+
+.help-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+    border: 1px solid var(--help-line);
+    border-radius: 6px;
+    background: var(--help-panel);
+}
+
+.help-tile-title {
+    font-size: 16px;
+    color: var(--help-text-1);
+}
+
+.help-tile .help-shortcuts {
+    padding-top: 10px;
+    border-top: 1px solid var(--help-line);
+}
+
+.help-shortcuts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.help-shortcut {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.help-shortcut-line {
+    line-height: 1.9;
+}
+
+// Shortcut keys are flat blocks: a solid tile marks what the user types.
+.help-key {
+    padding: 1px 7px;
+    border-radius: 2px;
+    font-family: var(--help-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    margin-right: 8px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.help-shortcut-note {
+    font-size: 13px;
+    color: var(--help-text-3);
+}
+
+.help-signature {
+    font-family: var(--help-mono);
+    font-size: 13px;
+    line-height: 1.6;
+
+    // Lines break between tokens first; a token wider than its tile still wraps inside itself.
+    > span {
+        display: inline-block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+}
+
+.help-signature--large {
+    font-size: 17px;
+}
+
+.help-token--path {
+    font-weight: 700;
+    color: #fff;
+}
+
+.help-token--required {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.help-token--optional,
+.help-token--flag {
+    color: var(--help-text-3);
+}
+
+.help-rows {
+    display: grid;
+    grid-template-columns: minmax(200px, max-content) 1fr;
+    column-gap: 48px;
+}
+
+.help-row {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    padding: 10px 0;
+    line-height: 22px;
+
+    & + & {
+        border-top: 1px solid var(--help-line);
+    }
+}
+
+.help-row-term {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+    font-family: var(--help-mono);
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.help-row-option {
+    font-weight: 700;
+    color: #fff;
+}
+
+.help-row-alias {
+    color: var(--help-text-3);
+}
+
+.help-row-description {
+    font-size: 15px;
+    color: var(--help-text-2);
+}
+
+.help-row-note {
+    display: block;
+    font-size: 13px;
+    color: var(--help-text-3);
+}
+
+.help-default {
+    margin-left: 10px;
+    font-size: 13px;
+    color: var(--help-text-3);
+}
+
+.help-examples {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px 20px;
+    margin: 0;
+    padding: 16px 20px;
+    list-style: none;
+}
+
+.help-example {
+    font-family: var(--help-mono);
+    font-size: 14px;
+
+    &::before {
+        content: '›';
+        margin-right: 10px;
+        color: var(--help-accent);
+    }
+}
+
+.help-hint {
+    font-size: 14px;
+    text-align: center;
+    color: var(--help-text-3);
+
+    code {
+        padding: 2px 6px;
+        border-radius: 3px;
+        color: var(--help-text-1);
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+.help-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding-top: 18px;
+    border-top: 1px solid var(--help-line);
+    font-size: 13px;
+    color: var(--help-text-3);
+}
+
+.help-footer-product {
+    font-weight: 700;
+    color: var(--help-accent);
+}

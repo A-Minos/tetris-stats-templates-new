@@ -1,155 +1,108 @@
 <script lang="ts" setup>
 import { HelpData } from '~/types/help';
-import { createUsageTokens, resolveShortcutTarget } from '~/utils/help';
-import { helpGames } from '~/constants/help-games';
-import HelpHeader from '~/components/shared/help-header.vue';
-import HelpView from '~/components/shared/help-view.vue';
+import { describeShortcuts } from '~/utils/help';
+import HelpCommandGrid from '~/components/shared/help-command-grid.vue';
+import HelpSection from '~/components/shared/help-section.vue';
 import HelpShortcut from '~/components/shared/help-shortcut.vue';
-import Tetromino, { tetrominoColors } from '~/components/shared/tetromino.vue';
+import HelpView from '~/components/shared/help-view.vue';
 
 const data = useData(HelpData);
 const { t } = useI18n();
 useLang();
 
 const isRoot = data.breadcrumb.length === 1;
-const gameAppearance = helpGames[data.breadcrumb[1]!];
-const accent = gameAppearance && tetrominoColors[gameAppearance.shape];
-const shortcuts = data.shortcuts.map((shortcut) => {
-    const node = resolveShortcutTarget(data.command, data.breadcrumb, shortcut.target);
-    return {
-        ...shortcut,
-        node,
-        tokens: createUsageTokens(node, [shortcut.key], shortcut.bound_options),
-        descriptions: shortcut.bound_options.length
-            ? node.options
-                  .filter((option) => shortcut.bound_options.includes(option.name))
-                  .map((option) => option.help_text)
-            : [node.help_text],
-    };
-});
-const games = data.command.subcommands.map((game) => ({
-    ...game,
-    appearance: helpGames[game.name],
-    commands: game.subcommands.map((command) => ({
-        ...command,
-        shortcuts: shortcuts.filter(
-            (shortcut) => shortcut.target[1] === game.name && shortcut.target[2] === command.name,
-        ),
-    })),
-}));
-const helpCommand = computed(() =>
-    [data.breadcrumb.join(' '), ...(data.command.subcommands.length ? [`<${t('help.subcommand')}>`] : [])].join(' '),
-);
+const shortcuts = describeShortcuts(data);
+// Shortcuts for deeper commands are listed on their command tiles.
+const ownShortcuts = data.command.subcommands.length
+    ? shortcuts.filter((shortcut) => shortcut.node === data.command)
+    : shortcuts;
+const helpCommand = [
+    data.breadcrumb.join(' '),
+    ...(data.command.subcommands.length ? [`<${t('help.subcommand')}>`] : []),
+].join(' ');
+// Games with only a few commands share a row instead of leaving most of a full-width row empty.
+const isWideGame = (commandCount: number) => commandCount > 4;
 </script>
 
 <template>
-    <v2-layout content_class="max-w-320 help-page">
-        <HelpHeader :command="data.command" :breadcrumb="data.breadcrumb" />
+    <main id="content" class="help max-w-320">
+        <header class="help-header">
+            <code v-if="!isRoot" class="help-breadcrumb">{{ data.breadcrumb.join(' / ') }}</code>
+            <h1 class="help-title">
+                {{ data.command.name }}
+                <span v-if="data.command.aliases.length" class="help-aliases">
+                    {{ data.command.aliases.join(' / ') }}
+                </span>
+            </h1>
+            <p v-if="data.command.help_text" class="help-description">{{ data.command.help_text }}</p>
+            <p v-if="data.usage" class="help-usage-text">{{ data.usage }}</p>
+        </header>
 
-        <template v-if="isRoot">
-            <n-divider v-if="data.usage" class="!my-0">{{ $t('help.description') }}</n-divider>
-            <n-card v-if="data.usage" size="small">
-                <n-text :depth="2" class="whitespace-pre-line leading-7">{{ data.usage }}</n-text>
-            </n-card>
-
-            <n-card
-                v-for="game in games"
+        <div v-if="isRoot" class="help-games">
+            <section
+                v-for="game in data.command.subcommands"
                 :key="game.dest"
-                size="small"
-                :style="{ borderLeft: game.appearance && `3px solid ${tetrominoColors[game.appearance.shape]}` }"
+                class="help-section"
+                :class="{ 'help-game--wide': isWideGame(game.subcommands.length) }"
             >
-                <template #header>
-                    <n-flex align="center" size="small">
-                        <Tetromino v-if="game.appearance" :shape="game.appearance.shape" :size="9" />
-                        <n-text
-                            class="text-6 fw-bold help-title"
-                            :style="{ color: game.appearance && tetrominoColors[game.appearance.shape] }"
-                        >
-                            {{ game.name }}
-                        </n-text>
-                        <n-text v-if="game.aliases.length" :depth="3" class="text-xs">
-                            {{ game.aliases.join(' / ') }}
-                        </n-text>
-                    </n-flex>
-                </template>
-                <n-text v-if="game.help_text" :depth="2" class="block mb-3">{{ game.help_text }}</n-text>
-                <div
-                    v-for="command in game.commands"
-                    :key="command.dest"
-                    class="grid grid-cols-[minmax(120px,1fr)_5fr] gap-x-5 py-3 border-t border-white/8"
-                >
-                    <div>
-                        <span
-                            class="inline-block size-2.5 mr-2 rounded-sm"
-                            :style="{ background: game.appearance && tetrominoColors[game.appearance.shape] }"
-                        />
-                        <n-text class="help-command fw-bold">{{ command.name }}</n-text>
-                        <n-text v-if="command.aliases.length" :depth="3" class="block text-xs mt-1">
-                            {{ command.aliases.join(' / ') }}
-                        </n-text>
-                    </div>
-                    <n-flex vertical size="small">
-                        <n-text :depth="2">{{ command.help_text }}</n-text>
-                        <n-flex v-if="command.shortcuts.length" size="small">
-                            <HelpShortcut
-                                v-for="shortcut in command.shortcuts"
-                                :key="shortcut.key"
-                                :tokens="shortcut.tokens"
-                                :descriptions="
-                                    shortcut.bound_options.length || shortcut.node.name !== command.name
-                                        ? shortcut.descriptions
-                                        : undefined
-                                "
-                            />
-                        </n-flex>
-                    </n-flex>
+                <div class="help-game-head">
+                    <h2 class="help-game-name">{{ game.name }}</h2>
+                    <code v-if="game.aliases.length" class="help-aliases">{{ game.aliases.join(' / ') }}</code>
+                    <span v-if="game.help_text" class="help-game-description">{{ game.help_text }}</span>
                 </div>
-            </n-card>
-
-            <n-divider v-if="data.examples.length" class="!my-0">{{ $t('help.examples') }}</n-divider>
-            <n-card v-if="data.examples.length" size="small">
-                <n-flex vertical size="small">
-                    <n-code v-for="example in data.examples" :key="example" :code="example" word-wrap />
-                </n-flex>
-            </n-card>
-        </template>
+                <HelpCommandGrid
+                    :commands="game.subcommands"
+                    :path="[...data.breadcrumb, game.name]"
+                    :shortcuts="shortcuts"
+                    :columns="isWideGame(game.subcommands.length) ? 3 : 2"
+                />
+            </section>
+        </div>
 
         <template v-else>
-            <n-text class="text-xs help-command" :depth="3">{{ data.breadcrumb.join(' › ') }}</n-text>
-            <HelpView :command="data.command" :breadcrumb="data.breadcrumb" :accent="accent" />
-            <n-divider v-if="shortcuts.length" class="!my-0">{{ $t('help.shortcuts') }}</n-divider>
-            <n-card v-if="shortcuts.length" size="small">
-                <n-flex size="small">
+            <HelpView :command="data.command" :breadcrumb="data.breadcrumb" />
+            <HelpSection v-if="data.command.subcommands.length" :title="$t('help.subcommands')">
+                <HelpCommandGrid
+                    :commands="data.command.subcommands"
+                    :path="data.breadcrumb"
+                    :shortcuts="shortcuts"
+                    :columns="3"
+                />
+            </HelpSection>
+            <HelpSection v-if="ownShortcuts.length" :title="$t('help.shortcuts')">
+                <div class="help-panel help-shortcuts">
                     <HelpShortcut
-                        v-for="shortcut in shortcuts"
+                        v-for="shortcut in ownShortcuts"
                         :key="shortcut.key"
-                        :tokens="shortcut.tokens"
-                        :descriptions="shortcut.descriptions"
+                        :shortcut="shortcut"
+                        :context="data.command"
                     />
-                </n-flex>
-            </n-card>
+                </div>
+            </HelpSection>
         </template>
 
-        <i18n-t keypath="help.details_hint" tag="div" class="text-sm text-center leading-7" scope="global">
+        <HelpSection v-if="data.examples.length" :title="$t('help.examples')">
+            <ul class="help-panel help-examples">
+                <li v-for="example in data.examples" :key="example" class="help-example">{{ example }}</li>
+            </ul>
+        </HelpSection>
+
+        <i18n-t keypath="help.details_hint" tag="p" class="help-hint" scope="global">
             <template #command>
-                <n-code :code="helpCommand" inline />
+                <code>{{ helpCommand }}</code>
             </template>
         </i18n-t>
-        <v2-footer />
-    </v2-layout>
+
+        <footer class="help-footer">
+            <i18n-t keypath="v2.footer.powered_by" tag="span" scope="global">
+                <template #product>
+                    <span class="help-footer-product">NoneBot2 x nonebot-plugin-tetris-stats</span>
+                </template>
+            </i18n-t>
+        </footer>
+    </main>
 </template>
 
 <style lang="scss">
-@use '~/styles/v2';
-
-.help-page .help-title {
-    font-family: 'HUN', 'HarmonyOS Sans SC', sans-serif;
-}
-
-.help-page .help-command,
-.help-page code,
-.help-page .n-code {
-    font-family:
-        ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'Courier New', 'HarmonyOS Sans SC', monospace;
-}
+@use '~/styles/help';
 </style>

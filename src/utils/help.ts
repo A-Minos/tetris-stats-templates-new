@@ -1,4 +1,4 @@
-import type { HelpArg, HelpNode } from '../types/help';
+import type { HelpArg, HelpData, HelpNode, HelpShortcut } from '../types/help';
 
 export type UsageToken = { text: string; kind: 'path' | 'required' | 'optional' | 'flag' };
 
@@ -30,4 +30,28 @@ export function resolveShortcutTarget(command: HelpNode, breadcrumb: string[], t
         node = subcommand;
     }
     return node;
+}
+
+/** A shortcut resolved against the current page's command tree. */
+export type ShortcutView = HelpShortcut & {
+    node: HelpNode;
+    tokens: UsageToken[];
+    /** Help texts of the bound options; the target command's help text when nothing is bound. */
+    notes: Array<string | null>;
+};
+
+export function describeShortcuts(data: HelpData): ShortcutView[] {
+    return data.shortcuts.map((shortcut) => {
+        const node = resolveShortcutTarget(data.command, data.breadcrumb, shortcut.target);
+        return {
+            ...shortcut,
+            node,
+            tokens: createUsageTokens(node, [shortcut.key], shortcut.bound_options),
+            notes: shortcut.bound_options.length
+                ? node.options
+                      .filter((option) => shortcut.bound_options.includes(option.name))
+                      .map((option) => option.help_text)
+                : [node.help_text],
+        };
+    });
 }

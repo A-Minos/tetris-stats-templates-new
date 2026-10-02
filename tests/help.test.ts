@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { HelpData, type HelpArg, type HelpNode } from '../src/types/help.ts';
-import { createUsageTokens, renderArgToken, resolveShortcutTarget } from '../src/utils/help.ts';
+import { createUsageTokens, describeShortcuts, renderArgToken, resolveShortcutTarget } from '../src/utils/help.ts';
 
 const account: HelpArg = {
     name: 'account',
@@ -176,4 +176,16 @@ test('real mask add and regex rank shortcuts retain their actual backend signatu
     );
     const rank = HelpData.parse(samples['zh-CN']!['TETR.IO rank']);
     assert.deepEqual(createUsageTokens(rank.command, [rank.shortcuts[0]!.key]), [{ text: 'iorank', kind: 'path' }]);
+});
+
+test('mode shortcuts are explained by their bound option, others by their target command', () => {
+    const record = describeShortcuts(HelpData.parse(samples['zh-CN']!['TETR.IO record']));
+    assert.deepEqual(
+        record.map((shortcut) => shortcut.notes),
+        [['查询 Blitz 记录'], ['查询 40行记录']],
+    );
+    const root = describeShortcuts(HelpData.parse(samples['zh-CN']!.root));
+    const maskList = root.find((shortcut) => shortcut.key === 'io屏蔽列表')!;
+    assert.deepEqual(maskList.notes, [maskList.node.help_text]);
+    assert.equal(maskList.node.name, 'list');
 });

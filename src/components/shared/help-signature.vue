@@ -3,18 +3,14 @@ import type { UsageToken } from '~/utils/help';
 
 defineProps<{
     readonly tokens: UsageToken[];
+    readonly large?: boolean;
 }>();
 </script>
 
 <template>
-    <code class="help-command leading-6 break-words">
-        <n-text
-            v-for="(token, index) in tokens"
-            :key="index"
-            :type="token.kind === 'required' ? 'error' : token.kind === 'flag' ? 'info' : 'default'"
-            :depth="token.kind === 'optional' ? 3 : undefined"
-            :class="{ 'fw-600': token.kind === 'path' }"
-            >{{ index === 0 ? '' : ' ' }}{{ token.text }}</n-text
-        >
-    </code>
+    <code class="help-signature" :class="{ 'help-signature--large': large }"
+        ><template v-for="(token, index) in tokens" :key="index"
+            >{{ index === 0 ? '' : ' ' }}<span :class="`help-token--${token.kind}`">{{ token.text }}</span></template
+        ></code
+    >
 </template>
