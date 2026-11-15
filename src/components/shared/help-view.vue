@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import type { HelpArg, HelpNode } from '~/types/help';
 import { createUsageTokens, renderArgToken } from '~/utils/help';
-import HelpSection from '~/components/shared/help-section.vue';
-import HelpSignature from '~/components/shared/help-signature.vue';
 
 const props = defineProps<{
     readonly command: HelpNode;
@@ -17,13 +15,13 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'help-token--optional' : 'hel
 </script>
 
 <template>
-    <HelpSection v-if="showUsage" :title="$t('help.usage')">
+    <shared-help-section v-if="showUsage" :title="$t('help.usage')">
         <div class="help-panel">
-            <HelpSignature :tokens="createUsageTokens(command, breadcrumb)" large />
+            <shared-help-signature :tokens="createUsageTokens(command, breadcrumb)" large />
         </div>
-    </HelpSection>
+    </shared-help-section>
 
-    <HelpSection v-if="command.args.length" :title="$t('help.arguments')">
+    <shared-help-section v-if="command.args.length" :title="$t('help.arguments')">
         <div class="help-panel help-rows">
             <div v-for="arg in command.args" :key="arg.name" class="help-row">
                 <code class="help-row-term" :class="argClass(arg)">{{ renderArgToken(arg) }}</code>
@@ -35,9 +33,9 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'help-token--optional' : 'hel
                 </div>
             </div>
         </div>
-    </HelpSection>
+    </shared-help-section>
 
-    <HelpSection v-if="command.options.length" :title="$t('help.options')">
+    <shared-help-section v-if="command.options.length" :title="$t('help.options')">
         <div class="help-panel help-rows">
             <div v-for="option in command.options" :key="option.dest" class="help-row">
                 <code class="help-row-term">
@@ -58,5 +56,5 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'help-token--optional' : 'hel
                 </div>
             </div>
         </div>
-    </HelpSection>
+    </shared-help-section>
 </template>

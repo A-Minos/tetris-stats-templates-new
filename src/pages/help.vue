@@ -1,10 +1,6 @@
 <script lang="ts" setup>
 import { HelpData } from '~/types/help';
 import { describeShortcuts } from '~/utils/help';
-import HelpCommandGrid from '~/components/shared/help-command-grid.vue';
-import HelpSection from '~/components/shared/help-section.vue';
-import HelpShortcut from '~/components/shared/help-shortcut.vue';
-import HelpView from '~/components/shared/help-view.vue';
 
 const data = useData(HelpData);
 const { t } = useI18n();
@@ -24,7 +20,7 @@ const isWideGame = (commandCount: number) => commandCount > 4;
 </script>
 
 <template>
-    <main id="content" class="help max-w-320">
+    <help-layout>
         <header class="help-header">
             <code v-if="!isRoot" class="help-breadcrumb">{{ data.breadcrumb.join(' / ') }}</code>
             <h1 class="help-title">
@@ -49,7 +45,7 @@ const isWideGame = (commandCount: number) => commandCount > 4;
                     <code v-if="game.aliases.length" class="help-aliases">{{ game.aliases.join(' / ') }}</code>
                     <span v-if="game.help_text" class="help-game-description">{{ game.help_text }}</span>
                 </div>
-                <HelpCommandGrid
+                <shared-help-command-grid
                     :commands="game.subcommands"
                     :path="[...data.breadcrumb, game.name]"
                     :shortcuts="shortcuts"
@@ -59,32 +55,32 @@ const isWideGame = (commandCount: number) => commandCount > 4;
         </div>
 
         <template v-else>
-            <HelpView :command="data.command" :breadcrumb="data.breadcrumb" />
-            <HelpSection v-if="data.command.subcommands.length" :title="$t('help.subcommands')">
-                <HelpCommandGrid
+            <shared-help-view :command="data.command" :breadcrumb="data.breadcrumb" />
+            <shared-help-section v-if="data.command.subcommands.length" :title="$t('help.subcommands')">
+                <shared-help-command-grid
                     :commands="data.command.subcommands"
                     :path="data.breadcrumb"
                     :shortcuts="shortcuts"
                     :columns="3"
                 />
-            </HelpSection>
-            <HelpSection v-if="ownShortcuts.length" :title="$t('help.shortcuts')">
+            </shared-help-section>
+            <shared-help-section v-if="ownShortcuts.length" :title="$t('help.shortcuts')">
                 <div class="help-panel help-shortcuts">
-                    <HelpShortcut
+                    <shared-help-shortcut
                         v-for="shortcut in ownShortcuts"
                         :key="shortcut.key"
                         :shortcut="shortcut"
                         :context="data.command"
                     />
                 </div>
-            </HelpSection>
+            </shared-help-section>
         </template>
 
-        <HelpSection v-if="data.examples.length" :title="$t('help.examples')">
+        <shared-help-section v-if="data.examples.length" :title="$t('help.examples')">
             <ul class="help-panel help-examples">
                 <li v-for="example in data.examples" :key="example" class="help-example">{{ example }}</li>
             </ul>
-        </HelpSection>
+        </shared-help-section>
 
         <i18n-t keypath="help.details_hint" tag="p" class="help-hint" scope="global">
             <template #command>
@@ -92,14 +88,8 @@ const isWideGame = (commandCount: number) => commandCount > 4;
             </template>
         </i18n-t>
 
-        <footer class="help-footer">
-            <i18n-t keypath="v2.footer.powered_by" tag="span" scope="global">
-                <template #product>
-                    <span class="help-footer-product">NoneBot2 x nonebot-plugin-tetris-stats</span>
-                </template>
-            </i18n-t>
-        </footer>
-    </main>
+        <help-footer />
+    </help-layout>
 </template>
 
 <style lang="scss">

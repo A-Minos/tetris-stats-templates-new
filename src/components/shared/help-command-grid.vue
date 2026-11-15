@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import type { HelpNode } from '~/types/help';
 import { createUsageTokens, type ShortcutView } from '~/utils/help';
-import HelpShortcut from '~/components/shared/help-shortcut.vue';
-import HelpSignature from '~/components/shared/help-signature.vue';
 
 const props = defineProps<{
     /** Commands to list, all children of the node at `path`. */
@@ -33,9 +31,14 @@ const tiles = computed(() =>
     <div class="help-grid" :style="{ '--help-columns': columns }">
         <article v-for="{ command, signature, shortcuts: own } in tiles" :key="command.dest" class="help-tile">
             <span class="help-tile-title">{{ command.help_text }}</span>
-            <HelpSignature :tokens="signature" />
+            <shared-help-signature :tokens="signature" />
             <div v-if="own.length" class="help-shortcuts">
-                <HelpShortcut v-for="shortcut in own" :key="shortcut.key" :shortcut="shortcut" :context="command" />
+                <shared-help-shortcut
+                    v-for="shortcut in own"
+                    :key="shortcut.key"
+                    :shortcut="shortcut"
+                    :context="command"
+                />
             </div>
         </article>
     </div>
