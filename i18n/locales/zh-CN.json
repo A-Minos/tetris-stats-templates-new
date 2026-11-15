@@ -177,7 +177,7 @@
       "record": {
         "personal_best": {
           "current": "当前最佳",
-          "former": "历史最佳"
+          "former": "此前最佳"
         },
         "query": {
           "top": "个人 Top #{index}",
