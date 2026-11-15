@@ -213,7 +213,7 @@
         },
         "finesse": {
           "title": "极简操作",
-          "faults": "失误数"
+          "faults": "次多余操作"
         }
       },
       "user": {
