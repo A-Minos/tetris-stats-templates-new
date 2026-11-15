@@ -16,10 +16,9 @@ const shortcuts = describeShortcuts(data);
 const ownShortcuts = data.command.subcommands.length
     ? shortcuts.filter((shortcut) => shortcut.node === data.command)
     : shortcuts;
-const helpCommand = [
-    data.breadcrumb.join(' '),
-    ...(data.command.subcommands.length ? [`<${t('help.subcommand')}>`] : []),
-].join(' ');
+const helpCommand = computed(() =>
+    [data.breadcrumb.join(' '), ...(data.command.subcommands.length ? [`<${t('help.subcommand')}>`] : [])].join(' '),
+);
 // Games with only a few commands share a row instead of leaving most of a full-width row empty.
 const isWideGame = (commandCount: number) => commandCount > 4;
 </script>
