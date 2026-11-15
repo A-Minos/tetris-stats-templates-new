@@ -92,6 +92,4 @@ const isWideGame = (commandCount: number) => commandCount > 4;
     </help-layout>
 </template>
 
-<style lang="scss">
-@use '~/styles/help';
-</style>
+<style src="~/styles/help.css"></style>

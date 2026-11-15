@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .help-header {
     display: flex;
     flex-direction: column;
@@ -61,14 +62,13 @@
     font-weight: 500;
     letter-spacing: 0.06em;
     color: var(--help-text-2);
-
-    &::before {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 1px;
-        background: var(--help-accent);
-    }
+}
+.help-section-label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 1px;
+    background: var(--help-accent);
 }
 
 .help-panel {
@@ -85,7 +85,7 @@
 }
 
 .help-game--wide {
-    grid-column: 1 / -1;
+    grid-column: 1/-1;
 }
 
 .help-game-head {
@@ -110,14 +110,13 @@
 }
 
 .help-grid {
-    // Masonry columns: tiles keep their natural height instead of stretching to the tallest neighbour.
+    /* Masonry columns: tiles keep their natural height instead of stretching to the tallest neighbour. */
     columns: var(--help-columns);
     column-gap: 10px;
-
-    > * {
-        break-inside: avoid;
-        margin-bottom: 10px;
-    }
+}
+.help-grid > * {
+    break-inside: avoid;
+    margin-bottom: 10px;
 }
 
 .help-tile {
@@ -156,7 +155,7 @@
     line-height: 1.9;
 }
 
-// Shortcut keys are flat blocks: a solid tile marks what the user types.
+/* Shortcut keys are flat blocks: a solid tile marks what the user types. */
 .help-key {
     padding: 1px 7px;
     border-radius: 2px;
@@ -178,13 +177,12 @@
     font-family: var(--help-mono);
     font-size: 13px;
     line-height: 1.6;
-
-    // Lines break between tokens first; a token wider than its tile still wraps inside itself.
-    > span {
-        display: inline-block;
-        max-width: 100%;
-        overflow-wrap: anywhere;
-    }
+    /* Lines break between tokens first; a token wider than its tile still wraps inside itself. */
+}
+.help-signature > span {
+    display: inline-block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
 }
 
 .help-signature--large {
@@ -213,14 +211,13 @@
 
 .help-row {
     display: grid;
-    grid-column: 1 / -1;
+    grid-column: 1/-1;
     grid-template-columns: subgrid;
     padding: 10px 0;
     line-height: 22px;
-
-    & + & {
-        border-top: 1px solid var(--help-line);
-    }
+}
+.help-row + .help-row {
+    border-top: 1px solid var(--help-line);
 }
 
 .help-row-term {
@@ -271,23 +268,21 @@
 .help-example {
     font-family: var(--help-mono);
     font-size: 14px;
-
-    &::before {
-        content: '›';
-        margin-right: 10px;
-        color: var(--help-accent);
-    }
+}
+.help-example::before {
+    content: '›';
+    margin-right: 10px;
+    color: var(--help-accent);
 }
 
 .help-hint {
     font-size: 14px;
     text-align: center;
     color: var(--help-text-3);
-
-    code {
-        padding: 2px 6px;
-        border-radius: 3px;
-        color: var(--help-text-1);
-        background: rgba(255, 255, 255, 0.08);
-    }
+}
+.help-hint code {
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--help-text-1);
+    background: rgba(255, 255, 255, 0.08);
 }

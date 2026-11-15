@@ -1,13 +1,15 @@
 <template>
-    <main id="content" class="help max-w-320">
+    <main id="content" class="help max-w-320 flex flex-col gap-7 px-11 pb-7 pt-10">
         <slot />
     </main>
 </template>
 
-<style lang="scss">
+<style>
 :root,
 body {
-    @apply m-0 p-0 text-[16px];
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
 }
 
 @font-face {
@@ -32,20 +34,19 @@ body {
     --help-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', 'HarmonyOS Sans SC', monospace;
     --help-display: CabinetGrotesk, 'HarmonyOS Sans SC', sans-serif;
 
-    @apply flex flex-col gap-7 pt-10 px-11 pb-7;
     color: var(--help-text-1);
     font-family: 'HarmonyOS Sans SC', sans-serif;
     line-height: 1.5;
     background-color: #0f1116;
-    // Faint playfield grid: the page itself reads as a Tetris well.
+    /* Faint playfield grid: the page itself reads as a Tetris well. */
     background-image:
         linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     background-size: 32px 32px;
     background-position: -1px -1px;
+}
 
-    code {
-        font-family: var(--help-mono);
-    }
+.help code {
+    font-family: var(--help-mono);
 }
 </style>
