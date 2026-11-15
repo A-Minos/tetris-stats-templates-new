@@ -213,7 +213,7 @@
         },
         "finesse": {
           "title": "極簡操作",
-          "faults": "多餘操作"
+          "faults": "次多餘操作"
         }
       },
       "user": {
