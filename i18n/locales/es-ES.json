@@ -181,7 +181,7 @@
         },
         "query": {
           "top": "Top personal #{index}",
-          "recent": "Registro reciente #{index}",
+          "recent": "Partida reciente #{index}",
           "progression": "Historial de mejores marcas #{index}"
         },
         "disputed": "Marca en disputa",
@@ -199,7 +199,7 @@
           "pps": "PPS",
           "lines": "Líneas",
           "lpm": "Líneas/Minuto",
-          "holds": "Reserva",
+          "holds": "Usos de Hold",
           "level": "Nivel",
           "blitz": {
             "score": "Puntuación",
