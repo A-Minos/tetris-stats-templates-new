@@ -180,7 +180,7 @@
           "former": "이전 개인 최고 기록"
         },
         "query": {
-          "top": "개인 최고 기록 #{index}",
+          "top": "개인 상위 기록 #{index}",
           "recent": "최근 기록 #{index}",
           "progression": "개인 최고 기록 이력 #{index}"
         },
@@ -213,7 +213,7 @@
         },
         "finesse": {
           "title": "피네스",
-          "faults": "오류 수"
+          "faults": "미스"
         }
       },
       "user": {
