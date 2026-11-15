@@ -20,18 +20,6 @@ export function createUsageTokens(command: HelpNode, path: string[], boundOption
     return tokens;
 }
 
-export function resolveShortcutTarget(command: HelpNode, breadcrumb: string[], target: string[]): HelpNode {
-    let node = command;
-    for (const name of target.slice(breadcrumb.length)) {
-        const subcommand = node.subcommands.find((subcommand) => subcommand.name === name);
-        if (!subcommand) {
-            throw new Error(`Shortcut target "${target.join(' ')}" has no subcommand "${name}" in "${node.name}"`);
-        }
-        node = subcommand;
-    }
-    return node;
-}
-
 /** A shortcut resolved against the current page's command tree. */
 export type ShortcutView = HelpShortcut & {
     node: HelpNode;
@@ -42,7 +30,16 @@ export type ShortcutView = HelpShortcut & {
 
 export function describeShortcuts(data: HelpData): ShortcutView[] {
     return data.shortcuts.map((shortcut) => {
-        const node = resolveShortcutTarget(data.command, data.breadcrumb, shortcut.target);
+        let node = data.command;
+        for (const name of shortcut.target.slice(data.breadcrumb.length)) {
+            const subcommand = node.subcommands.find((subcommand) => subcommand.name === name);
+            if (!subcommand) {
+                throw new Error(
+                    `Shortcut target "${shortcut.target.join(' ')}" has no subcommand "${name}" in "${node.name}"`,
+                );
+            }
+            node = subcommand;
+        }
         return {
             ...shortcut,
             node,

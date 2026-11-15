@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { HelpData, type HelpArg, type HelpNode } from '../src/types/help.ts';
-import { createUsageTokens, describeShortcuts, renderArgToken, resolveShortcutTarget } from '../src/utils/help.ts';
+import { createUsageTokens, describeShortcuts, renderArgToken } from '../src/utils/help.ts';
 
 const account: HelpArg = {
     name: 'account',
@@ -69,29 +69,34 @@ const payload: HelpData = {
     shortcuts: [{ key: 'io查', target: ['tetris-stats', 'TETR.IO', 'query'], bound_options: ['--blitz'] }],
 };
 
-test('root-page shortcut resolves its complete canonical path to the nested command', () => {
-    assert.equal(resolveShortcutTarget(root, payload.breadcrumb, payload.shortcuts[0]!.target), query);
+test('shortcut descriptions match from the root, a group, and the target page', () => {
+    for (const [command, breadcrumb] of [
+        [root, ['tetris-stats']],
+        [tetrio, ['tetris-stats', 'TETR.IO']],
+        [query, ['tetris-stats', 'TETR.IO', 'query']],
+    ] as const) {
+        const [shortcut] = describeShortcuts({ ...payload, command, breadcrumb: [...breadcrumb] });
+        assert.equal(shortcut!.node, query);
+        assert.deepEqual(shortcut!.tokens, [
+            { text: 'io查', kind: 'path' },
+            { text: '[account]', kind: 'optional' },
+            { text: '[--40l]', kind: 'flag' },
+            { text: '[--template <template>]', kind: 'flag' },
+        ]);
+        assert.deepEqual(shortcut!.notes, ['Blitz 成绩']);
+    }
+});
+
+test('shortcut description reports an unresolved command path', () => {
+    const [shortcut] = payload.shortcuts;
+    assert.throws(
+        () => describeShortcuts({ ...payload, shortcuts: [{ ...shortcut!, target: ['tetris-stats', 'missing'] }] }),
+        { message: 'Shortcut target "tetris-stats missing" has no subcommand "missing" in "tetris-stats"' },
+    );
+});
+
+test('normal usage retains the full path and every option', () => {
     assert.deepEqual(createUsageTokens(root, payload.breadcrumb), [{ text: 'tetris-stats', kind: 'path' }]);
-});
-
-test('deep-page shortcut removes the entire breadcrumb and can target the current node', () => {
-    assert.equal(
-        resolveShortcutTarget(tetrio, ['tetris-stats', 'TETR.IO'], ['tetris-stats', 'TETR.IO', 'query']),
-        query,
-    );
-    assert.equal(
-        resolveShortcutTarget(query, ['tetris-stats', 'TETR.IO', 'query'], ['tetris-stats', 'TETR.IO', 'query']),
-        query,
-    );
-});
-
-test('shortcut signatures exclude bound --blitz, retain --40l, and preserve argument order', () => {
-    assert.deepEqual(createUsageTokens(query, ['io查'], ['--blitz']), [
-        { text: 'io查', kind: 'path' },
-        { text: '[account]', kind: 'optional' },
-        { text: '[--40l]', kind: 'flag' },
-        { text: '[--template <template>]', kind: 'flag' },
-    ]);
     assert.deepEqual(createUsageTokens(query, ['tetris-stats', 'TETR.IO', 'query']), [
         { text: 'tetris-stats', kind: 'path' },
         { text: 'TETR.IO', kind: 'path' },
@@ -147,9 +152,7 @@ test('real backend samples validate and all shortcut targets resolve in their co
     for (const pages of Object.values(samples)) {
         for (const sample of Object.values(pages)) {
             const data = HelpData.parse(sample);
-            for (const shortcut of data.shortcuts) {
-                resolveShortcutTarget(data.command, data.breadcrumb, shortcut.target);
-            }
+            assert.equal(describeShortcuts(data).length, data.shortcuts.length);
         }
     }
 });
@@ -157,11 +160,7 @@ test('real backend samples validate and all shortcut targets resolve in their co
 test('real Blitz and 40L shortcuts omit only the mode that is already bound', () => {
     const data = HelpData.parse(samples['zh-CN']!['TETR.IO record']);
     assert.deepEqual(
-        data.shortcuts.map((shortcut) =>
-            createUsageTokens(data.command, [shortcut.key], shortcut.bound_options)
-                .map((token) => token.text)
-                .join(' '),
-        ),
+        describeShortcuts(data).map((shortcut) => shortcut.tokens.map((token) => token.text).join(' ')),
         ['io记录blitz <who> [--40l]', 'io记录40l <who> [--blitz]'],
     );
 });
@@ -169,13 +168,13 @@ test('real Blitz and 40L shortcuts omit only the mode that is already bound', ()
 test('real mask add and regex rank shortcuts retain their actual backend signatures', () => {
     const mask = HelpData.parse(samples['zh-CN']!['TETR.IO mask add']);
     assert.equal(
-        createUsageTokens(mask.command, [mask.shortcuts[0]!.key])
-            .map((token) => token.text)
+        describeShortcuts(mask)[0]!
+            .tokens.map((token) => token.text)
             .join(' '),
         'io屏蔽 <account> [fields...]',
     );
     const rank = HelpData.parse(samples['zh-CN']!['TETR.IO rank']);
-    assert.deepEqual(createUsageTokens(rank.command, [rank.shortcuts[0]!.key]), [{ text: 'iorank', kind: 'path' }]);
+    assert.deepEqual(describeShortcuts(rank)[0]!.tokens, [{ text: 'iorank', kind: 'path' }]);
 });
 
 test('mode shortcuts are explained by their bound option, others by their target command', () => {
