@@ -1,18 +1,12 @@
 <script lang="ts" setup>
 import '~/styles/help.css';
 import { HelpData } from '~/types/help';
-import { describeShortcuts } from '~/utils/help';
 
 const data = useData(HelpData);
 const { t } = useI18n();
 useLang();
 
 const isRoot = data.breadcrumb.length === 1;
-const shortcuts = describeShortcuts(data);
-// Shortcuts for deeper commands are listed on their command tiles.
-const ownShortcuts = data.command.subcommands.length
-    ? shortcuts.filter((shortcut) => shortcut.node === data.command)
-    : shortcuts;
 const helpCommand = computed(() =>
     [data.breadcrumb.join(' '), ...(data.command.subcommands.length ? [`<${t('help.subcommand')}>`] : [])].join(' '),
 );
@@ -37,8 +31,8 @@ const isWideGame = (commandCount: number) => commandCount > 4;
                     {{ data.command.aliases.join(' / ') }}
                 </span>
             </h1>
-            <p v-if="data.command.help_text" class="m-0 text-[18px] text-[var(--help-text-2)]">
-                {{ data.command.help_text }}
+            <p v-if="data.command.description" class="m-0 text-[18px] text-[var(--help-text-2)]">
+                {{ data.command.description }}
             </p>
             <p
                 v-if="data.usage"
@@ -51,7 +45,7 @@ const isWideGame = (commandCount: number) => commandCount > 4;
         <div v-if="isRoot" class="grid grid-cols-2 gap-x-5 gap-y-7">
             <section
                 v-for="game in data.command.subcommands"
-                :key="game.dest"
+                :key="game.name"
                 class="flex flex-col gap-3"
                 :class="{ 'col-span-full': isWideGame(game.subcommands.length) }"
             >
@@ -64,14 +58,13 @@ const isWideGame = (commandCount: number) => commandCount > 4;
                         class="[font-family:var(--help-mono)] text-[14px] font-400 text-[var(--help-text-3)]"
                         >{{ game.aliases.join(' / ') }}</code
                     >
-                    <span v-if="game.help_text" class="ml-auto text-[14px] text-[var(--help-text-3)]">{{
-                        game.help_text
+                    <span v-if="game.description" class="ml-auto text-[14px] text-[var(--help-text-3)]">{{
+                        game.description
                     }}</span>
                 </div>
                 <shared-help-command-grid
                     :commands="game.subcommands"
                     :path="[...data.breadcrumb, game.name]"
-                    :shortcuts="shortcuts"
                     :columns="isWideGame(game.subcommands.length) ? 3 : 2"
                 />
             </section>
@@ -80,20 +73,15 @@ const isWideGame = (commandCount: number) => commandCount > 4;
         <template v-else>
             <shared-help-view :command="data.command" :breadcrumb="data.breadcrumb" />
             <shared-help-section v-if="data.command.subcommands.length" :title="$t('help.subcommands')">
-                <shared-help-command-grid
-                    :commands="data.command.subcommands"
-                    :path="data.breadcrumb"
-                    :shortcuts="shortcuts"
-                    :columns="3"
-                />
+                <shared-help-command-grid :commands="data.command.subcommands" :path="data.breadcrumb" :columns="3" />
             </shared-help-section>
-            <shared-help-section v-if="ownShortcuts.length" :title="$t('help.shortcuts')">
+            <shared-help-section v-if="data.command.shortcuts.length" :title="$t('help.shortcuts')">
                 <div
                     class="px-5 py-4 border-1 border-solid border-[var(--help-line)] rounded-[6px] bg-[var(--help-panel)] flex flex-col gap-2"
                 >
                     <shared-help-shortcut
-                        v-for="shortcut in ownShortcuts"
-                        :key="shortcut.key"
+                        v-for="shortcut in data.command.shortcuts"
+                        :key="shortcut.label"
                         :shortcut="shortcut"
                         :context="data.command"
                     />

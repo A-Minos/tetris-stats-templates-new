@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { HelpArg, HelpNode } from '~/types/help';
+import type { HelpArg, HelpCommand } from '~/types/help';
 import { createUsageTokens, renderArgToken } from '~/utils/help';
 
 const props = defineProps<{
-    readonly command: HelpNode;
+    readonly command: HelpCommand;
     readonly breadcrumb: string[];
 }>();
 
@@ -36,7 +36,7 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'text-[var(--help-text-3)]' :
                     >{{ renderArgToken(arg) }}</code
                 >
                 <div class="text-[15px] text-[var(--help-text-2)]">
-                    {{ arg.notice || arg.type_repr }}
+                    {{ arg.description }}
                     <span v-if="arg.default !== null" class="ml-[10px] text-[13px] text-[var(--help-text-3)]">
                         {{ $t('help.default', { value: arg.default }) }}
                     </span>
@@ -51,7 +51,7 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'text-[var(--help-text-3)]' :
         >
             <div
                 v-for="option in command.options"
-                :key="option.dest"
+                :key="option.name"
                 class="grid col-span-full [grid-template-columns:subgrid] py-[10px] leading-[22px] [&+&]:border-t-1 [&+&]:border-t-solid [&+&]:border-[var(--help-line)]"
             >
                 <code
@@ -66,13 +66,13 @@ const argClass = (arg: HelpArg) => (arg.optional ? 'text-[var(--help-text-3)]' :
                     </span>
                 </code>
                 <div class="text-[15px] text-[var(--help-text-2)]">
-                    {{ option.help_text }}
+                    {{ option.description }}
                     <template v-for="arg in option.args" :key="arg.name">
                         <span v-if="arg.default !== null" class="ml-[10px] text-[13px] text-[var(--help-text-3)]">
                             {{ $t('help.default', { value: arg.default }) }}
                         </span>
-                        <span v-if="arg.notice" class="block text-[13px] text-[var(--help-text-3)]">{{
-                            arg.notice
+                        <span v-if="arg.description" class="block text-[13px] text-[var(--help-text-3)]">{{
+                            arg.description
                         }}</span>
                     </template>
                 </div>
