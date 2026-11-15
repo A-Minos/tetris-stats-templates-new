@@ -1,6 +1,7 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import type { NuxtPage } from '@nuxt/schema';
+import Languages, { languageNames } from './src/constants/enum/languages';
 
 function walkVueFiles(dir: string): string[] {
     return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -45,6 +46,14 @@ function createDevPages(): NuxtPage[] {
         });
 }
 
+const locales = Languages.filter((code) =>
+    existsSync(join(import.meta.dirname, 'i18n', 'locales', `${code}.json`)),
+).map((code) => ({
+    code,
+    name: languageNames[code],
+    file: `${code}.json`,
+}));
+
 export default defineNuxtConfig({
     future: {
         compatibilityVersion: 4,
@@ -67,10 +76,7 @@ export default defineNuxtConfig({
     i18n: {
         defaultLocale: 'zh-CN',
         strategy: 'no_prefix',
-        locales: [
-            { code: 'en-US', name: 'English', file: 'en-US.json' },
-            { code: 'zh-CN', name: 'Chinese', file: 'zh-CN.json' },
-        ],
+        locales,
         detectBrowserLanguage: false,
         experimental: {
             typedOptionsAndMessages: 'default',
@@ -79,12 +85,15 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            script: [
-                {
-                    innerHTML: 'window.__DATA__ = {{ data | tojson }};',
-                    type: 'text/javascript',
-                },
-            ],
+            script:
+                process.env.NODE_ENV === 'production'
+                    ? [
+                          {
+                              innerHTML: 'window.__DATA__ = {{ data | tojson }};',
+                              type: 'text/javascript',
+                          },
+                      ]
+                    : [],
         },
         cdnURL: './',
     },

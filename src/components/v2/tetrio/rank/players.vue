@@ -5,5 +5,5 @@ defineProps<{
 </script>
 
 <template>
-    <n-text class="text-xl">{{ $t('v2.tetrio.rank.player', { value: value }) }}</n-text>
+    <n-text class="text-xl">{{ $t('common.player', { count: value }, value) }}</n-text>
 </template>

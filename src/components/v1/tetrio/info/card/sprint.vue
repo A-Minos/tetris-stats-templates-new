@@ -28,7 +28,9 @@ const valid = computed(() => {
             <img :src="sprint" class="absolute top-0 left-0" />
 
             <div class="absolute top-4.75 left-6">
-                <span class="font-template text-6.25 fw-800 color-[#b42323]">40L</span>
+                <span class="font-template text-6.25 fw-800 color-[#b42323]">
+                    {{ $t('common.game_mode.sprint') }}
+                </span>
             </div>
 
             <div class="absolute bottom-4.25 left-6">

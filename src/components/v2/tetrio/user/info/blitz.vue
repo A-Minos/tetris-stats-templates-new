@@ -28,7 +28,7 @@ const data = useData(
 </script>
 
 <template>
-    <n-card v-if="isNonNullish(data.blitz) && confirmShow()" size="small" title="Blitz">
+    <n-card v-if="isNonNullish(data.blitz) && confirmShow()" size="small" :title="$t('common.game_mode.blitz')">
         <n-flex align="center" justify="space-between">
             <n-flex :size="0" vertical>
                 <n-text class="text-3xl fw-bold">

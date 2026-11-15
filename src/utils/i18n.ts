@@ -1,10 +1,15 @@
-import type { FormatDistanceToNowOptions } from 'date-fns';
-import { enUS, zhCN } from 'date-fns/locale';
+import type { FormatDistanceToNowOptions, Locale } from 'date-fns';
+import { enUS, es, ja, ko, zhCN, zhTW } from 'date-fns/locale';
+import type { Language } from '~/constants/enum/languages';
 
 const dateFnsMapping = {
     'zh-CN': zhCN,
+    'zh-TW': zhTW,
     'en-US': enUS,
-};
+    'es-ES': es,
+    'ja-JP': ja,
+    'ko-KR': ko,
+} satisfies Record<Language, Locale>;
 
 export function formatDateFns(
     formater: (options?: FormatDistanceToNowOptions) => string,

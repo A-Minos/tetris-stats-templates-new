@@ -54,7 +54,6 @@ onMounted(async () => {
                         <div class="flex flex-col items-center gap-2.5 h-full justify-center">
                             <shared-avatar
                                 :avatar="data.user.avatar"
-                                alt="user.avatar"
                                 class="size-31.25 rounded-full shadow-[0rem_0.5625rem_1.5625rem_0rem_rgba(0,0,0,0.15)]"
                             />
                             <span class="font-template text-6.25 fw-800 text-[#000000]">{{ data.user.name }}</span>
@@ -81,7 +80,9 @@ onMounted(async () => {
                             <div class="w-full border-t-([0.0625rem] solid [#bababa])" />
 
                             <div class="flex flex-col">
-                                <span class="font-template text-6.25 fw-800 text-[#000000]">Ranking</span>
+                                <span class="font-template text-6.25 fw-800 text-[#000000]">
+                                    {{ $t('common.ranking') }}
+                                </span>
 
                                 <span class="font-template text-12.5 fw-400 lh-[120%] text-[#000000]">
                                     {{ data.multiplayer.glicko }}

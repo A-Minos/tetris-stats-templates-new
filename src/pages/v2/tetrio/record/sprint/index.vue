@@ -11,6 +11,7 @@ const data = useData(
         })
         .readonly(),
 );
+const { t } = useI18n();
 
 const title = computed(() => {
     if (data.statistic.tspins.double >= 20) {
@@ -21,7 +22,7 @@ const title = computed(() => {
         return '10PC';
     }
 
-    return '40L';
+    return t('common.game_mode.sprint');
 });
 
 useLang();

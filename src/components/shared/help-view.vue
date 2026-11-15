@@ -1,171 +1,82 @@
 <script lang="ts" setup>
-import { z } from 'zod';
-import { HelpNode } from '~/types/help';
+import type { HelpArg, HelpNode } from '~/types/help';
+import { createUsageTokens, renderArgToken } from '~/utils/help';
 
-const data = useData(
-    z
-        .object({
-            command: HelpNode,
-            breadcrumb: z.array(z.string()),
-        })
-        .readonly(),
+const props = defineProps<{
+    readonly command: HelpNode;
+    readonly breadcrumb: string[];
+}>();
+
+// A pure command group's usage is just its own path; the subcommand list says more.
+const showUsage = computed(
+    () => props.command.args.length || props.command.options.length || !props.command.subcommands.length,
 );
-
-/**
- * Render an arg as `<name>` (required) or `[name]` (optional). This matches
- * the conventional CLI --help syntax users already understand.
- */
-const renderArgToken = (name: string, optional: boolean): string => (optional ? `[${name}]` : `<${name}>`);
-
-/** Limit alias visual noise: keep at most the first 2. */
-const trimAliases = (aliases: string[]): string[] => aliases.slice(0, 2);
-
-/** Tokenized usage line so we can color required/optional/flag pieces. */
-type UsageToken = { text: string; kind: 'path' | 'required' | 'optional' | 'flag' };
-
-const usageTokens = computed<UsageToken[]>(() => {
-    const tokens: UsageToken[] = [];
-    for (const seg of data.breadcrumb) tokens.push({ text: seg, kind: 'path' });
-    for (const a of data.command.args) {
-        tokens.push({
-            text: renderArgToken(a.name, a.optional),
-            kind: a.optional ? 'optional' : 'required',
-        });
-    }
-    for (const o of data.command.options) {
-        const inner = [o.name, ...o.args.map((a) => renderArgToken(a.name, a.optional))].join(' ');
-        tokens.push({ text: `[${inner}]`, kind: 'flag' });
-    }
-    return tokens;
-});
-
-/** Map token kinds to Naive UI text types so colours follow the dark theme. */
-const tokTypeOf = (kind: UsageToken['kind']): 'default' | 'error' | 'info' => {
-    switch (kind) {
-        case 'required':
-            return 'error';
-        case 'flag':
-            return 'info';
-        default:
-            return 'default';
-    }
-};
-const tokDepthOf = (kind: UsageToken['kind']): 1 | 2 | 3 | undefined => {
-    return kind === 'optional' ? 3 : undefined;
-};
+const argClass = (arg: HelpArg) => (arg.optional ? 'text-[var(--help-text-3)]' : 'text-white/80');
 </script>
 
 <template>
-    <n-flex vertical :size="20">
-        <!-- Hero: title + aliases + description -->
-        <div>
-            <n-flex align="baseline" :size="12" :wrap="true">
-                <n-text class="text-9 fw-700 tracking-[-0.01em]" :depth="1">{{ data.command.name }}</n-text>
-                <n-text
-                    v-for="alias in trimAliases(data.command.aliases)"
-                    :key="alias"
-                    class="font-mono text-3.25"
-                    :depth="3"
-                >
-                    {{ alias }}
-                </n-text>
-            </n-flex>
-            <n-text v-if="data.command.help_text" class="block mt-2 text-4 leading-6" :depth="2">
-                {{ data.command.help_text }}
-            </n-text>
+    <shared-help-section v-if="showUsage" :title="$t('help.usage')">
+        <div class="px-5 py-4 border-1 border-solid border-[var(--help-line)] rounded-[6px] bg-[var(--help-panel)]">
+            <shared-help-signature :tokens="createUsageTokens(command, breadcrumb)" large />
         </div>
+    </shared-help-section>
 
-        <!-- USAGE -->
-        <n-card size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">USAGE</n-text>
-            </template>
-            <pre class="m-0 font-mono text-3.75 leading-6 whitespace-pre-wrap break-words"><n-text
-                v-for="(t, i) in usageTokens"
-                :key="i"
-                :type="tokTypeOf(t.kind)"
-                :depth="tokDepthOf(t.kind)"
-                :class="t.kind === 'flag' || t.kind === 'path' ? 'fw-500' : ''"
-            >{{ i === 0 ? '' : ' ' }}{{ t.text }}</n-text></pre>
-        </n-card>
-
-        <!-- ARGUMENTS -->
-        <n-card v-if="data.command.args.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">ARGUMENTS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(arg, ri) in data.command.args"
-                    :key="arg.name"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
+    <shared-help-section v-if="command.args.length" :title="$t('help.arguments')">
+        <div
+            class="px-5 py-4 border-1 border-solid border-[var(--help-line)] rounded-[6px] bg-[var(--help-panel)] grid [grid-template-columns:minmax(200px,max-content)_1fr] gap-x-12"
+        >
+            <div
+                v-for="arg in command.args"
+                :key="arg.name"
+                class="grid col-span-full [grid-template-columns:subgrid] py-[10px] leading-[22px] [&+&]:border-t-1 [&+&]:border-t-solid [&+&]:border-[var(--help-line)]"
+            >
+                <code
+                    class="flex items-baseline flex-wrap gap-x-2 gap-y-[2px] [font-family:var(--help-mono)] text-[14px] [overflow-wrap:anywhere]"
+                    :class="argClass(arg)"
+                    >{{ renderArgToken(arg) }}</code
                 >
-                    <div class="font-mono text-3.5">
-                        <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
-                            {{ renderArgToken(arg.name, arg.optional) }}
-                        </n-text>
-                    </div>
-                    <n-flex align="baseline" :size="8" :wrap="true">
-                        <n-text class="text-3.75 leading-6" :depth="2">{{ arg.notice || arg.type_repr || '' }}</n-text>
-                        <n-text v-if="arg.default" class="text-3.25" :depth="3">默认 {{ arg.default }}</n-text>
-                    </n-flex>
+                <div class="text-[15px] text-[var(--help-text-2)]">
+                    {{ arg.notice || arg.type_repr }}
+                    <span v-if="arg.default !== null" class="ml-[10px] text-[13px] text-[var(--help-text-3)]">
+                        {{ $t('help.default', { value: arg.default }) }}
+                    </span>
                 </div>
-            </n-flex>
-        </n-card>
+            </div>
+        </div>
+    </shared-help-section>
 
-        <!-- OPTIONS -->
-        <n-card v-if="data.command.options.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">OPTIONS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(opt, ri) in data.command.options"
-                    :key="opt.dest"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
+    <shared-help-section v-if="command.options.length" :title="$t('help.options')">
+        <div
+            class="px-5 py-4 border-1 border-solid border-[var(--help-line)] rounded-[6px] bg-[var(--help-panel)] grid [grid-template-columns:minmax(200px,max-content)_1fr] gap-x-12"
+        >
+            <div
+                v-for="option in command.options"
+                :key="option.dest"
+                class="grid col-span-full [grid-template-columns:subgrid] py-[10px] leading-[22px] [&+&]:border-t-1 [&+&]:border-t-solid [&+&]:border-[var(--help-line)]"
+            >
+                <code
+                    class="flex items-baseline flex-wrap gap-x-2 gap-y-[2px] [font-family:var(--help-mono)] text-[14px] [overflow-wrap:anywhere]"
                 >
-                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
-                        <n-text type="info" class="fw-500">{{ opt.name }}</n-text>
-                        <template v-if="trimAliases(opt.aliases).length">
-                            <n-text class="text-3.25" :depth="3">,</n-text>
-                            <n-text type="info" class="op-75">
-                                {{ trimAliases(opt.aliases).join(', ') }}
-                            </n-text>
-                        </template>
-                        <template v-for="arg in opt.args" :key="arg.name">
-                            <n-text :type="arg.optional ? 'default' : 'error'" :depth="arg.optional ? 3 : undefined">
-                                {{ renderArgToken(arg.name, arg.optional) }}
-                            </n-text>
-                        </template>
-                    </n-flex>
-                    <n-text class="text-3.75 leading-6" :depth="2">{{ opt.help_text || '' }}</n-text>
+                    <span class="font-700 text-white">{{ option.name }}</span>
+                    <span v-for="alias in option.aliases" :key="alias" class="text-[var(--help-text-3)]">{{
+                        alias
+                    }}</span>
+                    <span v-for="arg in option.args" :key="arg.name" :class="argClass(arg)">
+                        {{ renderArgToken(arg) }}
+                    </span>
+                </code>
+                <div class="text-[15px] text-[var(--help-text-2)]">
+                    {{ option.help_text }}
+                    <template v-for="arg in option.args" :key="arg.name">
+                        <span v-if="arg.default !== null" class="ml-[10px] text-[13px] text-[var(--help-text-3)]">
+                            {{ $t('help.default', { value: arg.default }) }}
+                        </span>
+                        <span v-if="arg.notice" class="block text-[13px] text-[var(--help-text-3)]">{{
+                            arg.notice
+                        }}</span>
+                    </template>
                 </div>
-            </n-flex>
-        </n-card>
-
-        <!-- SUBCOMMANDS -->
-        <n-card v-if="data.command.subcommands.length > 0" size="small">
-            <template #header>
-                <n-text class="text-2.75 fw-600 tracking-[0.12em] uppercase" :depth="3">SUBCOMMANDS</n-text>
-            </template>
-            <n-flex vertical :size="0">
-                <div
-                    v-for="(sub, ri) in data.command.subcommands"
-                    :key="sub.dest"
-                    class="grid grid-cols-[minmax(160px,max-content)_1fr] items-baseline gap-x-6 py-3"
-                    :class="ri > 0 ? 'border-t border-white/9' : 'pt-1'"
-                >
-                    <n-flex align="baseline" :size="6" :wrap="true" class="font-mono text-3.5">
-                        <n-text class="fw-600" :depth="1">{{ sub.name }}</n-text>
-                        <n-text v-if="trimAliases(sub.aliases).length" class="text-3.25" :depth="3">
-                            {{ trimAliases(sub.aliases).join(', ') }}
-                        </n-text>
-                    </n-flex>
-                    <n-text class="text-3.75 leading-6" :depth="2">{{ sub.help_text || '' }}</n-text>
-                </div>
-            </n-flex>
-        </n-card>
-    </n-flex>
+            </div>
+        </div>
+    </shared-help-section>
 </template>

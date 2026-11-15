@@ -3,7 +3,7 @@ import { Chart } from '@antv/g2';
 import { tryOnMounted } from '@vueuse/core';
 import type { historyData } from '~/types/history-data';
 
-const { locale } = useI18n();
+const { locale, t } = useI18n();
 
 const props = defineProps<{
     readonly current_tr: number;
@@ -19,46 +19,52 @@ tryOnMounted(() => {
         theme: 'dark',
     });
 
-    chart.options({
-        type: 'view',
+    const setOptions = () => {
+        chart.options({
+            type: 'view',
 
-        data: {
-            value: props.data,
-        },
+            data: {
+                value: props.data,
+            },
 
-        axis: {
-            x: {
-                labelFormatter: (date: Date) => date.toLocaleDateString(locale.value),
+            axis: {
+                x: {
+                    labelFormatter: (date: Date) => date.toLocaleDateString(locale.value),
+                },
+                y: {
+                    title: t('common.tetra_rating'),
+                },
             },
-            y: {
-                title: 'Tetra Rating',
-            },
-        },
 
-        encode: {
-            x: (data: historyData[number]) => {
-                return data.record_at;
+            encode: {
+                x: (data: historyData[number]) => {
+                    return data.record_at;
+                },
+                y: (data: historyData[number]) => {
+                    return Number(data.score);
+                },
             },
-            y: (data: historyData[number]) => {
-                return Number(data.score);
-            },
-        },
 
-        children: [
-            {
-                type: 'line',
-            },
-            {
-                type: 'point',
-            },
-        ],
-    });
+            children: [
+                {
+                    type: 'line',
+                },
+                {
+                    type: 'point',
+                },
+            ],
+        });
+    };
 
+    setOptions();
     setTimeout(() => {
         chart.render();
     }, 0);
 
-    watch(locale, () => chart.render());
+    watch(locale, () => {
+        setOptions();
+        chart.render();
+    });
 });
 </script>
 

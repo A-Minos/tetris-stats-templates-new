@@ -5,9 +5,12 @@ export const HelpArg = z.object({
     notice: z.string().nullable(),
     type_repr: z.string().nullable(),
     optional: z.boolean(),
+    variadic: z.boolean(),
     hidden: z.boolean(),
     default: z.string().nullable(),
 });
+
+export type HelpArg = z.infer<typeof HelpArg>;
 
 export const HelpOption = z.object({
     name: z.string(),
@@ -29,10 +32,15 @@ export const HelpNode = z.object({
     },
 });
 
+export type HelpNode = z.infer<typeof HelpNode>;
+
 export const HelpShortcut = z.object({
     key: z.string(),
     target: z.array(z.string()),
+    bound_options: z.array(z.string()),
 });
+
+export type HelpShortcut = z.infer<typeof HelpShortcut>;
 
 export const HelpData = z.object({
     lang: z.string(),
@@ -42,3 +50,5 @@ export const HelpData = z.object({
     examples: z.array(z.string()).default([]),
     shortcuts: z.array(HelpShortcut).default([]),
 });
+
+export type HelpData = z.infer<typeof HelpData>;

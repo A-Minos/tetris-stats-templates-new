@@ -35,5 +35,5 @@ export function getAvatar(avatar: Avatar): string {
 </script>
 
 <template>
-    <img :src="getAvatar(avatar)" alt="头像" />
+    <img :src="getAvatar(avatar)" :alt="$t('common.avatar_alt')" />
 </template>

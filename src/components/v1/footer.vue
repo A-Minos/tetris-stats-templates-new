@@ -1,6 +1,8 @@
 <template>
     <div class="text-center my-5">
-        <span class="font-template text-center text-5 fw-900 leading-[100%] text-[#71717b]">POWERED BY</span>
+        <span class="font-template text-center text-5 fw-900 leading-[100%] text-[#71717b]">
+            {{ $t('v1.footer.powered_by') }}
+        </span>
 
         <br />
 
@@ -12,7 +14,7 @@
 
         <div class="mt-1.5">
             <span class="font-template text-center text-5 fw-500 leading-[100%] text-[#71717b]">
-                <span>Graphic Design by</span>
+                <span>{{ $t('v1.footer.graphic_design_by') }}</span>
                 <span>&nbsp;</span>
 
                 <span>C</span>
