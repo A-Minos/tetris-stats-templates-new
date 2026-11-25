@@ -48,9 +48,11 @@ tryOnMounted(() => {
             children: [
                 {
                     type: 'line',
+                    animate: false,
                 },
                 {
                     type: 'point',
+                    animate: false,
                 },
             ],
         });
