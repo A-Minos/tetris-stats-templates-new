@@ -131,7 +131,9 @@ const option = computed<ChartOption>(() => {
 
 const initialized = ref(false);
 
-onMounted(() => {
+onMounted(async () => {
+    // ECharts 按测到的文本宽度摆轴名, 字体没就绪时会量成回退字体的宽度
+    await document.fonts.load('800 15px CabinetGrotesk');
     initialized.value = true;
 });
 
