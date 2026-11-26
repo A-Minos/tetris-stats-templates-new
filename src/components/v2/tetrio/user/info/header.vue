@@ -120,7 +120,16 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate();
             class="flex items-baseline gap-1.5 rounded border border-white/12 border-solid px-2.5 py-1.5 mt-1 text-xs"
         >
             <n-text :depth="3" class="shrink-0">{{ $t('v2.tetrio.user.info.old_names') }}</n-text>
-            <n-text :depth="2" class="min-w-0 flex-1 break-words">{{ data.user.old_names.join(' · ') }}</n-text>
+            <div class="min-w-0 flex flex-1 flex-wrap gap-x-1.5 gap-y-1">
+                <n-text
+                    v-for="(name, index) in data.user.old_names"
+                    :key="index"
+                    :depth="2"
+                    class="max-w-full break-words rounded bg-white/8 px-1.5 py-0.5"
+                >
+                    {{ name.toUpperCase() }}
+                </n-text>
+            </div>
         </div>
     </div>
 </template>
