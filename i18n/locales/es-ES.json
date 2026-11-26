@@ -218,6 +218,7 @@
       },
       "user": {
         "info": {
+          "old_names": "Nombres de usuario anteriores",
           "multi_player": "Multijugador",
           "single_player": "Un jugador",
           "status": {

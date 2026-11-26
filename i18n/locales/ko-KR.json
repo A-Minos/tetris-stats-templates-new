@@ -218,6 +218,7 @@
       },
       "user": {
         "info": {
+          "old_names": "이전 사용자 이름",
           "multi_player": "멀티플레이",
           "single_player": "싱글플레이",
           "status": {

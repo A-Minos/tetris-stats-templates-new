@@ -11,6 +11,7 @@ onMounted(async () => {
                 banner: 'https://tetr.io/user-content/banners/62466f02f071b942778da44b.jpg',
                 avatar: { type: 'identicon', hash: '5eb270aaeb7d4250d3f2fc47' },
                 name: 'SCDHH',
+                old_names: ['squarecat_alpha', 'mino_cat', 'catstacks'],
                 id: '5eb270aaeb7d4250d3f2fc47',
                 country: 'CN',
                 friend_count: 114514,

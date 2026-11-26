@@ -15,6 +15,7 @@ const data = useData(
                 avatar: Avatar,
 
                 name: z.string(),
+                old_names: z.array(z.string()).default([]),
                 id: z.string(),
 
                 country: z.string().nullable(),
@@ -31,7 +32,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate();
 </script>
 
 <template>
-    <div class="relative">
+    <div>
         <UserDefine>
             <div>
                 <n-flex size="small" vertical>
@@ -89,7 +90,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate();
             </div>
         </LogoDefine>
 
-        <template v-if="isNonNullish(data.user.banner)">
+        <div v-if="isNonNullish(data.user.banner)" class="relative">
             <n-image :src="data.user.banner" class="[&>img]:(w-full)" />
 
             <div class="absolute top-1/2 left-1/2 -translate-1/2 w-full">
@@ -105,7 +106,7 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate();
                     </n-flex>
                 </div>
             </div>
-        </template>
+        </div>
 
         <template v-else>
             <n-flex align="center" justify="space-between">
@@ -113,5 +114,13 @@ const { define: LogoDefine, reuse: Logo } = createReusableTemplate();
                 <Logo />
             </n-flex>
         </template>
+
+        <div
+            v-if="data.user.old_names.length"
+            class="flex items-baseline gap-1.5 rounded border border-white/12 border-solid px-2.5 py-1.5 mt-1 text-xs"
+        >
+            <n-text :depth="3" class="shrink-0">{{ $t('v2.tetrio.user.info.old_names') }}</n-text>
+            <n-text :depth="2" class="min-w-0 flex-1 break-words">{{ data.user.old_names.join(' · ') }}</n-text>
+        </div>
     </div>
 </template>
