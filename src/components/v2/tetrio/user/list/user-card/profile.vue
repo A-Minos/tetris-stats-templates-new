@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { isNonNullish } from 'remeda';
-import { getAvatar } from '~/components/shared/avatar.vue';
 import Avatar from '~/types/avatar';
 import { calculateXpLevel } from '~/utils/xp';
 
@@ -23,7 +22,7 @@ const props = defineProps<{
     <n-flex align="center" size="small">
         <n-text v-if="isNonNullish(index)" class="text-4 fw-bold" type="info">#{{ index }}</n-text>
 
-        <n-image :img-props="{ class: 'size-12' }" :src="getAvatar(user.avatar)" />
+        <shared-avatar :avatar="user.avatar" :fallback="{ type: 'identicon', hash: user.id }" class="size-12" />
 
         <n-flex :size="0" vertical>
             <n-text class="text-(5 current) leading-none fw-bold">

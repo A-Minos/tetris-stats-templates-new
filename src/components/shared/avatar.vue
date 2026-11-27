@@ -1,9 +1,22 @@
 <script lang="ts" setup>
 import type Avatar from '~/types/avatar';
 
-defineProps<{
+const props = defineProps<{
     avatar: Avatar;
+    fallback?: IdenticonType;
 }>();
+
+const source = computed(() => getAvatar(props.avatar));
+const failed = ref(false);
+watch(source, () => (failed.value = false));
+
+const displaySource = computed(() => (failed.value && props.fallback ? getAvatar(props.fallback) : source.value));
+
+function onError() {
+    if (typeof props.avatar === 'string' && props.fallback) {
+        failed.value = true;
+    }
+}
 </script>
 
 <script lang="ts">
@@ -35,5 +48,5 @@ export function getAvatar(avatar: Avatar): string {
 </script>
 
 <template>
-    <img :src="getAvatar(avatar)" :alt="$t('common.avatar_alt')" />
+    <img :key="displaySource" :src="displaySource" :alt="$t('common.avatar_alt')" @error="onError" />
 </template>
