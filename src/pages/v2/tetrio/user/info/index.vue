@@ -9,7 +9,6 @@ useLang();
         <v2-tetrio-user-info-header />
         <v2-tetrio-user-info-role />
         <v2-tetrio-user-info-bad-standing />
-        <v2-tetrio-user-info-bio />
         <n-divider class="!my-0">{{ $t('v2.tetrio.user.info.multi_player') }}</n-divider>
         <v2-tetrio-user-info-badges />
         <n-flex vertical>

@@ -218,6 +218,7 @@
       },
       "user": {
         "info": {
+          "old_names": "曾用名",
           "multi_player": "多人遊戲",
           "single_player": "單人遊戲",
           "status": {
